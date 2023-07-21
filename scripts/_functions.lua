@@ -125,6 +125,9 @@ end
 
 
 
+--
+--
+--
 function display_text_and_acquisition_text_width(_context,
     _align,
     _pos_x, _pos_y, _font_size,
@@ -142,57 +145,6 @@ function display_text_and_acquisition_text_width(_context,
         _text, _font_face, _font_slant, _font_weight)
 end
 
-
-
-
-
---[[
---
---
---
-function getting_text_width(_context,
-    _font_size,
-    _text, _font_face, _font_slant, _font_weight)
-
-    local extents = cairo_text_extents_t:create()
-    tolua.takeownership(extents)
-
-    cairo_select_font_face(_context, _font_face, _font_slant, _font_weight);
-    cairo_set_font_size(_context, _font_size)
-    cairo_text_extents(_context, _text, extents)
-
-    return extents.width + extents.x_bearing
-end
-
-
-
---
---
---
-function drawing_text(_context,
-    _align,
-    _pos_x, _pos_y, _font_size,
-    _text, _font_face, _font_slant, _font_weight,
-    _color)
-
-    local const = get_const()
-
-    local extents = cairo_text_extents_t:create()
-    tolua.takeownership(extents)
-
-    cairo_select_font_face(_context, _font_face, _font_slant, _font_weight);
-    cairo_set_font_size(_context, _font_size)
-    cairo_text_extents(_context, _text, extents)
-
-    cairo_move_to(_context,
-        (const.ALIGN_RIGHT == _align) and (_pos_x - extents.width - extents.x_bearing) or _pos_x,
-        _pos_y)
-
-    cairo_set_source_rgba(_context, _color.red, _color.green, _color.blue, _color.alpha)
-    cairo_show_text(_context, _text)
-    cairo_new_path(_context)
-end
-]]
 
 
 --

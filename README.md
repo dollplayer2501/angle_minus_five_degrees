@@ -14,7 +14,7 @@ So I thought, "I should use this vast space!".
 - Linux distribution: [EndeavourOS](https://endeavouros.com/)
 - Window manager: [Qtile](http://www.qtile.org/), [qtile-extras](https://qtile-extras.readthedocs.io/en/stable/#)
 - Terminal emulator: [Alacritty](https://github.com/alacritty/alacritty)
-- Text editor: [Code OSS](https://github.com/microsoft/vscode/) with [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit)
+- Text editor: [Code OSS](https://github.com/microsoft/vscode/) ~~with [GlassIt-VSC](https://marketplace.visualstudio.com/items?itemName=s-nlf-fh.glassit)~~
 - Standalone compositor: [Picom](https://wiki.archlinux.org/title/Picom)
 
 I created the theme based on the idea that "Every thing other than the time display is a decoration" likening Mobile Suit Gundam's "Legs are decorations".
