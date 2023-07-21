@@ -55,6 +55,7 @@ function get_conky_parse()
 
         -- Global IP Address, This is optional
         global_ip    = conky_parse('${execi 600 wget -q -O - http://checkip.amazonaws.com/}'),
+        -- global_ip = '123.456.789.012',
 
         mem          = conky_parse('${mem}'),
         memmax       = conky_parse('${memmax}'),

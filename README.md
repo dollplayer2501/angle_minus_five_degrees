@@ -1,7 +1,7 @@
 # Conky theme, "Angle minus five degrees"
 
 
-<img src="./images/EndeavourOS_Qtile_2023-07-21_20-07-01.png" width="630"><br clear="all" />
+<img src="./images/EndeavourOS_Qtile_2023-07-21_21-35-52.png" width="630"><br clear="all" />
 <img src="./images/EndeavourOS_Qtile_2023-07-21_20-07-09.png" width="200">
 <img src="./images/EndeavourOS_Qtile_2023-07-21_20-08-16.png" width="200">
 <img src="./images//EndeavourOS_Qtile_2023-07-21_20-08-22.png" width="200">
