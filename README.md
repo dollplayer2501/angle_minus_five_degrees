@@ -59,8 +59,8 @@ Functions that could not be implemented due to my lack of technical skills.
 1. ~~Change character decoration in the middle of a sentence~~  
    Done, not implemented as a generalized parser, for this reason, it is a very unrefined implementation.   
    See. `./scripts/text_detail.lua`
-2. Network Up/Down speed graph, disk read/write, a logarithmic graph implementation ?  
-   I have no idea...although I have a completely unique imprementation idea...
+2. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
+   I have no idea and skill...although I have a completely unique imprementation idea...
 3. Imprementing display of currency rates.  
    Planned, may not be implemented.
 
@@ -71,7 +71,7 @@ A few years...half a year later, for myself to review this scripts.
 
 - Setting a virtual space that is twice the size of the displayed image.  
   See `./angle_minus_five_degrees.conf`
-- Changing the center point in code is relatively easy to fix.  
+- Changing the center point in this theme is relatively easy to fix.  
   See `THEME_POSITION` of `./angle_minus_five_degrees.lua`
 - The width of the lower left panel is linked to width of the string of today's date (full).
 - Each module/scripts is/are using [`conky_parse('${updates}')`](https://conky.cc/variables#updates) to do some lazy processing.  
@@ -79,7 +79,7 @@ A few years...half a year later, for myself to review this scripts.
 - This theme color scheme is used [EndeavourOS colour palette](https://forum.endeavouros.com/t/colour-palette/3480).  
   See `./scripts/_color.lua`
 - NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./scripts/_conky_parse.lua`.
-- The file system name is written directory in `DISK_DEVICE` of `_const.lua`, in my case `/dev/sda2`
+- The file system name is written directory in `DISK_DEVICE` of `./scripts/_const.lua`, in my case `/dev/sda2`
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
 
 
