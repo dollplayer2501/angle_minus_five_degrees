@@ -83,5 +83,38 @@ A few years...half a year later, for myself to review this scripts.
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
 
 
+## Appendix) How this theme interacts with tiling window managers
+
+In my case, I use Qtile on EndeavourOS, so this is the premise.
+
+### 1. In `~/.config/qtile/autostart.sh` write a call to the startup script for this theme below.
+
+```
+~/.config/conky/angle_minus_five_degrees/start.sh & disown
+```
+
+### 2. Add a screen that does't dare to do anything to Qtile's virtual screen.
+
+In my case, `~/.config/qtile/modules/groups.py`.
+
+```
+groups = [
+  Group('1', position = 1, init = True, persist = True, label = '1.Terminal', layout = 'tile', matches = [Match(wm_class = ['Alacritty'])],),
+  Group('2', position = 2, init = False, persist = False, label = '2.Code', layout = 'max', matches = [Match(wm_class = ['code-oss'])],),
+  Group('3', position = 3, init = False, persist = False, label = '3.Web', layout = 'max', matches = [Match(wm_class = ['firefox', 'brave-browser'])],),
+    :
+  Group('9', position = 9, init = True, persist = True, label = '9.Null', layout = 'max', ),
+]
+```
+
+With this above, you can jump to a virtual screen for the purpose of not display any application with **Mod + 9**.
+
+### 3. Applications that are always used perform transparent processing with the configuration of the applications or Picom.
+
+### 4. For the above...
+
+The terminal and text editor that I mainly use always show the current time transparently (or I look directory at the watch/clock), and if I want to know other information, I can get various information with **Mod + 9**.
+
+
 
 //
