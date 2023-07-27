@@ -22,6 +22,7 @@ require 'ring_more'
 require 'text_clock'
 require 'graph_cpu'
 require 'text_detail'
+require 'text_top'
 
 
 
@@ -71,7 +72,7 @@ function conky_main()
         CENTER_Y = 1080,
     }
     local THEME_POSITION = {
-        CENTER_X = SCREEN_POSITION.CENTER_X + 300,
+        CENTER_X = SCREEN_POSITION.CENTER_X + 350,
         CENTER_Y = SCREEN_POSITION.CENTER_Y + 150,
     }
 
@@ -219,7 +220,7 @@ function conky_main()
         base_ring_cpu_caption_x, base_ring_cpu_caption_y, base_ring_cpu_caption_increment_y,
         global_const.ALIGN_LEFT, global_const.FONT_FACE_2_2, base_ring_cpu_caption_font_size,
         -- values
-        global_conky_parse,
+        global_conky_parse.cpu,
         -- color
         global_color.ring)
 
@@ -286,8 +287,8 @@ function conky_main()
     -- Time(HH:MM) -- Text
     --
 
-    local base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust = -55, -60
-    local base_text_clock_hour_font_size = 500
+    local base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust = -35, -60
+    local base_text_clock_hour_font_size = 450
     local base_text_clock_hour_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_hour_font_align = global_const.ALIGN_RIGHT
 
@@ -297,7 +298,7 @@ function conky_main()
     local base_text_clock_delimiter_font_align = global_const.ALIGN_LEFT
 
     local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 25, 120
-    local base_text_clock_min_font_size = 450
+    local base_text_clock_min_font_size = 400
     local base_text_clock_min_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_min_font_align = global_const.ALIGN_LEFT
 
@@ -343,6 +344,40 @@ function conky_main()
         global_const.DISK_DEVICE, global_conky_parse, global_const.USAGE_LIMIT,
         -- color
         global_color.text_detail)
+
+
+
+    --
+    -- Text Top
+    --
+
+    local base_text_top_position_x_name = THEME_POSITION.CENTER_X
+    local base_text_top_position_y_name = THEME_POSITION.CENTER_Y + global_const.LINE_LENGTH.HEIGHT.BOTTOM_LEFT
+    local base_text_top_position_x_adjust_name = 10
+
+    local base_text_top_position_x_cpu = THEME_POSITION.CENTER_X + global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_text_top_position_y_cpu = THEME_POSITION.CENTER_Y + global_const.LINE_LENGTH.HEIGHT.BOTTOM_LEFT
+    local base_text_top_position_x_adjust_cpu = -10
+
+    local base_text_top_position_y_adjust = 30
+    local base_text_increment_y = 18
+
+    local base_text_font_face = global_const.FONT_FACE_2_1
+    local base_text_font_size = 18
+
+    drawing_text_top(cr_draw, global_conky_parse_updates, global_const,
+        -- Left side, ${top name n}
+        base_text_top_position_x_name, base_text_top_position_y_name, base_text_top_position_x_adjust_name,
+        -- Right size, ${top cpu n}
+        base_text_top_position_x_cpu, base_text_top_position_y_cpu, base_text_top_position_x_adjust_cpu,
+        -- location etc
+        base_text_top_position_y_adjust, base_text_increment_y,
+        -- values
+        global_conky_parse.top,
+        -- font
+        base_text_font_face, base_text_font_size,
+        -- color
+        global_color.text_top)
 
 
 

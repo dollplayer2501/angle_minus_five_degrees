@@ -29,10 +29,10 @@ function get_color()
         },
 
         text_time = {
-            hour                = setting_hex_to_rgba('#ff7fff', 0.8),
+            hour                = setting_hex_to_rgba('#ff7fff', 0.9),
             delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.8),
             delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.8),
-            mins                = setting_hex_to_rgba('#ff7fff', 0.8),
+            mins                = setting_hex_to_rgba('#ff7fff', 0.9),
         },
 
         graph = {
@@ -57,6 +57,14 @@ function get_color()
         bar_load_rate = {
             normal              = setting_hex_to_rgba('#7f7fff', 0.9),
             high                = setting_hex_to_rgba('#ff7fff', 0.9),
+        },
+        text_top = {
+            fg1                 = setting_hex_to_rgba('#7f7fff', 1.00),
+            fg2                 = setting_hex_to_rgba('#7f7fff', 0.85),
+            fg3                 = setting_hex_to_rgba('#7f7fff', 0.70),
+            fg4                 = setting_hex_to_rgba('#7f7fff', 0.55),
+            fg5                 = setting_hex_to_rgba('#7f7fff', 0.40),
+            fg6                 = setting_hex_to_rgba('#7f7fff', 0.25),
         },
 
         debugging               = setting_hex_to_rgba('#ff0000', 1.0),

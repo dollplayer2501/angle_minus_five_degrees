@@ -55,7 +55,7 @@ function get_conky_parse()
 
         -- Global IP Address, This is optional
         global_ip    = conky_parse('${execi 600 wget -q -O - http://checkip.amazonaws.com/}'),
-        -- global_ip = '123.456.789.012',
+        -- global_ip    = '123.456.789.012',
 
         mem          = conky_parse('${mem}'),
         memmax       = conky_parse('${memmax}'),
@@ -70,5 +70,21 @@ function get_conky_parse()
 
         diskio_write = conky_parse('${diskio_write '.. const.DISK_DEVICE .. '}'),
         diskio_read  = conky_parse('${diskio_read '.. const.DISK_DEVICE .. '}'),
+
+        top = {
+            name1    = conky_parse("${top name 1}"),
+            name2    = conky_parse("${top name 2}"),
+            name3    = conky_parse("${top name 3}"),
+            name4    = conky_parse("${top name 4}"),
+            name5    = conky_parse("${top name 5}"),
+            name6    = conky_parse("${top name 6}"),
+
+            cpu1     = conky_parse("${top cpu 1}"),
+            cpu2     = conky_parse("${top cpu 2}"),
+            cpu3     = conky_parse("${top cpu 3}"),
+            cpu4     = conky_parse("${top cpu 4}"),
+            cpu5     = conky_parse("${top cpu 5}"),
+            cpu6     = conky_parse("${top cpu 6}"),
+        },
     }
 end

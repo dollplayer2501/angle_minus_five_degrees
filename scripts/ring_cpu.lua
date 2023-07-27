@@ -12,7 +12,7 @@ function drawing_ring_cpu(_context, _conky_parse_updates,
     _caption_start_x, _caption_start_y, _caption_increment_y,
     _caption_align, _caption_font_face, _caption_font_size,
     -- values
-    _conky_parse,
+    _conky_parse_cpu,
     -- color
     _color_ring)
 
@@ -26,7 +26,7 @@ function drawing_ring_cpu(_context, _conky_parse_updates,
 
     for ii = 0, 3 do
         local tmp_radius = _ring_radius + (_ring_width * ii) + (_ring_gap * ii)
-        local tmp_usage = _conky_parse['cpu']['cpu' .. (ii + 1)]
+        local tmp_usage = _conky_parse_cpu['cpu' .. (ii + 1)]
         local tmp_fg_end_angle = ((_ring_angle_end - _ring_angle_start) * tmp_usage / 100) + _ring_angle_start
 
         -- ring foreground usage
@@ -48,12 +48,12 @@ function drawing_ring_cpu(_context, _conky_parse_updates,
     for ii = 0, 3 do
         local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
         local tmp_cpu_number = ii + 1
-        local tmp_usage = _conky_parse['cpu']['cpu' .. tmp_cpu_number]
+        local tmp_usage = _conky_parse_cpu['cpu' .. tmp_cpu_number]
 
         drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
             string.format(
                 'CPU%s: %s%%',
-                tmp_cpu_number, _conky_parse['cpu']['cpu' .. tmp_cpu_number]
+                tmp_cpu_number, _conky_parse_cpu['cpu' .. tmp_cpu_number]
             ),
             _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
     end

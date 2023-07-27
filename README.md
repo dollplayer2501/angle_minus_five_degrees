@@ -1,10 +1,10 @@
 # Conky theme, "Angle minus five degrees"
 
 
-<img src="./images/EndeavourOS_Qtile_2023-07-21_21-35-52.png" width="630"><br clear="all" />
-<img src="./images/EndeavourOS_Qtile_2023-07-21_20-07-09.png" width="200">
-<img src="./images/EndeavourOS_Qtile_2023-07-21_20-08-16.png" width="200">
-<img src="./images//EndeavourOS_Qtile_2023-07-21_20-08-22.png" width="200">
+<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-15.png" width="620"><br clear="all" />
+<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-25.png" width="200">
+<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-42.png" width="200">
+<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-50.png" width="200">
 
 
 I created this unnecessarily large [Conky](https://github.com/brndnmtthws/conky) theme on the premise that "I only need to know current time".  
@@ -63,8 +63,8 @@ Functions that could not be implemented due to my lack of technical skills.
    I have no idea and skill...although I have a completely unique imprementation idea...
 3. Imprementing display of currency rates.  
    Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
-4. Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?  
-   Because it is relatively easy to mix left and right justification on the same line.
+4. ~~Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?~~  
+   Done, because it is relatively easy to mix left and right justification on the same line.
 5. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3)'s library is fully used?  
     - Network Up/Down speed implementation included.
     - Does not include an implementation of decoration changes in the middle of a string.
@@ -123,7 +123,6 @@ And I don't dare to use Qtile's [`libqtile.widget.Clock()`](https://docs.qtile.o
 ### 4. For the above...
 
 The terminal and text editor that I mainly use always show the current time transparently (or I look directory at the watch/clock), and if I want to know other information, I can get various information with **Mod + 9**.
-
 
 
 //
