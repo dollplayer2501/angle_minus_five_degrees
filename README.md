@@ -62,7 +62,13 @@ Functions that could not be implemented due to my lack of technical skills.
 2. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
    I have no idea and skill...although I have a completely unique imprementation idea...
 3. Imprementing display of currency rates.  
-   Planned, may not be implemented.
+   Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
+4. Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?  
+   Because it is relatively easy to mix left and right justification on the same line.
+5. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3) hoge's library is fully used?  
+    - Network Up/Down speed implementation included.
+    - Does not include an implementation of decoration changes in the middle of a string.
+    - I want to separate the source code of the main body and the settings of each module from being described in the same file.
 
 
 ## Other notable matters
@@ -107,9 +113,12 @@ groups = [
 ]
 ```
 
-With this above, you can jump to a virtual screen for the purpose of not display any application with **Mod + 9**.
+With this above, you can jump to a virtual screen for the purpose of not display any application with **Mod + 9**.  
+And I don't dare to use Qtile's [`libqtile.widget.Clock()`](https://docs.qtile.org/en/stable/manual/ref/widgets.html?highlight=time#clock)...I don't care.
+
 
 ### 3. Applications that are always used perform transparent processing with the configuration of the applications or Picom.
+
 
 ### 4. For the above...
 
