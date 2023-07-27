@@ -71,7 +71,7 @@ function conky_main()
         CENTER_Y = 1080,
     }
     local THEME_POSITION = {
-        CENTER_X = SCREEN_POSITION.CENTER_X + 250,
+        CENTER_X = SCREEN_POSITION.CENTER_X + 300,
         CENTER_Y = SCREEN_POSITION.CENTER_Y + 150,
     }
 
@@ -80,7 +80,7 @@ function conky_main()
 
     local TODAY_WIDTH = {
         FONT_SIZE = 84,
-        FONT_FACE = global_const.FONT_FACE_2,
+        FONT_FACE = global_const.FONT_FACE_2_2,
         FONT_WEIGHT = CAIRO_FONT_WEIGHT_NORMAL,
         MARGIN = 50
     }
@@ -187,7 +187,7 @@ function conky_main()
         base_ring_clock_radius, base_ring_clock_width, base_ring_clock_gap,
         -- caption
         base_ring_clock_caption_x, base_ring_clock_caption_y, base_ring_clock_caption_increment_y,
-        global_const.ALIGN_LEFT, global_const.FONT_FACE_2, base_ring_clock_caption_font_size,
+        global_const.ALIGN_LEFT, global_const.FONT_FACE_2_2, base_ring_clock_caption_font_size,
         -- color
         global_color.ring)
 
@@ -217,7 +217,7 @@ function conky_main()
         global_const.USAGE_LIMIT.CPU,
         -- caption
         base_ring_cpu_caption_x, base_ring_cpu_caption_y, base_ring_cpu_caption_increment_y,
-        global_const.ALIGN_LEFT, global_const.FONT_FACE_2, base_ring_cpu_caption_font_size,
+        global_const.ALIGN_LEFT, global_const.FONT_FACE_2_2, base_ring_cpu_caption_font_size,
         -- values
         global_conky_parse,
         -- color
@@ -248,7 +248,7 @@ function conky_main()
         base_more_ring_radius, base_more_ring_width, base_more_ring_gap,
         -- caption
         base_more_ring_caption_x, base_more_ring_caption_y, base_more_ring_caption_increment_y,
-        global_const.ALIGN_RIGHT, global_const.FONT_FACE_2, base_more_ring_caption_font_size,
+        global_const.ALIGN_RIGHT, global_const.FONT_FACE_2_2, base_more_ring_caption_font_size,
         -- values
         global_conky_parse.memperc,
         -- color
@@ -287,8 +287,8 @@ function conky_main()
     --
 
     local base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust = -55, -60
-    local base_text_clock_hour_font_size = 600
-    local base_text_clock_hour_font_face = global_const.FONT_FACE_2
+    local base_text_clock_hour_font_size = 500
+    local base_text_clock_hour_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_hour_font_align = global_const.ALIGN_RIGHT
 
     local base_text_clock_delimiter_position_x_adjust, base_text_clock_delimiter_position_y_adjust = -25, 8
@@ -297,8 +297,8 @@ function conky_main()
     local base_text_clock_delimiter_font_align = global_const.ALIGN_LEFT
 
     local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 25, 120
-    local base_text_clock_min_font_size = 500
-    local base_text_clock_min_font_face = global_const.FONT_FACE_2
+    local base_text_clock_min_font_size = 450
+    local base_text_clock_min_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_min_font_align = global_const.ALIGN_LEFT
 
     drawing_text_clock(cr_draw, global_conky_parse_updates,

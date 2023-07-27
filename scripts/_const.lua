@@ -11,7 +11,8 @@ function get_const()
 
 
         FONT_FACE_1 = 'GeosansLight',
-        FONT_FACE_2 = 'Raleway Thin',
+        FONT_FACE_2_1 = 'Raleway Light',
+        FONT_FACE_2_2 = 'Raleway Thin',
 
         -- Text align
         ALIGN_LEFT = 'left',
