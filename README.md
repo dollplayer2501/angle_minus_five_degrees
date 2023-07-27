@@ -65,7 +65,7 @@ Functions that could not be implemented due to my lack of technical skills.
    Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
 4. Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?  
    Because it is relatively easy to mix left and right justification on the same line.
-5. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3) hoge's library is fully used?  
+5. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3)'s library is fully used?  
     - Network Up/Down speed implementation included.
     - Does not include an implementation of decoration changes in the middle of a string.
     - I want to separate the source code of the main body and the settings of each module from being described in the same file.
