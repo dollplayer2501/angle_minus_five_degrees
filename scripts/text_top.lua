@@ -24,20 +24,20 @@ function drawing_text_top(_context, _conky_parse_updates, _const,
 
     for ii = 0, 5 do
 
-        drawing_text(_context, _const.ALIGN_LEFT,
+        drawing_text(_context, _const.ALIGN.LEFT,
             _position_x_name + _position_x_adjust_name,
             _position_y_name + _position_y_adjust + (_increment_y * ii),
             _font_size,
             _conky_parse_top['name' .. (ii + 1)],
-            _font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_top['fg' ..(ii + 1)])
+            _font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_text_top['fg' ..(ii + 1)])
 
-        drawing_text(_context, _const.ALIGN_RIGHT,
+        drawing_text(_context, _const.ALIGN.RIGHT,
             _position_x_cpu + _position_x_adjust_cpu,
             _position_y_cpu + _position_y_adjust + (_increment_y * ii),
             _font_size,
             string.format('%s%%',
                 _conky_parse_top['cpu' .. (ii + 1)]
             ),
-            _font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_top['fg' ..(ii + 1)])
+            _font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_text_top['fg' ..(ii + 1)])
     end
 end

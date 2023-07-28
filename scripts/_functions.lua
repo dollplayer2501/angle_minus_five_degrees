@@ -115,7 +115,7 @@ function drawing_text(_context,
         _text, _font_face, _font_slant, _font_weight)
 
     cairo_move_to(_context,
-        (const.ALIGN_RIGHT == _align) and (_pos_x - extents.width - extents.x_bearing) or _pos_x,
+        (const.ALIGN.RIGHT == _align) and (_pos_x - extents.width - extents.x_bearing) or _pos_x,
         _pos_y)
 
     cairo_set_source_rgba(_context, _color.red, _color.green, _color.blue, _color.alpha)
