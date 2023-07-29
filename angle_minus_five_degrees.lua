@@ -110,18 +110,6 @@ function conky_main()
 
 
     --
-    -- Background (Lines)
-    --
---[[
-    drawing_background_lines(cr_draw, global_const,
-        global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
-        TODAY_WIDTH.WIDTH, TODAY_WIDTH.MARGIN,
-        CAIRO_LINE_CAP_BUTT,
-        global_color.line, global_color.debugging)
-]]
-
-
-    --
     -- Bar More
     --
 
