@@ -65,10 +65,10 @@ function drawing_ring_clock(_context,
 
     -- draw caption
 
-    local tmp_text = { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months' }
+    local tmp_text = { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
 
     for ii = 0, 4 do
-        local tmp_positon_y = _caption_start_y - (_caption_increment_y * ii)
+        local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
 
         drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
             tmp_text[ii + 1],

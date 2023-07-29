@@ -14,10 +14,10 @@ function drawing_wall_clock(_context,
     _line_cap, _color_wall_clock)
 
 
-    local tmp_secs_sys = os.date('%S')
-    local tmp_mins_sys = os.date('%M')
-    local tmp_hours12_sys = os.date('%I')
-    local tmp_hours24_sys = os.date('%H')
+    local tmp_secs_sys = tonumber(os.date('%S'))
+    local tmp_mins_sys = tonumber(os.date('%M'))
+    local tmp_hours12_sys = tonumber(os.date('%I'))
+    local tmp_hours24_sys = tonumber(os.date('%H'))
 
     local tmp_secs_arc = (2 * math.pi / 60) * tmp_secs_sys
     local tmp_mins_arc = (2 * math.pi / 60) * tmp_mins_sys + tmp_secs_arc / 60

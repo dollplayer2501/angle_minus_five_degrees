@@ -79,7 +79,7 @@ function conky_main()
     local base_wall_clock_radius_hour12 = 310
     local base_wall_clock_width_hour12 = 40
 
-    local base_wall_clock_radius_hour24 = 800
+    local base_wall_clock_radius_hour24 = 1200
     local base_wall_clock_width_hour24 = 6
 
     local base_wall_clock_radius_mins = 510
@@ -112,13 +112,13 @@ function conky_main()
     --
     -- Background (Lines)
     --
-
+--[[
     drawing_background_lines(cr_draw, global_const,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
         TODAY_WIDTH.WIDTH, TODAY_WIDTH.MARGIN,
         CAIRO_LINE_CAP_BUTT,
         global_color.line, global_color.debugging)
-
+]]
 
 
     --
@@ -144,51 +144,21 @@ function conky_main()
 
 
     --
-    -- Ring Clock - Month, day, hour 24, hour 12, days
-    --
-
-    local base_ring_clock_radius = 200
-    local base_ring_clock_center_x = global_const.CENTER_POSITION.THEME.X
-    local base_ring_clock_center_y = global_const.CENTER_POSITION.THEME.Y
-    local base_ring_clock_angle_start = 0
-    local base_ring_clock_angle_end = 89
-    local base_ring_clock_width = 20
-    local base_ring_clock_gap = 5
-
-    local base_ring_clock_caption_x = global_const.CENTER_POSITION.THEME.X + 4
-    local base_ring_clock_caption_y = global_const.CENTER_POSITION.THEME.Y - base_ring_clock_radius + 7
-    local base_ring_clock_caption_increment_y = 25
-    local base_ring_clock_caption_font_size = 20
-
-    drawing_ring_clock(cr_draw,
-        -- ring
-        base_ring_clock_center_x, base_ring_clock_center_y,
-        base_ring_clock_angle_start, base_ring_clock_angle_end,
-        base_ring_clock_radius, base_ring_clock_width, base_ring_clock_gap,
-        -- caption
-        base_ring_clock_caption_x, base_ring_clock_caption_y, base_ring_clock_caption_increment_y,
-        global_const.ALIGN.LEFT, global_const.FONT_FACE_2_2, base_ring_clock_caption_font_size,
-        -- color
-        global_color.ring)
-
-
-
-    --
     -- CPU Load Average Ring
     --
 
     local base_ring_cpu_radius = 200
     local base_ring_cpu_center_x = global_const.CENTER_POSITION.THEME.X
     local base_ring_cpu_center_y = global_const.CENTER_POSITION.THEME.Y
-    local base_ring_cpu_angle_start = 90
-    local base_ring_cpu_angle_end = 179
+    local base_ring_cpu_angle_start = 00
+    local base_ring_cpu_angle_end = 89
     local base_ring_cpu_width = 20
     local base_ring_cpu_gap = 5
 
-    local base_ring_cpu_caption_x = global_const.CENTER_POSITION.THEME.X + 6
-    local base_ring_cpu_caption_y = global_const.CENTER_POSITION.THEME.Y + base_ring_cpu_radius + 6
+    local base_ring_cpu_caption_x = global_const.CENTER_POSITION.THEME.X + 4
+    local base_ring_cpu_caption_y = global_const.CENTER_POSITION.THEME.Y - base_ring_cpu_radius + 6
     local base_ring_cpu_caption_increment_y = 25
-    local base_ring_cpu_caption_font_size = 20
+    local base_ring_cpu_caption_font_size = 18
 
     drawing_ring_cpu(cr_draw, global_conky_parse_updates,
         base_ring_cpu_center_x, base_ring_cpu_center_y,
@@ -201,6 +171,36 @@ function conky_main()
         global_const.ALIGN.LEFT, global_const.FONT_FACE_2_2, base_ring_cpu_caption_font_size,
         -- values
         global_conky_parse.cpu,
+        -- color
+        global_color.ring)
+
+
+
+    --
+    -- Ring Clock - Month, day, hour 24, hour 12, days
+    --
+
+    local base_ring_clock_radius = 200
+    local base_ring_clock_center_x = global_const.CENTER_POSITION.THEME.X
+    local base_ring_clock_center_y = global_const.CENTER_POSITION.THEME.Y
+    local base_ring_clock_angle_start = 90
+    local base_ring_clock_angle_end = 179
+    local base_ring_clock_width = 20
+    local base_ring_clock_gap = 5
+
+    local base_ring_clock_caption_x = global_const.CENTER_POSITION.THEME.X + 8
+    local base_ring_clock_caption_y = global_const.CENTER_POSITION.THEME.Y + base_ring_clock_radius + 7
+    local base_ring_clock_caption_increment_y = 25
+    local base_ring_clock_caption_font_size = 18
+
+    drawing_ring_clock(cr_draw,
+        -- ring
+        base_ring_clock_center_x, base_ring_clock_center_y,
+        base_ring_clock_angle_start, base_ring_clock_angle_end,
+        base_ring_clock_radius, base_ring_clock_width, base_ring_clock_gap,
+        -- caption
+        base_ring_clock_caption_x, base_ring_clock_caption_y, base_ring_clock_caption_increment_y,
+        global_const.ALIGN.LEFT, global_const.FONT_FACE_2_2, base_ring_clock_caption_font_size,
         -- color
         global_color.ring)
 
@@ -262,6 +262,18 @@ function conky_main()
         global_const.FONT_FACE_1, base_cpu_graph_font_size,
         -- color
         global_color.graph)
+
+
+
+    --
+    -- Background (Lines)
+    --
+
+    drawing_background_lines(cr_draw, global_const,
+        global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
+        TODAY_WIDTH.WIDTH, TODAY_WIDTH.MARGIN,
+        CAIRO_LINE_CAP_BUTT,
+        global_color.line, global_color.debugging)
 
 
 

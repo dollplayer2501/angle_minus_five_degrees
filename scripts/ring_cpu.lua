@@ -46,7 +46,7 @@ function drawing_ring_cpu(_context, _conky_parse_updates,
     -- draw caption
 
     for ii = 0, 3 do
-        local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
+        local tmp_positon_y = _caption_start_y - (_caption_increment_y * ii)
         local tmp_cpu_number = ii + 1
         local tmp_usage = _conky_parse_cpu['cpu' .. tmp_cpu_number]
 

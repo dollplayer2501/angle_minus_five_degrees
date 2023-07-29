@@ -42,9 +42,9 @@ function get_color()
         },
 
         ring = {
-            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
+            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.9),
             fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
-            bg                  = setting_hex_to_rgba('#7f7fff', 0.4),
+            bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
