@@ -24,6 +24,7 @@ function drawing_wall_clock(_context,
     local tmp_hours12_arc = (2 * math.pi / 12) * tmp_hours12_sys + tmp_mins_arc / 12
     local tmp_hours24_arc = (2 * math.pi / 24) * tmp_hours24_sys + tmp_mins_arc / 24
 
+
     -- 12 hour
 
     local tmp_hour12_length_x = _center_x + _radius_hour12 * math.sin(tmp_hours12_arc)

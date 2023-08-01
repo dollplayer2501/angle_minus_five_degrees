@@ -36,7 +36,8 @@ function get_color()
         },
 
         graph = {
-            normal              = setting_hex_to_rgba('#7f7fff', 0.6),
+            normal_1            = setting_hex_to_rgba('#7f7fff', 0.6),
+            normal_2            = setting_hex_to_rgba('#7f7fff', 0.2),
             high                = setting_hex_to_rgba('#ff7fff', 0.6),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },

@@ -15,13 +15,12 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
     _color_graph)
 
 
-    -- Set array of cpu load average
-
     if 4 > _conky_parse_updates then
         cpu_table_data = {}
         return
     end
 
+    -- Set array of cpu load average
     for ii = 1, _cpu_array_count do
         if nil == cpu_table_data[ii + 1] then
             cpu_table_data[ii + 1] = 0
@@ -35,14 +34,48 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
     -- draw graph
 
     for ii = 1, _cpu_array_count do
-        local tmp_height_1 = (_graph_height / 100) * cpu_table_data[ii]
-        local tmp_height_2 = (_cpu_usage_limit < cpu_table_data[ii]) and (tmp_height_1 / 7 * 2) or (tmp_height_1 / 2 * 1)
+        -- Memo:
+        --  ** This code is tentativery/prelinary. **
+        --  Especially when the rate of increase/decrease is intense, the graph cannot be drawn clearly.
+        --  In order to deal with this, I think that knowledge and implementation of differentation are necessary?
+
+        local tmp_height_position_from = (_graph_height / 100) * cpu_table_data[ii]
+        local tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 3 * 1)
+        local tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 3 * 1)
+        local tmp_height_position_to_3 = nil
+        local tmp_color_1 = _color_graph.normal_1
+        local tmp_color_2 = _color_graph.normal_2
+        local tmp_color_3 = nil
+
+        if _cpu_usage_limit * 2 < cpu_table_data[ii] then
+            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 7 * 1)
+            tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 7 * 1)
+            tmp_height_position_to_3 = tmp_height_position_to_2 - (tmp_height_position_from / 7 * 4)
+            tmp_color_1 = _color_graph.high
+            tmp_color_2 = _color_graph.normal_1
+            tmp_color_3 = _color_graph.normal_2
+        elseif _cpu_usage_limit * 1 < cpu_table_data[ii] then
+            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 6 * 3)
+            tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 6 * 2)
+            tmp_color_1 = _color_graph.high
+        end
 
         drawing_line(_context,
-            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_1 * -1),
-            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_2 * -1),
-            _graph_width, CAIRO_LINE_CAP_BUTT,
-            (_cpu_usage_limit < cpu_table_data[ii]) and _color_graph.high or _color_graph.normal)
+            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_from * -1),
+            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_1 * -1),
+            _graph_width, CAIRO_LINE_CAP_BUTT, tmp_color_1)
+
+        drawing_line(_context,
+            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_1 * -1),
+            _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_2 * -1),
+            _graph_width, CAIRO_LINE_CAP_BUTT, tmp_color_2)
+
+        if nil ~= tmp_height_position_to_3 then
+            drawing_line(_context,
+                _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_2 * -1),
+                _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_3 * -1),
+                _graph_width, CAIRO_LINE_CAP_BUTT, tmp_color_3)
+        end
     end
 
     -- draw caption
