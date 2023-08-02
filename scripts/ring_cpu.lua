@@ -55,6 +55,6 @@ function drawing_ring_cpu(_context, _conky_parse_updates,
                 'CPU%s: %s%%',
                 tmp_cpu_number, _conky_parse_cpu['cpu' .. tmp_cpu_number]
             ),
-            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
+            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_ring.caption)
     end
 end

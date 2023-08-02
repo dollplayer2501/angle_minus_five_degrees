@@ -7,6 +7,7 @@ function drawing_ring_clock(_context,
     _ring_center_x, _ring_center_y,
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
+    _enabled_secs,
     -- caption
     _caption_start_x, _caption_start_y, _caption_increment_y,
     _caption_align, _caption_font_face, _caption_font_size,
@@ -16,40 +17,69 @@ function drawing_ring_clock(_context,
 
     -- draw ring
 
-    for ii = 0, 4 do
+    function _get_second(_angle, _start)
+        return (tonumber(os.date('%S')) / 60 * _angle) + _start
+    end
+
+    function _get_minites(_angle, _start)
+        return (tonumber(os.date('%M')) / 60 * _angle) + _start
+    end
+
+    function _get_hour12(_angle, _start)
+        return (tonumber(os.date('%I')) / 12 * _angle) + _start
+    end
+
+    function _get_hour24(_angle, _start)
+        return (tonumber(os.date('%H')) / 24 * _angle) + _start
+    end
+
+    function _get_month(_angle, _start)
+        return (tonumber(os.date('%m')) / 12 * _angle) + _start
+    end
+
+    function _get_days(_angle, _start)
+        local tmp_year = tonumber(os.date('%G'))
+        local tmp_today = tonumber(os.date('%d'))
+        local tmp_month = tonumber(os.date('%m'))
+
+        local tmp_mar_times = os.time({ year = tmp_year, month = 03, day = 01, hour = 00, min = 00, sec = 00 })
+        local tmp_feb_times = os.time({ year = tmp_year, month = 02, day = 01, hour = 00, min = 00, sec = 00 })
+        local tmp_feb_days = (os.difftime(tmp_mar_times, tmp_feb_times) / (24 * 60 * 60))
+        local tmp_month_days = { 31, tmp_feb_days, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+        local tmp_days = tmp_month_days[tonumber(tmp_month)]
+
+        return (tmp_today / tmp_days * _angle) + _start
+    end
+
+
+    local tmp_end = (true == _enabled_secs) and 5 or 4
+    for ii = 0, tmp_end do
         local tmp_radius = _ring_radius + (_ring_width * ii) + (_ring_gap * ii)
         local tmp_ring_angle = _ring_angle_end - _ring_angle_start
         local tmp_fg_end_angle = 0
 
         if 0 == ii then
-            -- foreground: minutes
-            tmp_fg_end_angle = (tonumber(os.date('%M')) / 60 * tmp_ring_angle) + _ring_angle_start
-
+            tmp_fg_end_angle = (true == _enabled_secs)
+                                and _get_second(tmp_ring_angle, _ring_angle_start)
+                                or _get_minites(tmp_ring_angle, _ring_angle_start)
         elseif 1 == ii then
-            -- foreground: hour 12
-            tmp_fg_end_angle = (tonumber(os.date('%I')) / 12 * tmp_ring_angle) + _ring_angle_start
-
+            tmp_fg_end_angle = (true == _enabled_secs)
+                                and _get_minites(tmp_ring_angle, _ring_angle_start)
+                                or _get_hour12(tmp_ring_angle, _ring_angle_start)
         elseif 2 == ii then
-            -- foreground: hour 24
-            tmp_fg_end_angle = (tonumber(os.date('%H')) / 24 * tmp_ring_angle) + _ring_angle_start
-
+            tmp_fg_end_angle = (true == _enabled_secs)
+                                and _get_hour12(tmp_ring_angle, _ring_angle_start)
+                                or _get_hour24(tmp_ring_angle, _ring_angle_start)
         elseif 3 == ii then
-            -- foreground: day
-            local tmp_year = tonumber(os.date('%G'))
-            local tmp_today = tonumber(os.date('%d'))
-            local tmp_month = tonumber(os.date('%m'))
-
-            local tmp_mar_times = os.time({ year = tmp_year, month = 03, day = 01, hour = 00, min = 00, sec = 00 })
-            local tmp_feb_times = os.time({ year = tmp_year, month = 02, day = 01, hour = 00, min = 00, sec = 00 })
-            local tmp_feb_days = (os.difftime(tmp_mar_times, tmp_feb_times) / (24 * 60 * 60))
-            local tmp_month_days = { 31, tmp_feb_days, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
-            local tmp_days = tmp_month_days[tonumber(tmp_month)]
-
-            tmp_fg_end_angle = (tmp_today / tmp_days * tmp_ring_angle) + _ring_angle_start
-
+            tmp_fg_end_angle = (true == _enabled_secs)
+                                and _get_hour24(tmp_ring_angle, _ring_angle_start)
+                                or _get_days(tmp_ring_angle, _ring_angle_start)
         elseif 4 == ii then
-            -- foreground: month
-            tmp_fg_end_angle = (tonumber(os.date('%m')) / 12 * tmp_ring_angle) + _ring_angle_start
+            tmp_fg_end_angle = (true == _enabled_secs)
+                                and _get_days(tmp_ring_angle, _ring_angle_start)
+                                or _get_month(tmp_ring_angle, _ring_angle_start)
+        elseif 5 == ii then
+            tmp_fg_end_angle = _get_month(tmp_ring_angle, _ring_angle_start)
         end
 
         -- draw foreground
@@ -65,13 +95,15 @@ function drawing_ring_clock(_context,
 
     -- draw caption
 
-    local tmp_text = { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
+    local tmp_text = (true == _enabled_secs)
+        and { 'Seconds', 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
+        or { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
 
-    for ii = 0, 4 do
+    for ii = 0, #tmp_text do
         local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
 
         drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
             tmp_text[ii + 1],
-            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
+            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_ring.caption)
     end
 end

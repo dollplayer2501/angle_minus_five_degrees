@@ -36,23 +36,25 @@ function get_color()
         },
 
         graph = {
+            normal_0            = setting_hex_to_rgba('#7f7fff', 0.9),
             normal_1            = setting_hex_to_rgba('#7f7fff', 0.6),
-            normal_2            = setting_hex_to_rgba('#7f7fff', 0.2),
+            normal_2            = setting_hex_to_rgba('#7f7fff', 0.4),
             high                = setting_hex_to_rgba('#ff7fff', 0.6),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
         ring = {
-            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.9),
+            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
             fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
             bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
         wall_clock = {
-            hour12              = setting_hex_to_rgba('#7f3fbf', 0.9),
+            hour12              = setting_hex_to_rgba('#7f3fbf', 0.8),
             hour24              = setting_hex_to_rgba('#7f3fbf', 0.9),
-            mins                = setting_hex_to_rgba('#7f3fbf', 0.9),
+            mins                = setting_hex_to_rgba('#7f3fbf', 0.8),
+            secs                = setting_hex_to_rgba('#7f3fbf', 0.9),
         },
 
         bar_load_rate = {

@@ -39,7 +39,7 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
         --  Especially when the rate of increase/decrease is intense, the graph cannot be drawn clearly.
         --  In order to deal with this, I think that knowledge and implementation of differentation are necessary?
 
-        local tmp_height_position_from = (_graph_height / 100) * cpu_table_data[ii]
+        local tmp_height_position_from = _graph_height * cpu_table_data[ii] / 100
         local tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 3 * 1)
         local tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 3 * 1)
         local tmp_height_position_to_3 = nil
@@ -48,16 +48,17 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
         local tmp_color_3 = nil
 
         if _cpu_usage_limit * 2 < cpu_table_data[ii] then
-            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 7 * 1)
-            tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 7 * 1)
-            tmp_height_position_to_3 = tmp_height_position_to_2 - (tmp_height_position_from / 7 * 4)
+            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 9 * 1)
+            tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 9 * 1)
+            tmp_height_position_to_3 = tmp_height_position_to_2 - (tmp_height_position_from / 9 * 4)
             tmp_color_1 = _color_graph.high
             tmp_color_2 = _color_graph.normal_1
             tmp_color_3 = _color_graph.normal_2
         elseif _cpu_usage_limit * 1 < cpu_table_data[ii] then
-            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 6 * 3)
+            tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 6 * 1)
             tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 6 * 2)
             tmp_color_1 = _color_graph.high
+            tmp_color_2 = _color_graph.normal_2
         end
 
         drawing_line(_context,
@@ -76,6 +77,16 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
                 _graprh_position_x + (_graph_width * (ii - 1)), _graprh_position_y + (tmp_height_position_to_3 * -1),
                 _graph_width, CAIRO_LINE_CAP_BUTT, tmp_color_3)
         end
+
+        if ii <= _cpu_array_count - 1 then
+            local tmp_height_position_from_1 = _graph_height * cpu_table_data[ii + 0] / 100
+            local tmp_height_position_from_2 = _graph_height * cpu_table_data[ii + 1] / 100
+
+            drawing_line(_context,
+                _graprh_position_x + (_graph_width * (ii + 0)), _graprh_position_y + (tmp_height_position_from_1 * -1),
+                _graprh_position_x + (_graph_width * (ii + 1)), _graprh_position_y + (tmp_height_position_from_2 * -1),
+                _graph_width, CAIRO_LINE_CAP_BUTT, _color_graph.normal_0)
+        end
     end
 
     -- draw caption
@@ -86,5 +97,5 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
             'CPU0: %s%%',
                 _cpu_usage_value
         ),
-        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_graph.caption)
+        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_graph.caption)
 end

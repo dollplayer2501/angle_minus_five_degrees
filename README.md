@@ -1,10 +1,10 @@
 # Conky theme, "Angle minus five degrees"
 
 
-<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-15.png" width="620"><br clear="all" />
-<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-25.png" width="200">
-<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-42.png" width="200">
-<img src="./images/EndeavourOS_Qtile_2023-07-28_02-07-50.png" width="200">
+<img src="./images/screenshot__null.png" width="610"><br clear="all" />
+<img src="./images/screenshot_terminal.png" width="200">
+<img src="./images/screenshot_editor.png" width="200">
+<img src="./images/screenshot_filer.png" width="200">
 
 
 I created this unnecessarily large [Conky](https://github.com/brndnmtthws/conky) theme on the premise that "I only need to know current time".  
@@ -59,16 +59,18 @@ Functions that could not be implemented due to my lack of technical skills.
 1. ~~Change character decoration in the middle of a sentence~~  
    Done, not implemented as a generalized parser, for this reason, it is a very unrefined implementation.   
    See. `./scripts/text_detail.lua`
-2. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
+1. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
    I have no idea and skill...although I have a completely unique imprementation idea...
-3. Imprementing display of currency rates.  
+1. Imprementing display of currency rates.  
    Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
-4. ~~Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?~~  
+1. ~~Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?~~  
    Done, because it is relatively easy to mix left and right justification on the same line.
-5. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3)'s library is fully used?  
+1. Rewrite on the premise that [wim66/conky-system-lua-V3](https://github.com/wim66/conky-system-lua-V3)'s library is fully used?  
     - Network Up/Down speed implementation included.
     - Does not include an implementation of decoration changes in the middle of a string.
     - I want to separate the source code of the main body and the settings of each module from being described in the same file.
+1. Using `vmstat` and|ore `ifstat`?
+
 
 
 ## Other notable matters
@@ -87,6 +89,9 @@ A few years...half a year later, for myself to review this scripts.
 - NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./scripts/_conky_parse.lua`.
 - The file system name is written directory in `DISK_DEVICE` of `./scripts/_const.lua`, in my case `/dev/sda2`
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
+- If you are concerned about the CPU load and want to reduce the CPU load even a little, you can turn off the drawing of the second hand and ring of second.
+    - The Second hand is `base_wall_clock_enabled_secs` of `./angle_minus_five_degrees.lua`
+    - The ring of second is `base_ring_clock_enabled_secs` of `./angle_minus_five_degrees.lua`
 
 
 ## Appendix) How this theme interacts with tiling window managers

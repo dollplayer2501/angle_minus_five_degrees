@@ -10,6 +10,8 @@ function drawing_wall_clock(_context,
     _radius_hour24, _width_hour24,
     -- minutes
     _radius_mins, _width_mins,
+    -- seconds
+    _radius_secs, _width_secs, _enabled_secs,
     -- etc
     _line_cap, _color_wall_clock)
 
@@ -48,4 +50,14 @@ function drawing_wall_clock(_context,
 
     drawing_line(_context, _center_x, _center_y, tmp_mins_length_x, tmp_mins_length_y,
         _width_mins, _line_cap, _color_wall_clock.mins)
+
+    -- seconds
+
+    if true == _enabled_secs then
+        local tmp_secs_length_x = _center_x + _radius_secs * math.sin(tmp_secs_arc)
+        local tmp_secs_length_y = _center_y - _radius_secs * math.cos(tmp_secs_arc)
+
+        drawing_line(_context, _center_x, _center_y, tmp_secs_length_x, tmp_secs_length_y,
+            _width_secs, _line_cap, _color_wall_clock.secs)
+    end
 end
