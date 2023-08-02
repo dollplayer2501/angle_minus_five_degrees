@@ -52,7 +52,7 @@ function drawing_ring_more(_context, _conky_parse_updates,
                     'Mem: %s%%',
                         _conky_parse_memperc
                 ),
-                _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_ring.caption)
+                _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
         end
     end
 end

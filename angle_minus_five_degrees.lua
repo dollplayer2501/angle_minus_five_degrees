@@ -125,7 +125,12 @@ function conky_main()
     local base_bar_more_bar_line_width = 3
     local base_bar_more_bar_value_width = global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT
 
+    local base_bar_more_caption_x = global_const.CENTER_POSITION.THEME.X + global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT - 4
+    local base_bar_more_caption_y = global_const.CENTER_POSITION.THEME.Y - global_const.LINE_LENGTH.HEIGHT.TOP_RIGHT + 16
+    local base_bar_more_caption_font_size = 12
+
     drawing_bar_more(cr_draw, global_conky_parse_updates,
+        -- bar
         base_bar_more_position_x, base_bar_more_position_y,
         base_bar_more_bar_gap_y,
         base_bar_more_bar_line_width, base_bar_more_bar_value_width,
@@ -133,6 +138,10 @@ function conky_main()
         global_conky_parse.memperc,
         global_conky_parse.fs_free_perc,
         global_const.USAGE_LIMIT,
+        -- caption
+        base_bar_more_caption_x, base_bar_more_caption_y,
+        global_const.ALIGN.RIGHT, global_const.FONT_FACE_2_2, base_bar_more_caption_font_size,
+        -- color
         global_color.bar_load_rate)
 
 
@@ -150,9 +159,9 @@ function conky_main()
     local base_ring_cpu_gap = 5
 
     local base_ring_cpu_caption_x = global_const.CENTER_POSITION.THEME.X + 4
-    local base_ring_cpu_caption_y = global_const.CENTER_POSITION.THEME.Y - base_ring_cpu_radius + 6
+    local base_ring_cpu_caption_y = global_const.CENTER_POSITION.THEME.Y - base_ring_cpu_radius + 8
     local base_ring_cpu_caption_increment_y = 25
-    local base_ring_cpu_caption_font_size = 20
+    local base_ring_cpu_caption_font_size = 12
 
     drawing_ring_cpu(cr_draw, global_conky_parse_updates,
         base_ring_cpu_center_x, base_ring_cpu_center_y,
@@ -185,7 +194,7 @@ function conky_main()
     local base_ring_clock_caption_x = global_const.CENTER_POSITION.THEME.X + 8
     local base_ring_clock_caption_y = global_const.CENTER_POSITION.THEME.Y + base_ring_clock_radius + 7
     local base_ring_clock_caption_increment_y = 25
-    local base_ring_clock_caption_font_size = 20
+    local base_ring_clock_caption_font_size = 12
 
     local base_ring_clock_enabled_secs = true
 
@@ -215,10 +224,10 @@ function conky_main()
     local base_more_ring_width = 20
     local base_more_ring_gap = 5
 
-    local base_more_ring_caption_x = global_const.CENTER_POSITION.THEME.X - 10
+    local base_more_ring_caption_x = global_const.CENTER_POSITION.THEME.X - 8
     local base_more_ring_caption_y = global_const.CENTER_POSITION.THEME.Y - base_more_ring_radius + 6
     local base_more_ring_caption_increment_y = 25
-    local base_more_ring_caption_font_size = 20
+    local base_more_ring_caption_font_size = 12
 
     drawing_ring_more(cr_draw, global_conky_parse_updates,
         -- ring
@@ -246,7 +255,7 @@ function conky_main()
 
     local base_cpu_graph_caption_pos_x = global_const.CENTER_POSITION.THEME.X - global_const.CPU_LOAD_AVERAGE.LENGTH + 2
     local base_cpu_graph_caption_pos_y = global_const.CENTER_POSITION.THEME.Y - 4
-    local base_cpu_graph_font_size = 20
+    local base_cpu_graph_font_size = 14
 
     drawing_graph_cpu(cr_draw, global_conky_parse_updates,
         -- CPU load average
@@ -278,7 +287,7 @@ function conky_main()
     -- Time(HH:MM) -- Text
     --
 
-    local base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust = -35, -60
+    local base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust = -25, -60
     local base_text_clock_hour_font_size = 450
     local base_text_clock_hour_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_hour_font_align = global_const.ALIGN.RIGHT
@@ -288,14 +297,21 @@ function conky_main()
     local base_text_clock_delimiter_font_face = global_const.FONT_FACE_1
     local base_text_clock_delimiter_font_align = global_const.ALIGN.LEFT
 
-    local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 15, 120
+    local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 10, 120
     local base_text_clock_min_font_size = 400
     local base_text_clock_min_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_min_font_align = global_const.ALIGN.LEFT
 
+    local base_text_clock_sec_enabled = true
+    local base_text_clock_sec_position_x_adjust = global_const.LINE_LENGTH.CENTER_TO.RIGHT - 5
+    local base_text_clock_sec_position_y_adjust = -5
+    local base_text_clock_sec_font_size = 150
+    local base_text_clock_sec_font_face = global_const.FONT_FACE_2_1
+    local base_text_clock_sec_font_align = global_const.ALIGN.RIGHT
+
     drawing_text_clock(cr_draw, global_conky_parse_updates,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
-        -- hour
+        -- hours
         base_text_clock_hour_position_x_adjust, base_text_clock_hour_position_y_adjust,
         base_text_clock_hour_font_size, base_text_clock_hour_font_align, base_text_clock_hour_font_face,
         -- delimiter
@@ -304,6 +320,9 @@ function conky_main()
         -- minutes
         base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust,
         base_text_clock_min_font_size, base_text_clock_min_font_align, base_text_clock_min_font_face,
+        -- seconds
+        base_text_clock_sec_position_x_adjust, base_text_clock_sec_position_y_adjust,
+        base_text_clock_sec_font_size, base_text_clock_sec_font_align, base_text_clock_sec_font_face, base_text_clock_sec_enabled,
         -- color
         global_color.text_time)
 

@@ -89,9 +89,10 @@ A few years...half a year later, for myself to review this scripts.
 - NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./scripts/_conky_parse.lua`.
 - The file system name is written directory in `DISK_DEVICE` of `./scripts/_const.lua`, in my case `/dev/sda2`
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
-- If you are concerned about the CPU load and want to reduce the CPU load even a little, you can turn off the drawing of the second hand and ring of second.
-    - The Second hand is `base_wall_clock_enabled_secs` of `./angle_minus_five_degrees.lua`
+- If you are concerned about the CPU load and want to reduce the CPU load even a little, you can turn off the drawing of the second.
+    - The second hand is `base_wall_clock_enabled_secs` of `./angle_minus_five_degrees.lua`
     - The ring of second is `base_ring_clock_enabled_secs` of `./angle_minus_five_degrees.lua`
+    - The string of second is `base_text_clock_sec_enabled` of `./angle_minus_five_degrees.lua`
 
 
 ## Appendix) How this theme interacts with tiling window managers

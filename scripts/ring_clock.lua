@@ -104,6 +104,6 @@ function drawing_ring_clock(_context,
 
         drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
             tmp_text[ii + 1],
-            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_ring.caption)
+            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
     end
 end

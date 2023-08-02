@@ -4,12 +4,14 @@
 
 function drawing_text_clock(_context, _conky_parse_updates,
     _position_x, _position_y,
-    -- hour
+    -- hours
     _hour_position_x_adjust, _hour_position_y_adjust, _hour_font_size, _hour_font_align, _hour_font_face,
     -- delimiter
     _delimiter_position_x_adjust, _delimiter_position_y_adjust, _delimiter_font_size, _delimiter_font_align, _delimiter_font_face,
     -- minutes
     _min_position_x_adjust, _min_position_y_adjust, _min_font_size, _min_font_align, _min_font_face,
+    -- seconds
+    _sec_position_x_adjust, _sec_position_y_adjust, _sec_font_size, _sec_font_align, _sec_font_face,  _enabled_secs,
     -- color
     _color_text_time)
 
@@ -29,21 +31,33 @@ function drawing_text_clock(_context, _conky_parse_updates,
         end
     end
 
-    -- Time - Hour
+    -- Hours
+
     drawing_text(_context, _hour_font_align,
         _position_x + _hour_position_x_adjust, _position_y + _hour_position_y_adjust, _hour_font_size,
-        os.date('%H'),
+        tostring(os.date('%H')),
         _hour_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.hour)
 
-    -- Time - Delimiter
+    -- Delimiter
+
     drawing_text(_context, _delimiter_font_align,
         _position_x + _delimiter_position_x_adjust, _position_y + _delimiter_position_y_adjust, _delimiter_font_size,
         ':',
         _delimiter_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, tmp_color)
 
-    -- Time - Min
+    -- Seconds (not Minutes, becase z-order)
+
+    if true == _enabled_secs then
+        drawing_text(_context, _sec_font_align,
+            _position_x + _sec_position_x_adjust, _position_y + _sec_position_y_adjust, _sec_font_size,
+            tostring(os.date('%S')),
+            _sec_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.sec)
+    end
+
+    -- Minutes
+
     drawing_text(_context, _min_font_align,
         _position_x + _min_position_x_adjust, _position_y + _min_position_y_adjust, _min_font_size,
-        os.date('%M'),
+        tostring(os.date('%M')),
         _min_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.mins)
 end

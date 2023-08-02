@@ -33,6 +33,7 @@ function get_color()
             delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.8),
             delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.8),
             mins                = setting_hex_to_rgba('#ff7fff', 0.9),
+            sec                 = setting_hex_to_rgba('#7f3fbf', 0.9),
         },
 
         graph = {
@@ -60,7 +61,9 @@ function get_color()
         bar_load_rate = {
             normal              = setting_hex_to_rgba('#7f7fff', 0.9),
             high                = setting_hex_to_rgba('#ff7fff', 0.9),
+            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
+
         text_top = {
             fg1                 = setting_hex_to_rgba('#7f7fff', 1.00),
             fg2                 = setting_hex_to_rgba('#7f7fff', 0.85),

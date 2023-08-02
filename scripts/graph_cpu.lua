@@ -97,5 +97,5 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
             'CPU0: %s%%',
                 _cpu_usage_value
         ),
-        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_graph.caption)
+        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_graph.caption)
 end
