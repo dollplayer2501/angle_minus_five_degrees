@@ -84,7 +84,7 @@ function conky_main()
 
     local base_wall_clock_radius_mins = 510
     local base_wall_clock_width_mins = 20
---[[
+
     drawing_wall_clock(cr_draw,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
         -- 12 hour
@@ -95,7 +95,7 @@ function conky_main()
         base_wall_clock_radius_mins, base_wall_clock_width_mins,
         -- etc
         CAIRO_LINE_CAP_ROUND, global_color.wall_clock)
-]]
+
 
 
     --
