@@ -7,15 +7,12 @@ function drawing_graph_network(_context, _conky_parse_updates, _time_interval,
     _network_upspeedf, _network_downspeedf,
     -- array's count
     _network_array_count_upspeed, _network_array_count_downspeed,
-    -- graph position
+    -- graph
     _graprh_position_x, _graprh_position_y,
-    -- graph etc
     _graph_width, _graph_max_height,
     -- caption
-    _caption_position_align,
-    _caption_position_x,
-    _caption_position_y_upspeed, _caption_position_y_downspeed,
-    _caption_font_face, _caption_font_size,
+    _caption_position_x, _caption_position_y_upspeed, _caption_position_y_downspeed,
+    _caption_position_align, _caption_font_face, _caption_font_size, _caption_font_weight,
     -- color
     _color_graph)
 
@@ -109,17 +106,15 @@ function drawing_graph_network(_context, _conky_parse_updates, _time_interval,
 
     drawing_text(_context, _caption_position_align,
         _caption_position_x, _caption_position_y_upspeed, _caption_font_size,
-        string.format(
-            'UpSpeed: %sKiB',
+        string.format('UpSpeed: %sKiB',
                 _network_upspeedf
             ),
         _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_graph.caption)
 
     drawing_text(_context, _caption_position_align,
         _caption_position_x, _caption_position_y_downspeed, _caption_font_size,
-        string.format(
-            'DownSpeed: %sKiB',
+        string.format('DownSpeed: %sKiB',
                 _network_downspeedf
             ),
-        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_graph.caption)
+        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_graph.caption)
 end

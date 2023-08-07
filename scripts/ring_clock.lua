@@ -3,14 +3,15 @@
 --
 
 function drawing_ring_clock(_context,
+    -- position
+    _ring_position_x, _ring_position_y,
     -- ring
-    _ring_center_x, _ring_center_y,
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
     _enabled_secs,
     -- caption
-    _caption_start_x, _caption_start_y, _caption_increment_y,
-    _caption_align, _caption_font_face, _caption_font_size,
+    _caption_position_x, _caption_position_y, _caption_increment_y,
+    _caption_align, _caption_font_face, _caption_font_size, _caption_font_weight,
     -- color
     _color_ring)
 
@@ -83,12 +84,12 @@ function drawing_ring_clock(_context,
         end
 
         -- draw foreground
-        drawing_ring(_context, _ring_center_x, _ring_center_y, tmp_radius,
+        drawing_ring(_context, _ring_position_x, _ring_position_y, tmp_radius,
             changing_angle_to_radian(_ring_angle_start), changing_angle_to_radian(tmp_fg_end_angle),
             _ring_width, CAIRO_LINE_CAP_BUTT, _color_ring.fg_normal)
 
         -- draw background
-        drawing_ring(_context, _ring_center_x, _ring_center_y, tmp_radius,
+        drawing_ring(_context, _ring_position_x, _ring_position_y, tmp_radius,
             changing_angle_to_radian(tmp_fg_end_angle), changing_angle_to_radian(_ring_angle_end),
             _ring_width, CAIRO_LINE_CAP_BUTT, _color_ring.bg)
     end
@@ -100,10 +101,10 @@ function drawing_ring_clock(_context,
         or { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
 
     for ii = 0, #tmp_text do
-        local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
+        local tmp_positon_y = _caption_position_y + (_caption_increment_y * ii)
 
-        drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
+        drawing_text(_context, _caption_align, _caption_position_x, tmp_positon_y, _caption_font_size,
             tmp_text[ii + 1],
-            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
+            _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_ring.caption)
     end
 end

@@ -7,10 +7,10 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
     _cpu_usage_value, _cpu_array_count, _cpu_usage_limit,
     -- graph
     _graprh_position_x, _graprh_position_y,
-    _graph_width, _graph_height,
+    _graph_width, _graph_max_height,
     -- caption
-    _caption_position_align, _caption_start_x, _caption_start_y,
-    _caption_font_face, _caption_font_size,
+    _caption_position_x, _caption_position_y,
+    _caption_position_align, _caption_font_face, _caption_font_size, _caption_font_weight,
     -- color
     _color_graph)
 
@@ -19,6 +19,7 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
         cpu_table_data = {}
         return
     end
+
 
     -- Set array of cpu load average
     for ii = 1, _cpu_array_count do
@@ -39,7 +40,7 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
         --  Especially when the rate of increase/decrease is intense, the graph cannot be drawn clearly.
         --  In order to deal with this, I think that knowledge and implementation of differentation are necessary?
 
-        local tmp_height_position_from = _graph_height * cpu_table_data[ii] / 100
+        local tmp_height_position_from = _graph_max_height * cpu_table_data[ii] / 100
         local tmp_height_position_to_1 = tmp_height_position_from - (tmp_height_position_from / 3 * 1)
         local tmp_height_position_to_2 = tmp_height_position_to_1 - (tmp_height_position_from / 3 * 1)
         local tmp_height_position_to_3 = nil
@@ -79,8 +80,8 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
         end
 
         if ii <= _cpu_array_count - 1 then
-            local tmp_height_position_from_1 = _graph_height * cpu_table_data[ii + 0] / 100
-            local tmp_height_position_from_2 = _graph_height * cpu_table_data[ii + 1] / 100
+            local tmp_height_position_from_1 = _graph_max_height * cpu_table_data[ii + 0] / 100
+            local tmp_height_position_from_2 = _graph_max_height * cpu_table_data[ii + 1] / 100
 
             drawing_line(_context,
                 _graprh_position_x + (_graph_width * (ii + 0)), _graprh_position_y + (tmp_height_position_from_1 * -1),
@@ -92,10 +93,10 @@ function drawing_graph_cpu(_context, _conky_parse_updates,
     -- draw caption
 
     drawing_text(_context,
-        _caption_position_align, _caption_start_x, _caption_start_y, _caption_font_size,
+        _caption_position_align, _caption_position_x, _caption_position_y, _caption_font_size,
         string.format(
             'CPU0: %s%%',
                 _cpu_usage_value
         ),
-        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_graph.caption)
+        _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_graph.caption)
 end

@@ -3,13 +3,14 @@
 --
 
 function drawing_text_detail(_context, _conky_parse_updates, _position_align,
+    -- position
     _position_x, _position_y,
+    -- values
+    _const_disk_device, _conky_parse, _usage_limit,
     -- large size
     _adjust_x_large, _adjust_y_large, _font_size_large, _font_face_large, _font_weight,
     -- normal size
     _adjust_x_normal, _adjust_y_normal, _gap_y_normal, _font_size_normal, _font_face_normal,
-    -- values
-    _const_disk_device, _conky_parse, _usage_limit,
     -- color
     _color_detail)
 

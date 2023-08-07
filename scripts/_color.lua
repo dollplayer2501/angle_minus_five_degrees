@@ -64,8 +64,8 @@ function get_color()
         },
 
         bar_load_rate = {
-            normal              = setting_hex_to_rgba('#7f7fff', 0.9),
-            high                = setting_hex_to_rgba('#ff7fff', 0.9),
+            normal              = setting_hex_to_rgba('#7f7fff', 0.6),
+            high                = setting_hex_to_rgba('#ff7fff', 0.6),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 

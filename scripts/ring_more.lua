@@ -4,14 +4,14 @@
 
 function drawing_ring_more(_context, _conky_parse_updates,
     _ring_center_x, _ring_center_y,
+    -- values
+    _conky_parse_memperc,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
     -- caption
-    _caption_start_x, _caption_start_y, _caption_increment_y,
-    _caption_align, _caption_font_face, _caption_font_size,
-    -- values
-    _conky_parse_memperc,
+    _caption_position_x, _caption_position_y, _caption_increment_y,
+    _caption_align, _caption_font_face, _caption_font_size,  _caption_font_weight,
     --color
     _color_ring)
 
@@ -19,6 +19,7 @@ function drawing_ring_more(_context, _conky_parse_updates,
     if 4 > _conky_parse_updates then
         return
     end
+
 
     -- draw ring
 
@@ -46,13 +47,13 @@ function drawing_ring_more(_context, _conky_parse_updates,
 
     for ii = 0, 0 do
         if 0 == ii then
-            local tmp_positon_y = _caption_start_y + (_caption_increment_y * ii)
-            drawing_text(_context, _caption_align, _caption_start_x, tmp_positon_y, _caption_font_size,
+            local tmp_positon_y = _caption_position_y + (_caption_increment_y * ii)
+            drawing_text(_context, _caption_align, _caption_position_x, tmp_positon_y, _caption_font_size,
                 string.format(
                     'Mem: %s%%',
                         _conky_parse_memperc
                 ),
-                _caption_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_ring.caption)
+                _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_ring.caption)
         end
     end
 end
