@@ -17,27 +17,27 @@ function drawing_ring_clock(_context,
 
     -- draw ring
 
-    function _get_second(_angle, _start)
+    local _get_second = function(_angle, _start)
         return (tonumber(os.date('%S')) / 60 * _angle) + _start
     end
 
-    function _get_minites(_angle, _start)
+    local _get_minites = function(_angle, _start)
         return (tonumber(os.date('%M')) / 60 * _angle) + _start
     end
 
-    function _get_hour12(_angle, _start)
+    local _get_hour12 = function(_angle, _start)
         return (tonumber(os.date('%I')) / 12 * _angle) + _start
     end
 
-    function _get_hour24(_angle, _start)
+    local _get_hour24 = function(_angle, _start)
         return (tonumber(os.date('%H')) / 24 * _angle) + _start
     end
 
-    function _get_month(_angle, _start)
+    local _get_month = function(_angle, _start)
         return (tonumber(os.date('%m')) / 12 * _angle) + _start
     end
 
-    function _get_days(_angle, _start)
+    local _get_days = function(_angle, _start)
         local tmp_year = tonumber(os.date('%G'))
         local tmp_today = tonumber(os.date('%d'))
         local tmp_month = tonumber(os.date('%m'))

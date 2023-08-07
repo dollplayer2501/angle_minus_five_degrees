@@ -29,14 +29,14 @@ function get_color()
         },
 
         text_time = {
-            hour                = setting_hex_to_rgba('#ff7fff', 0.9),
-            delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.8),
-            delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.8),
-            mins                = setting_hex_to_rgba('#ff7fff', 0.9),
-            sec                 = setting_hex_to_rgba('#7f3fbf', 0.9),
+            hour                = setting_hex_to_rgba('#ff7fff', 0.6),
+            delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
+            delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),
+            mins                = setting_hex_to_rgba('#ff7fff', 0.6),
+            sec                 = setting_hex_to_rgba('#ff7fff', 0.2),
         },
 
-        graph = {
+        graph_cpu = {
             normal_0            = setting_hex_to_rgba('#7f7fff', 0.9),
             normal_1            = setting_hex_to_rgba('#7f7fff', 0.6),
             normal_2            = setting_hex_to_rgba('#7f7fff', 0.4),
@@ -44,8 +44,13 @@ function get_color()
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
+        graph_network = {
+            normal              = setting_hex_to_rgba('#7f7fff', 0.9),
+            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
+        },
+
         ring = {
-            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
+            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.6),
             fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
             bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),

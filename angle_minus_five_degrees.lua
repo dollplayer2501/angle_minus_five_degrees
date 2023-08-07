@@ -21,6 +21,7 @@ require 'ring_cpu'
 require 'ring_more'
 require 'text_clock'
 require 'graph_cpu'
+require 'graph_network'
 require 'text_detail'
 require 'text_top'
 
@@ -249,25 +250,65 @@ function conky_main()
     --
 
     local cpu_array_count = global_const.CPU_LOAD_AVERAGE.LENGTH
-    local base_cpu_graph_pos_x = global_const.CENTER_POSITION.THEME.X - cpu_array_count
-    local base_cpu_graph_pos_y = global_const.CENTER_POSITION.THEME.Y
-    local base_cpu_graph_width = 1
+    local base_graph_cpu_pos_x = global_const.CENTER_POSITION.THEME.X - cpu_array_count
+    local base_graph_cpu_pos_y = global_const.CENTER_POSITION.THEME.Y
+    local base_graph_cpu_width = 1
 
-    local base_cpu_graph_caption_pos_x = global_const.CENTER_POSITION.THEME.X - global_const.CPU_LOAD_AVERAGE.LENGTH + 2
-    local base_cpu_graph_caption_pos_y = global_const.CENTER_POSITION.THEME.Y - 4
-    local base_cpu_graph_font_size = 14
+    local base_graph_cpu_caption_pos_x = global_const.CENTER_POSITION.THEME.X - global_const.CPU_LOAD_AVERAGE.LENGTH + 2
+    local base_graph_cpu_caption_pos_y = global_const.CENTER_POSITION.THEME.Y - 4
+    local base_graph_cpu_font_size = 14
 
     drawing_graph_cpu(cr_draw, global_conky_parse_updates,
         -- CPU load average
         global_conky_parse.cpu.cpu0, cpu_array_count, global_const.USAGE_LIMIT.CPU,
         -- graph
-        base_cpu_graph_pos_x, base_cpu_graph_pos_y,
-        base_cpu_graph_width, global_const.CPU_LOAD_AVERAGE.HEIGHT,
+        base_graph_cpu_pos_x, base_graph_cpu_pos_y,
+        base_graph_cpu_width, global_const.CPU_LOAD_AVERAGE.HEIGHT,
         -- caption
-        global_const.ALIGN.LEFT, base_cpu_graph_caption_pos_x, base_cpu_graph_caption_pos_y,
-        global_const.FONT_FACE_1, base_cpu_graph_font_size,
+        global_const.ALIGN.LEFT, base_graph_cpu_caption_pos_x, base_graph_cpu_caption_pos_y,
+        global_const.FONT_FACE_1, base_graph_cpu_font_size,
         -- color
-        global_color.graph)
+        global_color.graph_cpu)
+
+
+
+    --
+    -- Network Graph
+    --
+
+    --
+    -- This is a buggy code!
+    --
+
+    local base_graph_network_time_interval = 1
+
+    local base_graph_network_array_count_upspeed = global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_graph_network_array_count_downspeed = global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_graph_network_graph_width = 1
+    local base_graph_network_graph_max_height = 50
+
+    local base_graph_network_caption_position_x = global_const.CENTER_POSITION.THEME.X + global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT - 2
+    local base_graph_network_caption_position_y_upspeed = global_const.CENTER_POSITION.THEME.Y - 4
+    local base_graph_network_caption_position_y_downspeed = global_const.CENTER_POSITION.THEME.Y + 14
+    local base_graph_network_caption_pos_x_adjust, base_graph_network_caption_pos_y_adjust = 0, 10
+    local base_graph_network_font_size = 14
+
+    drawing_graph_network(cr_draw, global_conky_parse_updates, base_graph_network_time_interval,
+        -- network speed
+        global_conky_parse.upspeedf, global_conky_parse.downspeedf,
+        -- array's count
+        base_graph_network_array_count_upspeed, base_graph_network_array_count_downspeed,
+        -- graph position
+        global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
+        -- graph etc
+        base_graph_network_graph_width, base_graph_network_graph_max_height,
+        -- caption
+        global_const.ALIGN.RIGHT,
+        base_graph_network_caption_position_x,
+        base_graph_network_caption_position_y_upspeed, base_graph_network_caption_position_y_downspeed,
+        global_const.FONT_FACE_1, base_graph_network_font_size,
+        -- color
+        global_color.graph_network)
 
 
 
@@ -297,7 +338,7 @@ function conky_main()
     local base_text_clock_delimiter_font_face = global_const.FONT_FACE_1
     local base_text_clock_delimiter_font_align = global_const.ALIGN.LEFT
 
-    local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 10, 120
+    local base_text_clock_min_position_x_adjust, base_text_clock_min_position_y_adjust = 10, 150
     local base_text_clock_min_font_size = 400
     local base_text_clock_min_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_min_font_align = global_const.ALIGN.LEFT
@@ -305,7 +346,7 @@ function conky_main()
     local base_text_clock_sec_enabled = true
     local base_text_clock_sec_position_x_adjust = global_const.LINE_LENGTH.CENTER_TO.RIGHT - 5
     local base_text_clock_sec_position_y_adjust = -5
-    local base_text_clock_sec_font_size = 150
+    local base_text_clock_sec_font_size = 250
     local base_text_clock_sec_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_sec_font_align = global_const.ALIGN.RIGHT
 

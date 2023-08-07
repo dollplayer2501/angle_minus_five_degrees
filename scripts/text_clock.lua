@@ -18,7 +18,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
 
     -- delimiter ':' blinks
     local tmp_color = _color_text_time.delimiter_1
-    if 3 >  _conky_parse_updates then
+    if 3 > _conky_parse_updates then
         return
     elseif 3 == _conky_parse_updates then
         flg_text_blink = false -- this is not local

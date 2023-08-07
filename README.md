@@ -60,7 +60,10 @@ Functions that could not be implemented due to my lack of technical skills.
    Done, not implemented as a generalized parser, for this reason, it is a very unrefined implementation.   
    See. `./scripts/text_detail.lua`
 1. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
-   I have no idea and skill...although I have a completely unique imprementation idea...
+   ~~I have no idea and skill...although I have a completely unique imprementation idea...~~  
+   I have implemented it, albeit **a buggy code**, I will check the detailed behavior in the future, 2023-08-07.  
+   I implemented it in a way that I dynamically get the maximum value in the array.  
+   See. `./scripts/graph_network.lua`
 1. Imprementing display of currency rates.  
    Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
 1. ~~Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?~~  
@@ -70,7 +73,6 @@ Functions that could not be implemented due to my lack of technical skills.
     - Does not include an implementation of decoration changes in the middle of a string.
     - I want to separate the source code of the main body and the settings of each module from being described in the same file.
 1. Using `vmstat` and|ore `ifstat`?
-
 
 
 ## Other notable matters
