@@ -16,10 +16,10 @@ function get_color()
         line                    = setting_hex_to_rgba('#7f3fbf', 1.0),
 
         background = {
-            top_left            = setting_hex_to_rgba('#685878', 0.5),
+            top_left            = setting_hex_to_rgba('#685878', 0.3),
             bottom_left         = setting_hex_to_rgba('#685878', 0.9),
-            top_right           = setting_hex_to_rgba('#685878', 0.7),
-            bottom_right        = setting_hex_to_rgba('#685878', 0.6),
+            top_right           = setting_hex_to_rgba('#685878', 0.5),
+            bottom_right        = setting_hex_to_rgba('#685878', 0.4),
         },
 
         text_detail = {

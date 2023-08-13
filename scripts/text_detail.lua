@@ -87,7 +87,7 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
 
         local tmp_width_2 = display_text_and_acquisition_text_width(_context, _position_align,
             _position_x + _adjust_x_normal - tmp_width_1, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format(' %s/%s ',
+            string.format('%s/%s',
                 _conky_parse.checkupdates,
                 _conky_parse.packman_Q
             ),
@@ -95,7 +95,7 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
 
         drawing_text(_context, _position_align,
             _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format('%s@%s needs to update ',
+            string.format('%s@%s needs to update',
                 _conky_parse.whoami,
                 _conky_parse.hostname
             ),

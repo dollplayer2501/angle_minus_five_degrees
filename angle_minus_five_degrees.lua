@@ -319,7 +319,7 @@ function conky_main()
 
 
     --
-    -- Time(HH:MM) -- Text
+    -- Time(HH:MM:SS) -- Text
     --
 
     local base_text_clock_hour_adjust_x, base_text_clock_hour_adjust_y = -25, -60
@@ -332,7 +332,7 @@ function conky_main()
     local base_text_clock_delimiter_font_face = global_const.FONT_FACE_1
     local base_text_clock_delimiter_font_align = global_const.ALIGN.LEFT
 
-    local base_text_clock_min_adjust_x, base_text_clock_min_adjust_y = 10, 150
+    local base_text_clock_min_adjust_x, base_text_clock_min_adjust_y = 0, 150
     local base_text_clock_min_font_size = 400
     local base_text_clock_min_font_face = global_const.FONT_FACE_2_1
     local base_text_clock_min_font_align = global_const.ALIGN.LEFT

@@ -30,12 +30,8 @@ function drawing_graph_network(_context, _conky_parse_updates, _time_interval,
                 _array_data[ii + 1] = 0
             end
             _array_data[ii] = _array_data[ii + 1]
-            if ii == _array_count then
-                if 0 == _network_downspeedf then
-                    _array_data[_array_count] = 1
-                else
-                    _array_data[_array_count] = _value
-                end
+             if ii == _array_count then
+                _array_data[_array_count] = _value
             end
         end
 
