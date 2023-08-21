@@ -56,7 +56,10 @@ function get_const()
         },
 
 
-        LINE_WIDTH = 2,
+        LINE_WIDTH = {
+            normal = 2,
+            high = 6,
+        },
 
         LINE_LENGTH = {
             --[[

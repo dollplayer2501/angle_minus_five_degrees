@@ -13,7 +13,10 @@ function get_color()
         -- # blue:   #7f7fff #bebeff #8a8aaa
         -- # pink:   #ff7fff #ffbebe #bc9c9c
 
-        line                    = setting_hex_to_rgba('#7f3fbf', 1.0),
+        line = {
+            normal              = setting_hex_to_rgba('#7f3fbf', 1.0),
+            high                = setting_hex_to_rgba('#ff7fff', 1.0),
+        },
 
         background = {
             top_left            = setting_hex_to_rgba('#685878', 0.3),
@@ -29,11 +32,11 @@ function get_color()
         },
 
         text_time = {
-            hour                = setting_hex_to_rgba('#ff7fff', 0.6),
+            hour                = setting_hex_to_rgba('#ff7fff', 0.8),
             delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
             delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),
-            mins                = setting_hex_to_rgba('#ff7fff', 0.6),
-            sec                 = setting_hex_to_rgba('#ff7fff', 0.2),
+            mins                = setting_hex_to_rgba('#ff7fff', 0.8),
+            sec                 = setting_hex_to_rgba('#ff7fff', 0.4),
         },
 
         graph_cpu = {
@@ -50,7 +53,7 @@ function get_color()
         },
 
         ring = {
-            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.6),
+            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
             fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
             bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),

@@ -126,7 +126,7 @@ function conky_main()
     local base_bar_more_bar_line_width = 3
     local base_bar_more_bar_length = global_const.LINE_LENGTH.WIDTH.BOTTOM_RIGHT
 
-    local base_bar_more_caption_position_x = global_const.CENTER_POSITION.THEME.X - 4
+    local base_bar_more_caption_position_x = global_const.CENTER_POSITION.THEME.X + 4
     local base_bar_more_caption_position_y = global_const.CENTER_POSITION.THEME.Y - global_const.LINE_LENGTH.HEIGHT.TOP_RIGHT + 16
     local base_bar_more_caption_gap_y = 12
     local base_bar_more_caption_font_size = 12
@@ -142,7 +142,7 @@ function conky_main()
         base_bar_more_bar_line_width, base_bar_more_bar_length,
         -- caption
         base_bar_more_caption_position_x, base_bar_more_caption_position_y, base_bar_more_caption_gap_y,
-        global_const.ALIGN.RIGHT, global_const.FONT_FACE_2_1, base_bar_more_caption_font_size, CAIRO_FONT_WEIGHT_BOLD,
+        global_const.ALIGN.LEFT, global_const.FONT_FACE_2_1, base_bar_more_caption_font_size, CAIRO_FONT_WEIGHT_BOLD,
         -- color
         global_color.bar_load_rate)
 
@@ -161,7 +161,7 @@ function conky_main()
     local base_ring_cpu_caption_position_x = global_const.CENTER_POSITION.THEME.X + 4
     local base_ring_cpu_caption_position_y = global_const.CENTER_POSITION.THEME.Y - base_ring_cpu_radius + 8
     local base_ring_cpu_caption_increment_y = 25
-    local base_ring_cpu_caption_font_size = 12
+    local base_ring_cpu_caption_font_size = 14
 
     drawing_ring_cpu(cr_draw, global_conky_parse_updates,
         -- values
@@ -310,9 +310,12 @@ function conky_main()
     -- Background (Lines)
     --
 
-    drawing_background_lines(cr_draw, global_const,
+    local base_background_lines_highlight_length = 4
+
+    drawing_background_lines(cr_draw, global_conky_parse_updates, global_const,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
         TODAY_WIDTH.WIDTH, TODAY_WIDTH.MARGIN,
+        base_background_lines_highlight_length,
         CAIRO_LINE_CAP_BUTT,
         global_color.line, global_color.debugging)
 
