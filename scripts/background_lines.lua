@@ -19,7 +19,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
     drawing_line(_context,
         _center_x - today_width - _const.LINE_LENGTH.ADDITION.LARGE, _center_y,
         _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT + _const.LINE_LENGTH.ADDITION.LARGE, _center_y,
-        _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
+        _const.LINE_WIDTH.bold, _line_cap, _color_line.normal)
 
     --
     -- Main - Vertical - Top to bottom
@@ -27,7 +27,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
     drawing_line(_context,
         _center_x, _center_y - _const.LINE_LENGTH.CENTER_TO.TOP,
         _center_x, _center_y + _const.LINE_LENGTH.CENTER_TO.BOTTOM,
-        _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
+        _const.LINE_WIDTH.bold, _line_cap, _color_line.normal)
 
     --
     -- Top, Left
@@ -63,42 +63,38 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
 
     -- Top, Right -- Vertical
 
-    -- This is nonsensical logic.
-
     --[[
+    -- Here is an implementation if you don't need weird behavior.
+
     drawing_line(_context,
         _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - _const.LINE_LENGTH.HEIGHT.TOP_RIGHT - _const.LINE_LENGTH.ADDITION.LARGE,
         _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y + _const.LINE_LENGTH.ADDITION.LARGE,
-        _const.LINE_WIDTH, _line_cap, _color_line)
+        _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
     ]]
 
+     -- The following 3 functions are implemented when you incorporate movements.
+
+     local tmp_value = _conky_parse_updates % _const.LINE_LENGTH.HEIGHT.TOP_RIGHT
+     -- The following is for speeding up the movement.
+     -- local tmp_value = (_conky_parse_updates % (_const.LINE_LENGTH.HEIGHT.TOP_RIGHT / _highlight_length)) * _highlight_length
+
+    -- Top, Right -- Vertical line 1/3 at upper
     drawing_line(_context,
         _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - _const.LINE_LENGTH.HEIGHT.TOP_RIGHT - _const.LINE_LENGTH.ADDITION.LARGE,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - _const.LINE_LENGTH.HEIGHT.TOP_RIGHT,
+        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value - _highlight_length,
         _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
 
+    -- Top, Right -- Vertical line 2/3 at highlight
     drawing_line(_context,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y,
+        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value - _highlight_length,
+        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value + _highlight_length,
+        _const.LINE_WIDTH.bolder, _line_cap, _color_line.high)
+
+    -- Top, Right -- Vertical line 2/3 at lower
+    drawing_line(_context,
+        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value + _highlight_length,
         _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y + _const.LINE_LENGTH.ADDITION.LARGE,
         _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
-
-    local tmp_value = _conky_parse_updates % _const.LINE_LENGTH.HEIGHT.TOP_RIGHT
-
-    drawing_line(_context,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - _const.LINE_LENGTH.HEIGHT.TOP_RIGHT,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value - _highlight_length,
-        _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
-
-    drawing_line(_context,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value - _highlight_length,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value + _highlight_length,
-        _const.LINE_WIDTH.high, _line_cap, _color_line.high)
-
-    drawing_line(_context,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value + _highlight_length,
-        _center_x + _const.LINE_LENGTH.CENTER_TO.RIGHT, _center_y,
-        _const.LINE_WIDTH.normal, _line_cap, _color_line.normal)
-
 
     -- Top, Right -- Holizontal
     drawing_line(_context,

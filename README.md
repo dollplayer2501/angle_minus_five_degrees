@@ -73,6 +73,8 @@ Functions that could not be implemented due to my lack of technical skills.
     - Does not include an implementation of decoration changes in the middle of a string.
     - I want to separate the source code of the main body and the settings of each module from being described in the same file.
 1. Using `vmstat` and|or `ifstat`?
+1. Imprementing gradient color, line and surface.  
+   But not sure if it applies to this theme.
 
 
 ## Other notable matters

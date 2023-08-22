@@ -62,8 +62,8 @@ function get_color()
         wall_clock = {
             hour12              = setting_hex_to_rgba('#7f3fbf', 0.8),
             hour24              = setting_hex_to_rgba('#7f3fbf', 0.9),
-            mins                = setting_hex_to_rgba('#7f3fbf', 0.8),
-            secs                = setting_hex_to_rgba('#7f3fbf', 0.9),
+            mins                = setting_hex_to_rgba('#7f3fbf', 0.6),
+            secs                = setting_hex_to_rgba('#7f3fbf', 0.4),
         },
 
         bar_load_rate = {

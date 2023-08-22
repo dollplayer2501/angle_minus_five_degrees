@@ -58,7 +58,8 @@ function get_const()
 
         LINE_WIDTH = {
             normal = 2,
-            high = 6,
+            bold = 4,
+            bolder = 6,
         },
 
         LINE_LENGTH = {

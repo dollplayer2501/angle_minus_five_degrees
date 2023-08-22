@@ -81,14 +81,14 @@ function conky_main()
     local base_wall_clock_width_hour12 = 30
 
     local base_wall_clock_radius_hour24 = global_const.CENTER_POSITION.THEME.X / 2
-    local base_wall_clock_width_hour24 = 6
+    local base_wall_clock_width_hour24 = 8
 
     local base_wall_clock_radius_mins = 500
     local base_wall_clock_width_mins = 20
 
     local base_wall_clock_enabled_secs = true
     local base_wall_clock_radius_secs = 400
-    local base_wall_clock_width_secs = 4
+    local base_wall_clock_width_secs = 6
 
     drawing_wall_clock(cr_draw,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
