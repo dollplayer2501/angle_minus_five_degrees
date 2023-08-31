@@ -47,7 +47,7 @@ I created the theme based on the idea that "Every thing other than the time disp
 Assuming everything is stored in `~/.config/conky/angle_minus_five_degrees/`.
 
 1. `./start.sh`
-2. `./angle_minus_five_degrees.conf`
+2. `./angle_minus_five_degrees.conky.conf`
 3. Start `./angle_minus_five_degrees.lua` from `lua_load` in above script
 4. `./includes/*.lua` and `./modules/*.lua` of above script, `require`
 
@@ -82,7 +82,7 @@ Functions that could not be implemented due to my lack of technical skills.
 A few years...half a year later, for myself to review this scripts.
 
 - Setting a virtual space that is twice the size of the displayed image.  
-  See `./angle_minus_five_degrees.conf`
+  See `./angle_minus_five_degrees.conky.conf`
 - Changing the center point in this theme is relatively easy to fix.  
   See `THEME_POSITION` of `./angle_minus_five_degrees.lua`
 - The width of the lower left panel is linked to width of the string of today's date (full).
