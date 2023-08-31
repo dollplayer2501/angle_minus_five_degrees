@@ -23,7 +23,7 @@ I created the theme based on the idea that "Every thing other than the time disp
 ## Requirements, operating conditions
 
 1. This theme runs the following Linux commands via Lua's `conky_parse` and Conky's `execi`.  
-   All these are put together in `./scripts/_conky_parse.lua`.
+   All these are put together in `./includes/conky_parse.lua`.
     - `lscpu`
     - `hostnamectl`
     - `uptime`
@@ -34,7 +34,7 @@ I created the theme based on the idea that "Every thing other than the time disp
     - `wget -q -O - http://checkip.amazonaws.com/`  
       This is a global IP address.  
       If you don't want to display, you'll need to comment out and/or modify code.  
-      See `global_ip` of `./scripts/_conky_parse.lua` and `./scripts/text_detail.lua`.
+      See `global_ip` of `./includes/conky_parse.lua` and `./modules/text_detail.lua`.
     - `wc`, `grep`
 2. [`Geosans Light font`](https://aur.archlinux.org/packages/ttf-geosans-light), [`Ralewy font`](https://aur.archlinux.org/packages/ttf-raleway)
 3. I am writing this code assuming **4 CPUs**.  
@@ -49,7 +49,7 @@ Assuming everything is stored in `~/.config/conky/angle_minus_five_degrees/`.
 1. `./start.sh`
 2. `./angle_minus_five_degrees.conf`
 3. Start `./angle_minus_five_degrees.lua` from `lua_load` in above script
-4. `./scripts/*.lua` of above script, `require`
+4. `./includes/*.lua` and `./modules/*.lua` of above script, `require`
 
 
 ## Features not implemented
@@ -58,12 +58,12 @@ Functions that could not be implemented due to my lack of technical skills.
 
 1. ~~Change character decoration in the middle of a sentence~~  
    Done, not implemented as a generalized parser, for this reason, it is a very unrefined implementation.   
-   See. `./scripts/text_detail.lua`
+   See. `./modules/text_detail.lua`
 1. Imprementing logarithmic graph, ex. Network Up/Down speed, Disk read/write.  
    ~~I have no idea and skill...although I have a completely unique imprementation idea...~~  
    I have implemented it, albeit **a buggy code**, I will check the detailed behavior in the future, 2023-08-07.  
    I implemented it in a way that I dynamically get the maximum value in the array.  
-   See. `./scripts/graph_network.lua`
+   See. `./modules/graph_network.lua`
 1. Imprementing display of currency rates.  
    Planned, may not be implemented. Use [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)?
 1. ~~Show [`conky_parse("${top name n}")` and `conky_parse("${top cpu n}%")`](https://conky.cc/variables#top) in bottom right?~~  
@@ -89,9 +89,9 @@ A few years...half a year later, for myself to review this scripts.
 - Each module/scripts is/are using [`conky_parse('${updates}')`](https://conky.cc/variables#updates) to do some lazy processing.  
   Therefore, it takes time to start up completely.
 - This theme color scheme is used [EndeavourOS colour palette](https://forum.endeavouros.com/t/colour-palette/3480).  
-  See `./scripts/_color.lua`
-- NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./scripts/_conky_parse.lua`.
-- The file system name is written directory in `DISK_DEVICE` of `./scripts/_const.lua`, in my case `/dev/sda2`
+  See `./includes/color.lua`
+- NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./includes/conky_parse.lua`.
+- The file system name is written directory in `DISK_DEVICE` of `./includes/const.lua`, in my case `/dev/sda2`
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
 - If you are concerned about the CPU load and want to reduce the CPU load even a little, you can turn off the drawing of the second.
     - The second hand is `base_wall_clock_enabled_secs` of `./angle_minus_five_degrees.lua`

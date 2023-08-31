@@ -4,26 +4,25 @@
 
 require 'cairo'
 
--- Set the path to the scripts folder
-package.path = os.getenv('HOME') .. '/.config/conky/angle_minus_five_degrees/scripts/?.lua'
+package.path = os.getenv('HOME') .. '/.config/conky/angle_minus_five_degrees/?.lua'
 
-require '_const'
-require '_functions'
-require '_conky_parse'
-require '_color'
+require 'includes/const'
+require 'includes/functions'
+require 'includes/conky_parse'
+require 'includes/color'
 
-require 'wall_clock'
-require 'background_tiles'
-require 'background_lines'
-require 'bar_more'
-require 'ring_clock'
-require 'ring_cpu'
-require 'ring_more'
-require 'text_clock'
-require 'graph_cpu'
-require 'graph_network'
-require 'text_detail'
-require 'text_top'
+require 'modules/wall_clock'
+require 'modules/background_tiles'
+require 'modules/background_lines'
+require 'modules/bar_more'
+require 'modules/ring_clock'
+require 'modules/ring_cpu'
+require 'modules/ring_more'
+require 'modules/text_clock'
+require 'modules/graph_cpu'
+require 'modules/graph_network'
+require 'modules/text_detail'
+require 'modules/text_top'
 
 
 
