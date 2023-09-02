@@ -233,6 +233,7 @@ function conky_main()
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
         -- values
         global_conky_parse.memperc,
+        global_conky_parse.ibm_temps_0,
         -- ring
         base_more_ring_angle_start, base_more_ring_angle_end,
         base_more_ring_radius, base_more_ring_width, base_more_ring_gap,

@@ -6,6 +6,7 @@ function drawing_ring_more(_context, _conky_parse_updates,
     _ring_center_x, _ring_center_y,
     -- values
     _conky_parse_memperc,
+    _conky_parse_temps,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
@@ -23,13 +24,15 @@ function drawing_ring_more(_context, _conky_parse_updates,
 
     -- draw ring
 
-    for ii = 0, 0 do
+    for ii = 0, 1 do
         local tmp_radius = _ring_radius + (_ring_width * ii) + (_ring_gap * ii)
         local tmp_ring_angle = _ring_angle_end - _ring_angle_start
         local tmp_fg_end_angle = _ring_angle_start
 
         if 0 == ii then
             tmp_fg_end_angle = (tonumber(_conky_parse_memperc) / 100 * tmp_ring_angle) + _ring_angle_start
+        elseif 1 == ii then
+            tmp_fg_end_angle = (tonumber(_conky_parse_temps) / 100 * tmp_ring_angle) + _ring_angle_start
         end
 
         -- ring foreground
@@ -45,13 +48,21 @@ function drawing_ring_more(_context, _conky_parse_updates,
 
     -- draw caption
 
-    for ii = 0, 0 do
+    for ii = 0, 1 do
+        local tmp_positon_y = _caption_position_y - (_caption_increment_y * ii)
+
         if 0 == ii then
-            local tmp_positon_y = _caption_position_y + (_caption_increment_y * ii)
             drawing_text(_context, _caption_align, _caption_position_x, tmp_positon_y, _caption_font_size,
                 string.format(
                     'Mem: %s%%',
                         _conky_parse_memperc
+                ),
+                _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_ring.caption)
+        elseif 1 == ii then
+            drawing_text(_context, _caption_align, _caption_position_x, tmp_positon_y, _caption_font_size,
+                string.format(
+                    'Temp: %sc',
+                        _conky_parse_temps
                 ),
                 _caption_font_face, CAIRO_FONT_SLANT_NORMAL, _caption_font_weight, _color_ring.caption)
         end
