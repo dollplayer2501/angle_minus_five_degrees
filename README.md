@@ -20,6 +20,10 @@ So I thought, "I should use this vast space!".
 I created the theme based on the idea that "Every thing other than the time display is a decoration" likening Mobile Suit Gundam's "Legs are decorations".
 
 
+> [!IMPORTANT]
+> FIRST, YOU MUST COPY AND RENAME `./config-sample.lua` TO `./config.lua`, IF YOU WANT TO USE THIS THEME.
+
+
 ## Requirements, operating conditions
 
 1. This theme runs the following Linux commands via Lua's `conky_parse` and Conky's `execi`.  
@@ -36,10 +40,10 @@ I created the theme based on the idea that "Every thing other than the time disp
       If you don't want to display, you'll need to comment out and/or modify code.  
       See `global_ip` of `./includes/conky_parse.lua` and `./modules/text_detail.lua`.
     - `wc`, `grep`
-2. [`Geosans Light font`](https://aur.archlinux.org/packages/ttf-geosans-light), [`Ralewy font`](https://aur.archlinux.org/packages/ttf-raleway)
-3. I am writing this code assuming **4 CPUs**.  
+1. [`Geosans Light font`](https://aur.archlinux.org/packages/ttf-geosans-light), [`Ralewy font`](https://aur.archlinux.org/packages/ttf-raleway)
+1. I am writing this code assuming **4 CPUs**.  
    If the number is other than this, it will be necessary to modify the this theme.
-4. This theme's design is based on the assumption that the screen is FHD/Full High Definition, 1920x1080.
+1. This theme's design is based on the assumption that the screen is FHD/Full High Definition, 1920x1080.
 
 
 ## Lanch order for this theme
@@ -47,9 +51,9 @@ I created the theme based on the idea that "Every thing other than the time disp
 Assuming everything is stored in `~/.config/conky/angle_minus_five_degrees/`.
 
 1. `./start.sh`
-2. `./angle_minus_five_degrees.conky.conf`
-3. Start `./angle_minus_five_degrees.lua` from `lua_load` in above script
-4. `./includes/*.lua` and `./modules/*.lua` of above script, `require`
+1. `./angle_minus_five_degrees.conky.conf`
+1. Start `./angle_minus_five_degrees.lua` from `lua_load` in above script
+1. `./config.lua`, `./includes/*.lua` and `./modules/*.lua` of above script, `require`
 
 
 ## Features not implemented
@@ -91,7 +95,7 @@ A few years...half a year later, for myself to review this scripts.
 - This theme color scheme is used [EndeavourOS colour palette](https://forum.endeavouros.com/t/colour-palette/3480).  
   See `./includes/color.lua`
 - NIC, Network Interface Card is dynamically fetching using [`conky_parse('${iface}')`](https://conky.cc/variables#gw_iface) of `./includes/conky_parse.lua`.
-- The file system name is written directory in `DISK_DEVICE` of `./includes/const.lua`, in my case `/dev/sda2`
+- The file system name is written directory in `filesystem.device` of `./config.lua`, in my case `/dev/sda2`
 - Since I am a native language other than English. For this reason, the sentences sutch as this `README.md` and comments in the source code may be strange.
 - If you are concerned about the CPU load and want to reduce the CPU load even a little, you can turn off the drawing of the second.
     - The second hand is `base_wall_clock_enabled_secs` of `./angle_minus_five_degrees.lua`

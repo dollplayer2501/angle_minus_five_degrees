@@ -4,7 +4,8 @@
 
 function get_conky_parse()
 
-    local const = get_const()
+    --local const = get_const()
+    local config = get_config()
 
 
     -- 'gw_ip' can be obtained after a few seconds booting
@@ -53,9 +54,8 @@ function get_conky_parse()
         upspeedf     = tonumber(conky_parse('${upspeedf ' .. tmp_conky_parse_iface .. '}')),
         downspeedf   = tonumber(conky_parse('${downspeedf ' .. tmp_conky_parse_iface .. '}')),
 
-        -- Global IP Address, This is optional
+        -- Global IP Address
         global_ip    = conky_parse('${execi 600 wget -q -O - http://checkip.amazonaws.com/}'),
-        -- global_ip    = '123.456.789.012',
 
         mem          = conky_parse('${mem}'),
         memmax       = conky_parse('${memmax}'),
@@ -64,12 +64,12 @@ function get_conky_parse()
         ibm_temps_0  = conky_parse('${ibm_temps 0}'),
         ibm_fan      = conky_parse('${ibm_fan}'),
 
-        fs_free      = conky_parse('${fs_free ' .. const.FILESYSTEM .. '}'),
-        fs_free_perc = conky_parse('${fs_free_perc ' .. const.FILESYSTEM .. '}'),
-        fs_used      = conky_parse('${fs_used ' .. const.FILESYSTEM .. '}'),
+        fs_free      = conky_parse('${fs_free ' .. config.filesystem.filesystem .. '}'),
+        fs_free_perc = conky_parse('${fs_free_perc ' .. config.filesystem.filesystem .. '}'),
+        fs_used      = conky_parse('${fs_used ' .. config.filesystem.filesystem .. '}'),
 
-        diskio_write = conky_parse('${diskio_write '.. const.DISK_DEVICE .. '}'),
-        diskio_read  = conky_parse('${diskio_read '.. const.DISK_DEVICE .. '}'),
+        diskio_write = conky_parse('${diskio_write '.. config.filesystem.device .. '}'),
+        diskio_read  = conky_parse('${diskio_read '.. config.filesystem.device .. '}'),
 
         top = {
             name1    = conky_parse("${top name 1}"),

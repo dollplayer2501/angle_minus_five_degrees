@@ -12,7 +12,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
     -- minutes
     _min_adjust_x, _min_adjust_y, _min_font_align, _min_font_size, _min_font_face,
     -- seconds
-    _sec_adjust_x, _sec_adjust_y, _sec_font_align, _sec_font_size, _sec_font_face, _enabled_secs,
+    _sec_adjust_x, _sec_adjust_y, _sec_font_align, _sec_font_size, _sec_font_face, _display_secs,
     -- color
     _color_text_time)
 
@@ -48,7 +48,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
 
     -- Seconds (not Minutes, becase z-order)
 
-    if true == _enabled_secs then
+    if true == _display_secs then
         drawing_text(_context, _sec_font_align,
             _position_x + _sec_adjust_x, _position_y + _sec_adjust_y, _sec_font_size,
             tostring(os.date('%S')),

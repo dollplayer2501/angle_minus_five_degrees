@@ -8,7 +8,7 @@ function drawing_ring_clock(_context,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
-    _enabled_secs,
+    _display_secs,
     -- caption
     _caption_position_x, _caption_position_y, _caption_increment_y,
     _caption_align, _caption_font_face, _caption_font_size, _caption_font_weight,
@@ -53,30 +53,30 @@ function drawing_ring_clock(_context,
     end
 
 
-    local tmp_end = (true == _enabled_secs) and 5 or 4
+    local tmp_end = (true == _display_secs) and 5 or 4
     for ii = 0, tmp_end do
         local tmp_radius = _ring_radius + (_ring_width * ii) + (_ring_gap * ii)
         local tmp_ring_angle = _ring_angle_end - _ring_angle_start
         local tmp_fg_end_angle = 0
 
         if 0 == ii then
-            tmp_fg_end_angle = (true == _enabled_secs)
+            tmp_fg_end_angle = (true == _display_secs)
                                 and _get_second(tmp_ring_angle, _ring_angle_start)
                                 or _get_minites(tmp_ring_angle, _ring_angle_start)
         elseif 1 == ii then
-            tmp_fg_end_angle = (true == _enabled_secs)
+            tmp_fg_end_angle = (true == _display_secs)
                                 and _get_minites(tmp_ring_angle, _ring_angle_start)
                                 or _get_hour12(tmp_ring_angle, _ring_angle_start)
         elseif 2 == ii then
-            tmp_fg_end_angle = (true == _enabled_secs)
+            tmp_fg_end_angle = (true == _display_secs)
                                 and _get_hour12(tmp_ring_angle, _ring_angle_start)
                                 or _get_hour24(tmp_ring_angle, _ring_angle_start)
         elseif 3 == ii then
-            tmp_fg_end_angle = (true == _enabled_secs)
+            tmp_fg_end_angle = (true == _display_secs)
                                 and _get_hour24(tmp_ring_angle, _ring_angle_start)
                                 or _get_days(tmp_ring_angle, _ring_angle_start)
         elseif 4 == ii then
-            tmp_fg_end_angle = (true == _enabled_secs)
+            tmp_fg_end_angle = (true == _display_secs)
                                 and _get_days(tmp_ring_angle, _ring_angle_start)
                                 or _get_month(tmp_ring_angle, _ring_angle_start)
         elseif 5 == ii then
@@ -96,7 +96,7 @@ function drawing_ring_clock(_context,
 
     -- draw caption
 
-    local tmp_text = (true == _enabled_secs)
+    local tmp_text = (true == _display_secs)
         and { 'Seconds', 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
         or { 'Minutes', 'Hours 12', 'Hours 24', 'Days', 'Months', }
 

@@ -11,6 +11,8 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
     _adjust_x_large, _adjust_y_large, _font_size_large, _font_face_large, _font_weight,
     -- normal size
     _adjust_x_normal, _adjust_y_normal, _gap_y_normal, _font_size_normal, _font_face_normal,
+    -- display global ip address
+    _display_global_ip_address,
     -- color
     _color_detail)
 
@@ -87,7 +89,7 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
 
         local tmp_width_2 = display_text_and_acquisition_text_width(_context, _position_align,
             _position_x + _adjust_x_normal - tmp_width_1, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format('%s/%s',
+            string.format(' %s/%s',
                 _conky_parse.checkupdates,
                 _conky_parse.packman_Q
             ),
@@ -113,17 +115,34 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
             _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
     end
 
-    -- Gate Way Address, IP Address
+    -- Gate Way Address, IP Address, Global IP Address
+
+    local tmp_global_iP_address = ''
+    if true == _display_global_ip_address.display then
+        tmp_global_iP_address = _conky_parse.global_ip
+    else
+        if '' ~= dummy_ip_address then
+            tmp_global_iP_address = _display_global_ip_address.dummy_ip_address
+        end
+    end
+
+    local tmp_display_string = '' == tmp_global_iP_address
+        and string.format(
+                'GW is %s, Local is %s',
+                    _conky_parse.gw_ip,
+                    _conky_parse.addrs
+            )
+        or string.format(
+                'GW is %s, Local is %s, Global is %s',
+                    _conky_parse.gw_ip,
+                    _conky_parse.addrs,
+                    tmp_global_iP_address
+            )
 
     idx = idx + 1
     drawing_text(_context, _position_align,
         _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(
-            'GW is %s, Local is %s, Global is %s',
-                _conky_parse.gw_ip,
-                _conky_parse.addrs,
-                _conky_parse.global_ip  -- Global IP Address, This is optional
-        ),
+        tmp_display_string,
         _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
 
     -- Network Up/Down Speed
