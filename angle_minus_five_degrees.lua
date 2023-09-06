@@ -79,17 +79,17 @@ function conky_main()
     -- Wall Clock
     --
 
-    local base_wall_clock_radius_hour12 = 300
+    local base_wall_clock_radius_hour12 = global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT - 100
     local base_wall_clock_width_hour12 = 30
 
     local base_wall_clock_radius_hour24 = global_const.CENTER_POSITION.THEME.X / 2
     local base_wall_clock_width_hour24 = 10
 
-    local base_wall_clock_radius_mins = 500
+    local base_wall_clock_radius_mins =  global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT + 50
     local base_wall_clock_width_mins = 20
 
     local base_wall_clock_display_secs = global_config.display_seconds.wall_clock
-    local base_wall_clock_radius_secs = 400
+    local base_wall_clock_radius_secs = global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT - 100
     local base_wall_clock_width_secs = 8
 
     drawing_wall_clock(cr_draw,
@@ -111,9 +111,13 @@ function conky_main()
     -- Background (Tiles)
     --
 
+    local base_background_tiles_display_background_gradient = global_config.display_background_gradient
+    local base_background_tiles_rect_step = global_const.BACKGROUND_TILES.RECT_STEP
+
     drawing_background_tiles(cr_draw, global_const,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
         TODAY_WIDTH.WIDTH, TODAY_WIDTH.MARGIN,
+        base_background_tiles_display_background_gradient, base_background_tiles_rect_step,
         global_color.background)
 
 
@@ -437,6 +441,30 @@ function conky_main()
         global_color.text_top)
 
 
+
+
+--[[
+    --
+    local zzBasePositionX = global_const.CENTER_POSITION.THEME.X - 500
+    local zzBasePositionY = global_const.CENTER_POSITION.THEME.Y - 600
+    local zzBaseWidth = 400
+    local zzBaseHeight = 900
+    local zzBaseStep = 2  -- basic with or height
+    local zzBaseColorFromTo = {
+        setting_hex_to_rgba('#7f3fbf', 0.00),
+        setting_hex_to_rgba('#7f3fbf', 0.20),
+        setting_hex_to_rgba('#7f7fff', 0.20),
+        setting_hex_to_rgba('#ff7fff', 0.20),
+        setting_hex_to_rgba('#ff7fff', 0.00),
+    }
+
+
+    drawing_gradient_square(cr_draw,
+        zzBasePositionX, zzBasePositionY, zzBaseWidth, zzBaseHeight,
+        --global_const.DIRECTION.HORIZONTAL, zzBaseStep,
+        global_const.DIRECTION.VERTICAL, zzBaseStep,
+        zzBaseColorFromTo)
+]]
 
 
 

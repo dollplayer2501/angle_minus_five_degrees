@@ -15,6 +15,13 @@ function get_config()
 
     return {
 
+        -- Whether or not to display gradient color of background
+        -- Caution!
+        -- Adopting this function may case moiré effect.
+        -- This tendency becomes especially strong when the alpha value approaches 1.00.
+        -- When the screen is set to 0 degrees, this moire does not occur.
+        display_background_gradient = true,
+
         -- Whether or not to display clock seconds
         display_seconds = {
             wall_clock = true,

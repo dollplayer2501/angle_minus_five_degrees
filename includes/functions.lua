@@ -177,3 +177,75 @@ function drawing_square(_context,
     cairo_fill_preserve(_context)
     cairo_stroke(_context)
 end
+
+
+
+--
+--
+--
+function drawing_gradient_square(_context,
+    _position_x, _position_y, _rect_width, _rect_height,
+    _gradient_direction, _rect_step,
+    _color_from_to)
+
+    local const = get_const()
+
+    local tmp_count_surface = const.DIRECTION.HORIZONTAL == _gradient_direction
+        and math.floor(_rect_width / _rect_step)
+        or math.floor(_rect_height / _rect_step)
+    local tmp_one_rect_color = math.floor(tmp_count_surface / (#_color_from_to - 1))
+    local tmp_color_start, tmp_color_end = _color_from_to[1], _color_from_to[#_color_from_to]
+
+    for ii = 1, tmp_count_surface do
+
+        --
+        -- surface
+        --
+
+        local tmp_position_x, tmp_position_y, tmp_width, tmp_height
+        if const.DIRECTION.HORIZONTAL == _gradient_direction then
+            tmp_position_x = _position_x + (_rect_step * (ii - 1))
+            tmp_position_y = _position_y
+            tmp_width = ii == tmp_count_surface
+                and _rect_width - (_rect_step * (ii - 1))
+                or _rect_step
+            tmp_height = _rect_height
+        else
+            tmp_position_x = _position_x
+            tmp_position_y = _position_y + (_rect_step * (ii - 1))
+            tmp_width = _rect_width
+            tmp_height = ii == tmp_count_surface
+                and _rect_height - (_rect_step * (ii - 1))
+                or _rect_step
+        end
+
+        --
+        -- color
+        --
+
+        local tmp_color_index = (ii - 1) // tmp_one_rect_color <= #_color_from_to - 2
+            and ((ii - 1) // tmp_one_rect_color) + 1
+            or #_color_from_to - 1
+        local tmp_rect_base = tmp_color_index <= #_color_from_to - 2
+            and tmp_one_rect_color
+            or tmp_count_surface - (tmp_one_rect_color * (tmp_color_index - 1))
+        local tmp_rect_now = ii - (tmp_one_rect_color * (tmp_color_index - 1))
+
+        local tmp_color_start, tmp_color_end = _color_from_to[tmp_color_index], _color_from_to[tmp_color_index + 1]
+
+        local tmp_color_red = tmp_color_start.red + ((tmp_color_end.red - tmp_color_start.red) / tmp_rect_base * tmp_rect_now)
+        local tmp_color_green = tmp_color_start.green + ((tmp_color_end.green - tmp_color_start.green) / tmp_rect_base * tmp_rect_now)
+        local tmp_color_blue = tmp_color_start.blue + ((tmp_color_end.blue - tmp_color_start.blue) / tmp_rect_base * tmp_rect_now)
+        local tmp_color_alpha = tmp_color_start.alpha + ((tmp_color_end.alpha - tmp_color_start.alpha) / tmp_rect_base * tmp_rect_now)
+
+        --
+        -- drawing
+        --
+
+        cairo_rectangle(_context, tmp_position_x, tmp_position_y, tmp_width, tmp_height)
+        cairo_set_line_width(_context, 0)
+        cairo_set_source_rgba(_context, tmp_color_red, tmp_color_green, tmp_color_blue, tmp_color_alpha)
+        cairo_fill_preserve(_context)
+        cairo_stroke(_context)
+    end
+end

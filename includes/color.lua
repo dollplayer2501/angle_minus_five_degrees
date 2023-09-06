@@ -19,10 +19,49 @@ function get_color()
         },
 
         background = {
-            top_left            = setting_hex_to_rgba('#685878', 0.3),
-            bottom_left         = setting_hex_to_rgba('#685878', 0.9),
-            top_right           = setting_hex_to_rgba('#685878', 0.5),
-            bottom_right        = setting_hex_to_rgba('#685878', 0.4),
+            top_left = {
+                one             = setting_hex_to_rgba('#685878', 0.3),
+                gradient = {      -- Top to Bottom, Vertical
+                                  setting_hex_to_rgba('#7f3fbf', 0.10),
+                                  setting_hex_to_rgba('#7f3fbf', 0.30),
+                                  setting_hex_to_rgba('#7f3fbf', 0.10),
+                                  setting_hex_to_rgba('#7f7fff', 0.20),
+                                  setting_hex_to_rgba('#ff7fff', 0.30),
+                                  setting_hex_to_rgba('#7f3fbf', 0.60),
+                  },
+            },
+            bottom_left = {
+                one             = setting_hex_to_rgba('#685878', 0.9),
+                gradient = {      -- Left to Right, Holizontal
+                                  setting_hex_to_rgba('#7f3fbf', 0.20),
+                                  setting_hex_to_rgba('#7f7fff', 0.20),
+                                  setting_hex_to_rgba('#ff7fff', 0.20),
+                                  setting_hex_to_rgba('#7f7fff', 0.30),
+                                  setting_hex_to_rgba('#ff7fff', 0.30),
+                                  setting_hex_to_rgba('#7f3fbf', 0.60),
+                },
+            },
+            top_right = {
+                one             = setting_hex_to_rgba('#685878', 0.5),
+                gradient = {     -- Left to Right, Holizontal
+                                  setting_hex_to_rgba('#7f3fbf', 0.50),
+                                  setting_hex_to_rgba('#ff7fff', 0.20),
+                                  setting_hex_to_rgba('#7f7fff', 0.20),
+                                  setting_hex_to_rgba('#ff7fff', 0.20),
+                                  setting_hex_to_rgba('#7f3fbf', 0.40),
+                },
+            },
+            bottom_right = {
+                one             = setting_hex_to_rgba('#685878', 0.4),
+                gradient = {      -- Top to Bottom, Vertical
+                                  setting_hex_to_rgba('#7f3fbf', 0.50),
+                                  setting_hex_to_rgba('#ff7fff', 0.30),
+                                  setting_hex_to_rgba('#7f7fff', 0.20),
+                                  setting_hex_to_rgba('#7f3fbf', 0.30),
+                                  setting_hex_to_rgba('#ff7fff', 0.20),
+                                  setting_hex_to_rgba('#7f3fbf', 0.10),
+                },
+            },
         },
 
         text_detail = {

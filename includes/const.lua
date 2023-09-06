@@ -41,6 +41,12 @@ function get_const()
         },
 
 
+        DIRECTION = {
+            HORIZONTAL = 'horizontal',
+            VERTICAL = 'vertical',
+        },
+
+
         USAGE_LIMIT = {
             CPU = 30,
             MEMORY = 60,
@@ -52,6 +58,10 @@ function get_const()
             HEIGHT = 200,
         },
 
+
+        BACKGROUND_TILES = {
+            RECT_STEP = 5,
+        },
 
         BACKGROUND_LINE = {
 
@@ -70,7 +80,7 @@ function get_const()
                                 |         |               |  |
                                 |         |               |  a
                                 |         |               |  |
-                - 4+----------+---------Z---------+-----+2 -
+                - 4+----------+---------Z---------+-------+2 -
                 |  |                    |         |
                 c  |                    |         |
                 |  |                    |         |
