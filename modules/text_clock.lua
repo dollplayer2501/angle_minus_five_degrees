@@ -14,11 +14,11 @@ function drawing_text_clock(_context, _conky_parse_updates,
     -- seconds
     _sec_adjust_x, _sec_adjust_y, _sec_font_align, _sec_font_size, _sec_font_face, _display_secs,
     -- color
-    _color_text_time)
+    _color_text_clock)
 
 
     -- delimiter ':' blinks
-    local tmp_color = _color_text_time.delimiter_1
+    local tmp_color = _color_text_clock.delimiter_1
     if 3 > _conky_parse_updates then
         return
     elseif 3 == _conky_parse_updates then
@@ -26,7 +26,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
     else
         if false == flg_text_blink then
             flg_text_blink = true
-            tmp_color = _color_text_time.delimiter_2
+            tmp_color = _color_text_clock.delimiter_2
         else
             flg_text_blink = false
         end
@@ -37,7 +37,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
     drawing_text(_context, _hour_font_align,
         _position_x + _hour_adjust_x, _position_y + _hour_adjust_y, _hour_font_size,
         tostring(os.date('%H')),
-        _hour_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.hour)
+        _hour_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.hour)
 
     -- Delimiter
 
@@ -52,7 +52,7 @@ function drawing_text_clock(_context, _conky_parse_updates,
         drawing_text(_context, _sec_font_align,
             _position_x + _sec_adjust_x, _position_y + _sec_adjust_y, _sec_font_size,
             tostring(os.date('%S')),
-            _sec_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.sec)
+            _sec_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.sec)
     end
 
     -- Minutes
@@ -60,5 +60,5 @@ function drawing_text_clock(_context, _conky_parse_updates,
     drawing_text(_context, _min_font_align,
         _position_x + _min_adjust_x, _position_y + _min_adjust_y, _min_font_size,
         tostring(os.date('%M')),
-        _min_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_time.mins)
+        _min_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.mins)
 end

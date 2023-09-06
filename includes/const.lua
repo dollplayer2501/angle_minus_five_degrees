@@ -59,70 +59,76 @@ function get_const()
         },
 
 
-        BACKGROUND_TILES = {
-            RECT_STEP = 5,
-        },
+        BACKGROUND = {
 
-        BACKGROUND_LINE = {
-
-            WIDTH = {
-                NORMAL = 2,
-                BOLD = 4,
-                BOLDER = 6,
+            TILES = {
+                RECT_STEP = 5,
             },
 
-            LENGTH = {
-                --[[
-                                |----d----|
-                                1         1
-                                |         |
-                                +         +---------+-----+2 -
-                                |         |               |  |
-                                |         |               |  a
-                                |         |               |  |
-                - 4+----------+---------Z---------+-------+2 -
-                |  |                    |         |
-                c  |                    |         |
-                |  |                    |         |
-                - 4+----------+---------+         +
-                                        |         |
-                                        |         |
-                                        3         3
-                                        |----b----|
+            LINES = {
 
-                    Z: CENTER_POSITION.THEME.X,Y
-                    1: center to top
-                    2: center to right
-                    3: center to bottom
-                    4: center to left
-                    a: top right height
-                    b: bottom right width
-                    c: bottom left height
-                    d: top left height
-                ]]
-
-                CENTER_TO = {
-                    TOP = (tmp_center_y / 2) + tmp_adjust_y, -- tentative, provisional
-                    RIGHT = 450,
-                    BOTTOM = (tmp_center_y / 2) + tmp_adjust_y, -- tentative, provisional
-                    LEFT = nil, -- Get automatically, today's width
-                },
-                ADDITION = {
-                    LARGE = 40,
-                    NORMAL = 20,
-                    SMALL = 10,
-                },
                 WIDTH = {
-                    TOP_LEFT = nil, -- same value, CPU_LOAD_AVERAGE_LENGTH
-                    BOTTOM_LEFT = nil, -- Today's width
-                    TOP_RIGHT = nil, -- same value, LINE_LENGTH.CENTER_TO.RIGHT
-                    BOTTOM_RIGHT = 350,
+                    NORMAL = 2,
+                    BOLD = 4,
+                    BOLDER = 6,
                 },
-                HEIGHT = {
-                    TOP_LEFT = nil, -- same value, LINE_LENGTH.CNTER_TO.TOP
-                    BOTTOM_LEFT = 350,
-                    TOP_RIGHT = 350,
-                    BOTTOM_RIGHT = nil, -- same value, LINE_LENGTH.CNTER_TO.BOTTOM
+
+                LENGTH = {
+                    --[[
+                                    |----d----|
+                                    1         1
+                                    |         |
+                                    +         +---------+-----+2 -
+                                    |         |               |  |
+                                    |         |               |  a
+                                    |         |               |  |
+                    - 4+----------+---------Z---------+-------+2 -
+                    |  |                    |         |
+                    c  |                    |         |
+                    |  |                    |         |
+                    - 4+----------+---------+         +
+                                            |         |
+                                            |         |
+                                            3         3
+                                            |----b----|
+
+                        Z: CENTER_POSITION.THEME.X,Y
+                        1: center to top
+                        2: center to right
+                        3: center to bottom
+                        4: center to left
+                        a: top right height
+                        b: bottom right width
+                        c: bottom left height
+                        d: top left height
+                    ]]
+
+                    CENTER_TO = {
+                        TOP = (tmp_center_y / 2) + tmp_adjust_y, -- tentative, provisional
+                        RIGHT = 450,
+                        BOTTOM = (tmp_center_y / 2) + tmp_adjust_y, -- tentative, provisional
+                        LEFT = nil, -- Get automatically, today's width
+                    },
+
+                    ADDITION = {
+                        LARGE = 40,
+                        NORMAL = 20,
+                        SMALL = 10,
+                    },
+
+                    WIDTH = {
+                        TOP_LEFT = nil, -- same value, CPU_LOAD_AVERAGE_LENGTH
+                        BOTTOM_LEFT = nil, -- Today's width
+                        TOP_RIGHT = nil, -- same value, LINE_LENGTH.CENTER_TO.RIGHT
+                        BOTTOM_RIGHT = 350,
+                    },
+
+                    HEIGHT = {
+                        TOP_LEFT = nil, -- same value, LINE_LENGTH.CNTER_TO.TOP
+                        BOTTOM_LEFT = 350,
+                        TOP_RIGHT = 350,
+                        BOTTOM_RIGHT = nil, -- same value, LINE_LENGTH.CNTER_TO.BOTTOM
+                    },
                 },
             },
         },

@@ -70,7 +70,7 @@ function get_color()
             body_strike         = setting_hex_to_rgba('#ff7fff', 0.8),
         },
 
-        text_time = {
+        text_clock = {
             hour                = setting_hex_to_rgba('#ff7fff', 0.8),
             delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
             delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),

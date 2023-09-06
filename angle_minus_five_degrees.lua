@@ -79,17 +79,17 @@ function conky_main()
     -- Wall Clock
     --
 
-    local base_wall_clock_radius_hour12 = global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT - 100
+    local base_wall_clock_radius_hour12 = global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 100
     local base_wall_clock_width_hour12 = 30
 
     local base_wall_clock_radius_hour24 = global_const.CENTER_POSITION.THEME.X / 2
     local base_wall_clock_width_hour24 = 10
 
-    local base_wall_clock_radius_mins =  global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT + 50
+    local base_wall_clock_radius_mins =  global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + 50
     local base_wall_clock_width_mins = 20
 
     local base_wall_clock_display_secs = global_config.display_seconds.wall_clock
-    local base_wall_clock_radius_secs = global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT - 100
+    local base_wall_clock_radius_secs = global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 100
     local base_wall_clock_width_secs = 8
 
     drawing_wall_clock(cr_draw,
@@ -112,7 +112,7 @@ function conky_main()
     --
 
     local base_background_tiles_display_background_gradient = global_config.display_background_gradient
-    local base_background_tiles_rect_step = global_const.BACKGROUND_TILES.RECT_STEP
+    local base_background_tiles_rect_step = global_const.BACKGROUND.TILES.RECT_STEP
 
     drawing_background_tiles(cr_draw, global_const,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,
@@ -127,13 +127,13 @@ function conky_main()
     --
 
     local base_bar_more_position_x = global_const.CENTER_POSITION.THEME.X
-    local base_bar_more_position_y = global_const.CENTER_POSITION.THEME.Y - global_const.BACKGROUND_LINE.LENGTH.HEIGHT.TOP_RIGHT
+    local base_bar_more_position_y = global_const.CENTER_POSITION.THEME.Y - global_const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT
     local base_bar_more_bar_gap_y = 12
     local base_bar_more_bar_line_width = 3
-    local base_bar_more_bar_length = global_const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_bar_more_bar_length = global_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT
 
     local base_bar_more_caption_position_x = global_const.CENTER_POSITION.THEME.X + 4
-    local base_bar_more_caption_position_y = global_const.CENTER_POSITION.THEME.Y - global_const.BACKGROUND_LINE.LENGTH.HEIGHT.TOP_RIGHT + 16
+    local base_bar_more_caption_position_y = global_const.CENTER_POSITION.THEME.Y - global_const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT + 16
     local base_bar_more_caption_gap_y = 12
     local base_bar_more_caption_font_size = 12
 
@@ -286,12 +286,12 @@ function conky_main()
 
     local base_graph_network_time_interval = 1
 
-    local base_graph_network_array_count_upspeed = global_const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT
-    local base_graph_network_array_count_downspeed = global_const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_graph_network_array_count_upspeed = global_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_graph_network_array_count_downspeed = global_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT
     local base_graph_network_graph_width = 1
     local base_graph_network_graph_max_height = 50
 
-    local base_graph_network_caption_position_x = global_const.CENTER_POSITION.THEME.X + global_const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT - 2
+    local base_graph_network_caption_position_x = global_const.CENTER_POSITION.THEME.X + global_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT - 2
     local base_graph_network_caption_position_y_upspeed = global_const.CENTER_POSITION.THEME.Y - 4
     local base_graph_network_caption_position_y_downspeed = global_const.CENTER_POSITION.THEME.Y + 14
     local base_graph_network_font_size = 12
@@ -350,7 +350,7 @@ function conky_main()
     local base_text_clock_min_font_align = global_const.ALIGN.LEFT
 
     local base_text_clock_sec_display = global_config.display_seconds.text_clock
-    local base_text_clock_sec_adjust_x = global_const.BACKGROUND_LINE.LENGTH.CENTER_TO.RIGHT - 5
+    local base_text_clock_sec_adjust_x = global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 5
     local base_text_clock_sec_adjust_y = -5
     local base_text_clock_sec_font_size = 250
     local base_text_clock_sec_font_face = global_const.FONT_FACE_2_1
@@ -372,7 +372,7 @@ function conky_main()
         base_text_clock_sec_adjust_x, base_text_clock_sec_adjust_y,
         base_text_clock_sec_font_align, base_text_clock_sec_font_size, base_text_clock_sec_font_face, base_text_clock_sec_display,
         -- color
-        global_color.text_time)
+        global_color.text_clock)
 
 
 
@@ -413,11 +413,11 @@ function conky_main()
     --
 
     local base_text_top_position_x_name = global_const.CENTER_POSITION.THEME.X
-    local base_text_top_position_y_name = global_const.CENTER_POSITION.THEME.Y + global_const.BACKGROUND_LINE.LENGTH.HEIGHT.BOTTOM_LEFT
+    local base_text_top_position_y_name = global_const.CENTER_POSITION.THEME.Y + global_const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT
     local base_text_top_adjust_x_name = 10
 
-    local base_text_top_position_x_cpu = global_const.CENTER_POSITION.THEME.X + global_const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT
-    local base_text_top_position_y_cpu = global_const.CENTER_POSITION.THEME.Y + global_const.BACKGROUND_LINE.LENGTH.HEIGHT.BOTTOM_LEFT
+    local base_text_top_position_x_cpu = global_const.CENTER_POSITION.THEME.X + global_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT
+    local base_text_top_position_y_cpu = global_const.CENTER_POSITION.THEME.Y + global_const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT
     local base_text_top_adjust_x_cpu = -10
 
     local base_text_top_adjust_y = 28
@@ -441,30 +441,6 @@ function conky_main()
         global_color.text_top)
 
 
-
-
---[[
-    --
-    local zzBasePositionX = global_const.CENTER_POSITION.THEME.X - 500
-    local zzBasePositionY = global_const.CENTER_POSITION.THEME.Y - 600
-    local zzBaseWidth = 400
-    local zzBaseHeight = 900
-    local zzBaseStep = 2  -- basic with or height
-    local zzBaseColorFromTo = {
-        setting_hex_to_rgba('#7f3fbf', 0.00),
-        setting_hex_to_rgba('#7f3fbf', 0.20),
-        setting_hex_to_rgba('#7f7fff', 0.20),
-        setting_hex_to_rgba('#ff7fff', 0.20),
-        setting_hex_to_rgba('#ff7fff', 0.00),
-    }
-
-
-    drawing_gradient_square(cr_draw,
-        zzBasePositionX, zzBasePositionY, zzBaseWidth, zzBaseHeight,
-        --global_const.DIRECTION.HORIZONTAL, zzBaseStep,
-        global_const.DIRECTION.VERTICAL, zzBaseStep,
-        zzBaseColorFromTo)
-]]
 
 
 
