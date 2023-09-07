@@ -19,13 +19,16 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
 
     -- Today
 
+    local tmp_flg = check_prime_number(tonumber(os.date('%Y%m%d')))
+
     drawing_text(_context, _position_align,
         _position_x + _adjust_x_large, _position_y + _adjust_y_large, _font_size_large,
         -- 'Wednesday, September 29, 2024',
         string.format('%s',
             _conky_parse.full_date
         ),
-        _font_face_large, CAIRO_FONT_SLANT_NORMAL, _font_weight, _color_detail.days)
+        _font_face_large, CAIRO_FONT_SLANT_NORMAL, _font_weight,
+        true == tmp_flg and _color_detail.days_strike or _color_detail.days_normal)
 
 
     -- If you do not interpose delay processing,

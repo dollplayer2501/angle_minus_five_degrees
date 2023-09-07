@@ -2,6 +2,22 @@
 --
 --
 
+
+
+--
+--
+--
+function check_prime_number(_date8)
+    for ii = 2, math.sqrt(_date8) do
+        if 0 == _date8 % ii then
+            return false
+        end
+    end
+    return true
+end
+
+
+
 --
 --
 --

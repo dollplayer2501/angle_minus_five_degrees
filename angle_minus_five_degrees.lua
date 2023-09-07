@@ -59,7 +59,9 @@ function conky_main()
     local global_const = get_const()
 
 
-    -- The width of the lower left panel is linked to width of the string of today's date (full).
+
+
+    -- The width of the left bottom panel is linked to width of the string of today's date (full).
 
     local TODAY_WIDTH = {
         FONT_SIZE = 84,
@@ -69,8 +71,8 @@ function conky_main()
     }
 
     TODAY_WIDTH['WIDTH'] = getting_text_width(cr_draw,
-        TODAY_WIDTH.FONT_SIZE, global_conky_parse.full_date, TODAY_WIDTH.FONT_FACE, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL)
-
+        TODAY_WIDTH.FONT_SIZE, global_conky_parse.full_date,
+        TODAY_WIDTH.FONT_FACE, CAIRO_FONT_SLANT_NORMAL, TODAY_WIDTH.FONT_WEIGHT)
 
 
 
@@ -83,14 +85,14 @@ function conky_main()
     local base_wall_clock_width_hour12 = 30
 
     local base_wall_clock_radius_hour24 = global_const.CENTER_POSITION.THEME.X / 2
-    local base_wall_clock_width_hour24 = 10
+    local base_wall_clock_width_hour24 = 12
 
     local base_wall_clock_radius_mins =  global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + 50
     local base_wall_clock_width_mins = 20
 
     local base_wall_clock_display_secs = global_config.display_seconds.wall_clock
-    local base_wall_clock_radius_secs = global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 100
-    local base_wall_clock_width_secs = 8
+    local base_wall_clock_radius_secs = global_const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 80
+    local base_wall_clock_width_secs = 10
 
     drawing_wall_clock(cr_draw,
         global_const.CENTER_POSITION.THEME.X, global_const.CENTER_POSITION.THEME.Y,

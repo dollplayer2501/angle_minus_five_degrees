@@ -65,7 +65,8 @@ function get_color()
         },
 
         text_detail = {
-            days                = setting_hex_to_rgba('#ff7fff', 0.8),
+            days_normal         = setting_hex_to_rgba('#ff7fff', 0.8),
+            days_strike         = setting_hex_to_rgba('#7f7fff', 1.0),
             body_normal         = setting_hex_to_rgba('#7f7fff', 1.0),
             body_strike         = setting_hex_to_rgba('#ff7fff', 0.8),
         },
@@ -102,7 +103,7 @@ function get_color()
             hour12              = setting_hex_to_rgba('#7f3fbf', 0.8),
             hour24              = setting_hex_to_rgba('#7f3fbf', 0.9),
             mins                = setting_hex_to_rgba('#7f3fbf', 0.6),
-            secs                = setting_hex_to_rgba('#7f3fbf', 0.4),
+            secs                = setting_hex_to_rgba('#7f3fbf', 0.8),
         },
 
         bar_load_rate = {
