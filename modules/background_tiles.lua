@@ -25,7 +25,7 @@ function drawing_background_tiles(_context, _const,
     else
         drawing_square(_context,
             _center_x - _const.CPU_LOAD_AVERAGE.LENGTH, _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
-            _const.CPU_LOAD_AVERAGE.LENGTH, _const.BACKGROUND_LINE.LENGTH.CENTER_TO.TOP,
+            _const.CPU_LOAD_AVERAGE.LENGTH, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
             _color_background.top_left.one)
     end
 
@@ -75,7 +75,7 @@ function drawing_background_tiles(_context, _const,
     else
         drawing_square(_context,
             _center_x, _center_y,
-            _const.BACKGROUND_LINE.LENGTH.WIDTH.BOTTOM_RIGHT, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
+            _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
             _color_background.bottom_right.one)
     end
 end
