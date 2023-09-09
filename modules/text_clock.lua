@@ -1,18 +1,23 @@
 --
--- Time(HH:MM) -- Text
+-- Clock Text
 --
 
 function drawing_text_clock(_context, _conky_parse_updates,
     -- position
     _position_x, _position_y,
     -- hours
-    _hour_adjust_x, _hour_adjust_y, _hour_font_align, _hour_font_size, _hour_font_face,
+    _hour_adjust_x, _hour_adjust_y,
+    _hour_font_align, _hour_font_size, _hour_font_face,
     -- delimiter
-    _delimiter_adjust_x, _delimiter_adjust_y, _delimiter_font_align, _delimiter_font_size, _delimiter_font_face,
+    _delimiter_adjust_x, _delimiter_adjust_y,
+    _delimiter_font_align, _delimiter_font_size, _delimiter_font_face,
     -- minutes
-    _min_adjust_x, _min_adjust_y, _min_font_align, _min_font_size, _min_font_face,
+    _min_adjust_x, _min_adjust_y,
+    _min_font_align, _min_font_size, _min_font_face,
     -- seconds
-    _sec_adjust_x, _sec_adjust_y, _sec_font_align, _sec_font_size, _sec_font_face, _display_secs,
+    _display_secs,
+    _sec_adjust_x, _sec_adjust_y,
+    _sec_font_align, _sec_font_size, _sec_font_face,
     -- color
     _color_text_clock)
 

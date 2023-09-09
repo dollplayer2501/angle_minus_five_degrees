@@ -1,10 +1,10 @@
 # Conky theme, "Angle minus five degrees"
 
 
-<img src="./images/screenshot__null.png" width="610"><br clear="all" />
-<img src="./images/screenshot_terminal.png" width="200">
-<img src="./images/screenshot_editor.png" width="200">
-<img src="./images/screenshot_filer.png" width="200">
+<img src="./_screenshots/screenshot__null.png" width="610"><br clear="all" />
+<img src="./_screenshots/screenshot_terminal.png" width="200">
+<img src="./_screenshots/screenshot_editor.png" width="200">
+<img src="./_screenshots/screenshot_filer.png" width="200">
 
 
 I created this unnecessarily large [Conky](https://github.com/brndnmtthws/conky) theme on the premise that "I only need to know current time".  
@@ -23,6 +23,10 @@ I created the theme based on the idea that "Every thing other than the time disp
 > [!IMPORTANT]
 > FIRST, YOU MUST COPY AND RENAME `./config-sample.lua` TO `./config.lua`, IF YOU WANT TO USE THIS THEME.
 
+> [!WARNING]
+> On September 9, 2023 (JST), I conducted a major review of the program structure.  
+> As a result, this document contains many inaccurecies.  
+> I will fix soon.
 
 ## Requirements, operating conditions
 

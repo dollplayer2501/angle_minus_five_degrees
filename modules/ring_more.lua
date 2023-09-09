@@ -3,16 +3,17 @@
 --
 
 function drawing_ring_more(_context, _conky_parse_updates,
-    _ring_center_x, _ring_center_y,
     -- values
     _conky_parse_memperc,
     _conky_parse_temps,
+    -- position
+    _ring_center_x, _ring_center_y,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
     -- caption
     _caption_position_x, _caption_position_y, _caption_increment_y,
-    _caption_align, _caption_font_face, _caption_font_size,  _caption_font_weight,
+    _caption_align, _caption_font_face, _caption_font_size, _caption_font_weight,
     --color
     _color_ring)
 

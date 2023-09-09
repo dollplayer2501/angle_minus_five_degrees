@@ -3,11 +3,15 @@
 --
 
 function drawing_background_lines(_context, _conky_parse_updates, _const,
+    -- position
     _center_x, _center_y,
+    -- left bottom width
     _today_width_body, _today_width_margin,
-    _highlight_length,
+    -- top right gimmick
+    _display_top_right_gimmick, _highlight_length,
+    -- etc
     _line_cap,
-    _display_top_right_gimmick,
+    -- color
     _color_line, _color_debug)
 
 

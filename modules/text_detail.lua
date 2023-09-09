@@ -2,17 +2,17 @@
 -- Detail text
 --
 
-function drawing_text_detail(_context, _conky_parse_updates, _position_align,
-    -- position
-    _position_x, _position_y,
+function drawing_text_detail(_context, _conky_parse_updates,
     -- values
     _const_disk_device, _conky_parse, _usage_limit,
-    -- large size
-    _adjust_x_large, _adjust_y_large, _font_size_large, _font_face_large, _font_weight,
-    -- normal size
-    _adjust_x_normal, _adjust_y_normal, _gap_y_normal, _font_size_normal, _font_face_normal,
     -- display global ip address
     _display_global_ip_address,
+    -- position
+    _position_x, _position_y, _position_align,
+    -- large font
+    _adjust_x_large, _adjust_y_large, _font_size_large, _font_face_large, _font_weight_large,
+    -- normal font
+    _adjust_x_normal, _adjust_y_normal, _gap_y_normal, _font_size_normal, _font_face_normal,
     -- color
     _color_detail)
 
@@ -27,7 +27,7 @@ function drawing_text_detail(_context, _conky_parse_updates, _position_align,
         string.format('%s',
             _conky_parse.full_date
         ),
-        _font_face_large, CAIRO_FONT_SLANT_NORMAL, _font_weight,
+        _font_face_large, CAIRO_FONT_SLANT_NORMAL, _font_weight_large,
         true == tmp_flg and _color_detail.days_strike or _color_detail.days_normal)
 
 

@@ -3,14 +3,14 @@
 --
 
 function drawing_ring_cpu(_context, _conky_parse_updates,
-    -- values
+    -- value
     _conky_parse_cpu,
+    _ring_cpu_usage_limit,
     -- position
     _ring_position_x, _ring_position_y,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
-    _ring_cpu_usage_limit,
     -- caption
     _caption_position_x, _caption_position_y, _caption_increment_y,
     _caption_align, _caption_font_face, _caption_font_size, _caption_font_weight,

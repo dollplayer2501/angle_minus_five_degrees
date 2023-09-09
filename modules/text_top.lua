@@ -3,6 +3,8 @@
 --
 
 function drawing_text_top(_context, _conky_parse_updates, _const,
+    -- values
+    _conky_parse_top,
     -- Left side, ${top name n}
     _position_x_name, _position_y_name, _adjust_x_name,
     -- Right size, ${top cpu n}
@@ -11,8 +13,6 @@ function drawing_text_top(_context, _conky_parse_updates, _const,
     _adjust_y, _increment_y,
     -- font
     _font_face, _font_size, _font_weight,
-    -- values
-    _conky_parse_top,
     -- color
     _color_text_top)
 

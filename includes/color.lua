@@ -121,6 +121,9 @@ function get_color()
             fg6                 = setting_hex_to_rgba('#7f7fff', 0.25),
         },
 
-        debugging               = setting_hex_to_rgba('#ff0000', 1.0),
+        debugging = {
+                                  setting_hex_to_rgba('#ff0000', 1.0),
+                                  setting_hex_to_rgba('#0000ff', 1.0),
+        },
     }
 end

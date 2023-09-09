@@ -1,8 +1,11 @@
 --
 -- Network Graph
+--  This is a buggy code!
 --
 
-function drawing_graph_network(_context, _conky_parse_updates, _time_interval,
+function drawing_graph_network(_context, _conky_parse_updates,
+    -- interval
+    _time_interval,
     -- network speed
     _network_upspeedf, _network_downspeedf,
     -- array's count

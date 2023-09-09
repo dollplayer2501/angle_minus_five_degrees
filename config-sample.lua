@@ -32,6 +32,9 @@ function get_config()
         -- Whether or not to display meaningless gimmicks
         display_top_right_gimmick = true,
 
+        -- Update interval time, network upspeed and down
+        graph_network_time_interval = 1,
+
         -- Whether or not to display Global IP address
         -- (if not to display, enable to display dummy strings)
         display_global_ip_address = {

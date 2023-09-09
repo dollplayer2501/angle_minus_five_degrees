@@ -3,16 +3,20 @@
 --
 
 function drawing_background_tiles(_context, _const,
+    -- position
     _center_x, _center_y,
+    -- left bottom width
     _today_width_body, _today_width_margin,
-    _display_background_gradient, _rect_step,
+    -- gradient
+    _display_gradient, _rect_step,
+    -- color
     _color_background)
 
 
     --
     -- Top, left
     --
-    if true == _display_background_gradient then
+    if true == _display_gradient then
         drawing_gradient_square(_context,
             _center_x - _const.CPU_LOAD_AVERAGE.LENGTH, _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
             _const.CPU_LOAD_AVERAGE.LENGTH, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
@@ -30,7 +34,7 @@ function drawing_background_tiles(_context, _const,
     --
     local tmp = _today_width_body + _today_width_margin
 
-    if true == _display_background_gradient then
+    if true == _display_gradient then
         drawing_gradient_square(_context,
             _center_x - tmp, _center_y,
             tmp, _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
@@ -46,7 +50,7 @@ function drawing_background_tiles(_context, _const,
     --
     -- Top, right
     --
-    if true == _display_background_gradient then
+    if true == _display_gradient then
         drawing_gradient_square(_context,
             _center_x, _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
             _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT, _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
@@ -62,7 +66,7 @@ function drawing_background_tiles(_context, _const,
     --
     -- Bottom, right
     --
-    if true == _display_background_gradient then
+    if true == _display_gradient then
         drawing_gradient_square(_context,
             _center_x, _center_y,
             _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,

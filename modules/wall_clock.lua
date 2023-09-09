@@ -3,6 +3,7 @@
 --
 
 function drawing_wall_clock(_context,
+    -- position
     _center_x, _center_y,
     -- 12 hour
     _radius_hour12, _width_hour12,
@@ -11,9 +12,11 @@ function drawing_wall_clock(_context,
     -- minutes
     _radius_mins, _width_mins,
     -- seconds
-    _radius_secs, _width_secs, _display_secs,
+    _display_secs, _radius_secs, _width_secs,
     -- etc
-    _line_cap, _color_wall_clock)
+    _line_cap,
+    -- color
+    _color_wall_clock)
 
 
     local tmp_secs_sys = tonumber(os.date('%S'))

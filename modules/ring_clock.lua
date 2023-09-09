@@ -1,14 +1,15 @@
 --
--- Ring Clock - Month, day, hour 24, hour 12, days
+-- Ring Clock
 --
 
 function drawing_ring_clock(_context,
     -- position
     _ring_position_x, _ring_position_y,
+    -- etc
+    _display_secs,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
-    _display_secs,
     -- caption
     _caption_position_x, _caption_position_y, _caption_increment_y,
     _caption_align, _caption_font_face, _caption_font_size, _caption_font_weight,

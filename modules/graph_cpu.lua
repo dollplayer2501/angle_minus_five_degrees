@@ -1,10 +1,13 @@
 --
 -- CPU Load Average Graph
+--  Is this a buggy code?
 --
 
 function drawing_graph_cpu(_context, _conky_parse_updates,
     -- CPU load average
-    _cpu_usage_value, _cpu_array_count, _cpu_usage_limit,
+    _cpu_usage_value,
+    -- etc
+    _cpu_array_count, _cpu_usage_limit,
     -- graph
     _graprh_position_x, _graprh_position_y,
     _graph_width, _graph_max_height,
