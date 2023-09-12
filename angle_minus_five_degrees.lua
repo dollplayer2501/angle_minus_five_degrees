@@ -4,14 +4,15 @@
 
 require 'cairo'
 
-package.path = os.getenv('HOME') .. '/.config/conky/angle_minus_five_degrees/?.lua'
+-- It still works even if I turn it off...
+-- package.path = os.getenv('HOME') .. '/.config/conky/angle_minus_five_degrees/?.lua'
 
 require 'config'
+require 'const'
+require 'color'
 
-require 'includes/const'
 require 'includes/functions'
 require 'includes/conky_parse'
-require 'includes/color'
 
 require 'config/wall_clock'
 require 'modules/wall_clock'

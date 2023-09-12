@@ -7,3 +7,5 @@ Memo.md
 
 start-quick.sh
 config.lua
+color_*.lua
+const_*.lua
