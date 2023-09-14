@@ -60,8 +60,29 @@ function get_config()
         -- I think in many countries it is expressed as '12:00pm' and '12:00am',
         -- but this expression left strange to me...
         --
-        display_hour12_japanese_style = true,
+        display_hour12_japanese_style = false,
 
+        --
+        -- Whether or not to display each modules
+        --
+        display_module = {
+            wall_clock = true,
+            background_tiles = true,
+            bar_more = true,
+            ring_cpu = true,
+            ring_clock = true,
+            ring_more = true,
+            graph_cpu = true,
+            graph_network = true,
+            background_lines = true,
+            text_clock = true,
+            text_top = true,
+            text_detail = true,
+        },
+
+        --
+        -- Filesystem
+        --
         filesystem = {
             -- Directory to be checked for file size
             filesystem = '/',

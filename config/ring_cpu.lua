@@ -26,7 +26,7 @@ function get_config_ring_cpu(_const, _config)
         caption_increment_y = 25,
         caption_align = _const.ALIGN.LEFT,
         caption_font_face = _const.FONT_FACE_2_1,
-        caption_font_size = 14,
+        caption_font_size = 12,
         caption_font_weight = CAIRO_FONT_WEIGHT_BOLD,
     }
 end
