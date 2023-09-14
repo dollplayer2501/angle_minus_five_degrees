@@ -78,7 +78,7 @@ function get_config()
             text_clock = true,
             text_top = true,
             text_detail = true,
-            debug_lines = true,
+            debug_lines = false,
         },
 
         --
