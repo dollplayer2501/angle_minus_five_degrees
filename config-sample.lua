@@ -63,6 +63,17 @@ function get_config()
         display_hour12_japanese_style = false,
 
         --
+        -- 12 hour system or 24 hour system
+        --
+        text_clock = {
+            display_24_hour = true,
+            -- This takes effect if display_24_hour is true
+            -- This may be redundant
+            -- ex) 08:01 am => 8:01 am
+            suppression_hour_zero = false,
+        },
+
+        --
         -- Whether or not to display each modules
         --
         display_module = {

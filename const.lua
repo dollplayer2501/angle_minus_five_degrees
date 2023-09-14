@@ -82,15 +82,15 @@ function get_const()
                                     |         |               |  |
                                     |         |               |  a
                                     |         |               |  |
-                    - 4+----------+---------Z---------+-------+2 -
-                    |  |                    |         |
-                    c  |                    |         |
-                    |  |                    |         |
-                    - 4+----------+---------+         +
-                                            |         |
-                                            |         |
-                                            3         3
-                                            |----b----|
+                      - 4+----------+---------Z---------+-------+2 -
+                      |  |                    |         |
+                      c  |                    |         |
+                      |  |                    |         |
+                      - 4+----------+---------+         +
+                                              |         |
+                                              |         |
+                                              3         3
+                                              |----b----|
 
                         Z: CENTER_POSITION.THEME.X,Y
                         1: center to top
@@ -100,7 +100,7 @@ function get_const()
                         a: top right height
                         b: bottom right width
                         c: bottom left height
-                        d: top left height
+                        d: top left width
                     ]]
 
                     CENTER_TO = {
@@ -117,7 +117,7 @@ function get_const()
                     },
 
                     WIDTH = {
-                        TOP_LEFT = nil, -- same value, CPU_LOAD_AVERAGE_LENGTH
+                        TOP_LEFT = nil, -- same value, CPU_LOAD_AVERAGE.LENGTH
                         BOTTOM_LEFT = nil, -- Today's width
                         TOP_RIGHT = nil, -- same value, LINE_LENGTH.CENTER_TO.RIGHT
                         BOTTOM_RIGHT = 350,

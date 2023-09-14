@@ -2,12 +2,15 @@
 -- Clock Text
 --
 
-function drawing_text_clock(_context, _conky_parse_updates,
+function drawing_text_clock(_context, _conky_parse_updates, _config,
     -- position
     _position_x, _position_y,
     -- hours
     _hour_adjust_x, _hour_adjust_y,
     _hour_font_align, _hour_font_size, _hour_font_face,
+    -- am/pm when 12 hour system is in effect
+    _am_pm_adjust_x, _am_pm_adjust_y,
+    _am_pm_font_align, _am_pm_font_size, _am_pm_font_face,
     -- delimiter
     _delimiter_adjust_x, _delimiter_adjust_y,
     _delimiter_font_align, _delimiter_font_size, _delimiter_font_face,
@@ -22,7 +25,10 @@ function drawing_text_clock(_context, _conky_parse_updates,
     _color_text_clock)
 
 
+    --
     -- delimiter ':' blinks
+    --
+
     local tmp_color = _color_text_clock.delimiter_1
     if 3 > _conky_parse_updates then
         return
@@ -37,21 +43,49 @@ function drawing_text_clock(_context, _conky_parse_updates,
         end
     end
 
-    -- Hours
+
+    --
+    -- Hours ... 12 or 24
+    --
+
+    local tmp_hour = tostring(os.date('%H'))
+    if true ~= _config.text_clock.display_24_hour then
+        tmp_hour = true == _config.text_clock.suppression_hour_zero
+            and tostring(tonumber(os.date('%I')))
+            or tostring(os.date('%I'))
+    end
 
     drawing_text(_context, _hour_font_align,
         _position_x + _hour_adjust_x, _position_y + _hour_adjust_y, _hour_font_size,
-        tostring(os.date('%H')),
+        tmp_hour,
         _hour_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.hour)
 
+
+    --
+    -- AM/PM
+    --
+
+    if true ~= _config.text_clock.display_24_hour then
+        drawing_text(_context, _am_pm_font_align,
+            _position_x + _am_pm_adjust_x, _position_y + _am_pm_adjust_y, _am_pm_font_size,
+            tostring(os.date('%p')),
+            _am_pm_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.am_pm)
+    end
+
+
+    --
     -- Delimiter
+    --
 
     drawing_text(_context, _delimiter_font_align,
         _position_x + _delimiter_adjust_x, _position_y + _delimiter_adjust_y, _delimiter_font_size,
         ':',
         _delimiter_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, tmp_color)
 
-    -- Seconds (not Minutes, becase z-order)
+
+    --
+    -- Seconds
+    --
 
     if true == _display_secs then
         drawing_text(_context, _sec_font_align,
@@ -60,7 +94,10 @@ function drawing_text_clock(_context, _conky_parse_updates,
             _sec_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.sec)
     end
 
+
+    --
     -- Minutes
+    --
 
     drawing_text(_context, _min_font_align,
         _position_x + _min_adjust_x, _position_y + _min_adjust_y, _min_font_size,
