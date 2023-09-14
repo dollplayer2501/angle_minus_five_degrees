@@ -38,7 +38,8 @@ require 'config/text_top'
 require 'modules/text_top'
 require 'config/text_detail'
 require 'modules/text_detail'
-
+require 'config/debbug_lines'
+require 'modules/debbug_lines'
 
 
 
@@ -353,40 +354,15 @@ function conky_main()
 
 
 
-
-    --
-    -- This is debug, do not delete!
-    --
-
-    if 0 > global_conky_parse_updates then
-        local cr_debug0 = cairo_create(cs)
-        local cr_debug5 = cairo_create(cs)
-
-        cairo_rotate(cr_debug0, 0)
-        cairo_rotate(cr_debug5, base_angle)
-
-        local tmp_objects = { cr_debug0, cr_debug5 }
-        for ii = 1, 2 do
-            -- Ring
-            drawing_ring(tmp_objects[ii],
-                global_const.CENTER_POSITION.SCREEN.X, global_const.CENTER_POSITION.SCREEN.Y,
-                500, changing_angle_to_radian(0), changing_angle_to_radian(320), 1,
-                CAIRO_LINE_CAP_BUTT, global_color.debugging[ii])
-            -- Holizental line
-            drawing_line(tmp_objects[ii],
-                global_const.CENTER_POSITION.SCREEN.X - 200, global_const.CENTER_POSITION.SCREEN.Y,
-                global_const.CENTER_POSITION.SCREEN.Y + 200, global_const.CENTER_POSITION.SCREEN.Y,
-                1, CAIRO_LINE_CAP_BUTT, global_color.debugging[ii])
-            -- Vertical line
-            drawing_line(tmp_objects[ii],
-                global_const.CENTER_POSITION.SCREEN.X, global_const.CENTER_POSITION.SCREEN.Y - 100,
-                global_const.CENTER_POSITION.SCREEN.X, global_const.CENTER_POSITION.SCREEN.Y + 100,
-                1, CAIRO_LINE_CAP_BUTT, global_color.debugging[ii])
-        end
-
-        cairo_destroy(cr_debug0)
-        cairo_destroy(cr_debug5)
+    ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    -- Debug lines
+    --  This is debug
+    ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    if true == global_config.display_module.debug_lines then
+        local cfg = get_config_debug_lines()
+        drawing_debug_lines(cs, base_angle, global_const, global_color.debugging)
     end
+
 
 
 
