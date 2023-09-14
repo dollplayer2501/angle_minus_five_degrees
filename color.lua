@@ -73,6 +73,7 @@ function get_color()
 
         text_clock = {
             hour                = setting_hex_to_rgba('#ff7fff', 0.8),
+            am_pm               = setting_hex_to_rgba('#ff7fff', 0.6),
             delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
             delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),
             mins                = setting_hex_to_rgba('#ff7fff', 0.8),

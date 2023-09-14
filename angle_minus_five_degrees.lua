@@ -288,12 +288,15 @@ function conky_main()
     ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
     if true == global_config.display_module.text_clock then
         local cfg = get_config_text_clock(global_const, global_config)
-        drawing_text_clock(cr_draw, global_conky_parse_updates,
+        drawing_text_clock(cr_draw, global_conky_parse_updates, global_config,
             -- position
             cfg.position_x, cfg.position_y,
             -- hours
             cfg.hour_adjust_x, cfg.hour_adjust_y,
             cfg.hour_font_align, cfg.hour_font_size, cfg.hour_font_face,
+            -- am/pm when 12 hour system is in effect
+            cfg.am_pm_adjust_x, cfg.am_pm_adjust_y,
+            cfg.am_pm_font_align, cfg.am_pm_font_size, cfg.am_pm_font_face,
             -- delimiter
             cfg.delimiter_adjust_x, cfg.delimiter_adjust_y,
             cfg.delimiter_font_align, cfg.delimiter_font_size, cfg.delimiter_font_face,

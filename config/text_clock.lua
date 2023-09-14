@@ -15,6 +15,13 @@ function get_config_text_clock(_const, _config)
         hour_font_size = 450,
         hour_font_face = _const.FONT_FACE_2_1,
 
+        -- am/pm when 12 hour system is in effect
+        am_pm_adjust_x = - _const.CPU_LOAD_AVERAGE.LENGTH + 145,
+        am_pm_adjust_y = - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT - 10,
+        am_pm_font_align = _const.ALIGN.RIGHT,
+        am_pm_font_size = 100,
+        am_pm_font_face = _const.FONT_FACE_2_1,
+
         -- delimiter
         delimiter_adjust_x = -25,
         delimiter_adjust_y = 8,
