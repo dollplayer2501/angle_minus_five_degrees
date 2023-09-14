@@ -49,6 +49,19 @@ function get_config()
             dummy_ip_address = '123.456.789.012',
         },
 
+        -- Whether or not to display 12pm or 0am
+        -- This setting only affects the 12 hour circle of the ring clock
+        --
+        --    24 hour system   | Global   | Japan
+        --   ------------------+----------+---------
+        --    0:00 / midnight  | 12:00 pm | 0:00 am
+        --   12:00 / afternoon | 12:00 am | 0:00 pm
+        --
+        -- I think in many countries it is expressed as '12:00pm' and '12:00am',
+        -- but this expression left strange to me...
+        --
+        display_hour12_japanese_style = true,
+
         filesystem = {
             -- Directory to be checked for file size
             filesystem = '/',

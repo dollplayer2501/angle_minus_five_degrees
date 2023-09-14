@@ -175,7 +175,7 @@ function conky_main()
     -- Ring Clock
     ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
     local cfg = get_config_ring_clock(global_const, global_config)
-    drawing_ring_clock(cr_draw,
+    drawing_ring_clock(cr_draw, global_config,
         -- position
         cfg.ring_position_x, cfg.ring_position_y,
         -- etc

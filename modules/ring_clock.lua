@@ -2,7 +2,7 @@
 -- Ring Clock
 --
 
-function drawing_ring_clock(_context,
+function drawing_ring_clock(_context, _config,
     -- position
     _ring_position_x, _ring_position_y,
     -- etc
@@ -27,8 +27,16 @@ function drawing_ring_clock(_context,
         return (tonumber(os.date('%M')) / 60 * _angle) + _start
     end
 
-    local _get_hour12 = function(_angle, _start)
-        return (tonumber(os.date('%I')) / 12 * _angle) + _start
+    local _get_hour12 = function(_angle, _start, _display_hour12_japanese_style)
+        if true == _display_hour12_japanese_style then
+            local tmp_hour12 = 12 ==  tonumber(os.date('%I'))
+                    and 0
+                    or tonumber(os.date('%I'))
+
+            return (tmp_hour12 / 12 * _angle) + _start
+        else
+            return (tonumber(os.date('%I')) / 12 * _angle) + _start
+        end
     end
 
     local _get_hour24 = function(_angle, _start)
@@ -67,10 +75,10 @@ function drawing_ring_clock(_context,
         elseif 1 == ii then
             tmp_fg_end_angle = (true == _display_secs)
                                 and _get_minites(tmp_ring_angle, _ring_angle_start)
-                                or _get_hour12(tmp_ring_angle, _ring_angle_start)
+                                or _get_hour12(tmp_ring_angle, _ring_angle_start, _config.display_hour12_japanese_style)
         elseif 2 == ii then
             tmp_fg_end_angle = (true == _display_secs)
-                                and _get_hour12(tmp_ring_angle, _ring_angle_start)
+                                and _get_hour12(tmp_ring_angle, _ring_angle_start, _config.display_hour12_japanese_style)
                                 or _get_hour24(tmp_ring_angle, _ring_angle_start)
         elseif 3 == ii then
             tmp_fg_end_angle = (true == _display_secs)
