@@ -13,12 +13,24 @@ function get_color()
         -- # blue:   #7f7fff #bebeff #8a8aaa
         -- # pink:   #ff7fff #ffbebe #bc9c9c
 
-        line = {
-            normal              = setting_hex_to_rgba('#7f3fbf', 1.0),
-            high                = setting_hex_to_rgba('#ff7fff', 1.0),
+        wall_clock = {
+            marks = {
+                hour12          = setting_hex_to_rgba('#7f3fbf', 0.4),
+                hour24          = setting_hex_to_rgba('#7f7fff', 0.6),
+                mins            = setting_hex_to_rgba('#7f3fbf', 0.4),
+            },
+            number = {
+                hour24          = setting_hex_to_rgba('#7f3fbf', 0.8),
+            },
+            hands ={
+                hour12          = setting_hex_to_rgba('#7f3fbf', 0.8),
+                hour24          = setting_hex_to_rgba('#7f7fff', 0.4),
+                mins            = setting_hex_to_rgba('#7f3fbf', 0.8),
+                secs            = setting_hex_to_rgba('#ff7fff', 0.4),
+            },
         },
 
-        background = {
+        background_tiles = {
             top_left = {
                 one             = setting_hex_to_rgba('#685878', 0.3),
                 gradient = {      -- Top to Bottom, Vertical
@@ -64,20 +76,18 @@ function get_color()
             },
         },
 
-        text_detail = {
-            days_normal         = setting_hex_to_rgba('#ff7fff', 0.8),
-            days_strike         = setting_hex_to_rgba('#7f7fff', 1.0),
-            body_normal         = setting_hex_to_rgba('#7f7fff', 1.0),
-            body_strike         = setting_hex_to_rgba('#ff7fff', 0.8),
+--        bar_load_rate = {
+        bar_more = {
+            normal              = setting_hex_to_rgba('#7f7fff', 0.6),
+            high                = setting_hex_to_rgba('#ff7fff', 0.6),
+            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
-        text_clock = {
-            hour                = setting_hex_to_rgba('#ff7fff', 0.8),
-            am_pm               = setting_hex_to_rgba('#ff7fff', 0.6),
-            delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
-            delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),
-            mins                = setting_hex_to_rgba('#ff7fff', 0.8),
-            sec                 = setting_hex_to_rgba('#ff7fff', 0.6),
+        ring = {
+            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
+            fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
+            bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
+            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
         graph_cpu = {
@@ -93,43 +103,34 @@ function get_color()
             caption             = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
-        ring = {
-            fg_normal           = setting_hex_to_rgba('#7f7fff', 0.8),
-            fg_high             = setting_hex_to_rgba('#ff7fff', 0.4),
-            bg                  = setting_hex_to_rgba('#7f7fff', 0.2),
-            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
+        background_lines = {
+            normal              = setting_hex_to_rgba('#7f3fbf', 1.0),
+            high                = setting_hex_to_rgba('#ff7fff', 1.0),
         },
 
-        wall_clock = {
-            marks = {
-                hour12          = setting_hex_to_rgba('#7f3fbf', 0.4),
-                hour24          = setting_hex_to_rgba('#7f7fff', 0.6),
-                mins            = setting_hex_to_rgba('#7f3fbf', 0.4),
-            },
-            number = {
-                hour24          = setting_hex_to_rgba('#7f3fbf', 0.8),
-            },
-            hands ={
-                hour12          = setting_hex_to_rgba('#7f3fbf', 0.8),
-                hour24          = setting_hex_to_rgba('#7f7fff', 0.4),
-                mins            = setting_hex_to_rgba('#7f3fbf', 0.8),
-                secs            = setting_hex_to_rgba('#ff7fff', 0.4),
-            },
+        text_clock = {
+            hour                = setting_hex_to_rgba('#ff7fff', 0.8),
+            am_pm               = setting_hex_to_rgba('#ff7fff', 0.6),
+            delimiter_1         = setting_hex_to_rgba('#7f7fff', 0.6),
+            delimiter_2         = setting_hex_to_rgba('#ff7fff', 0.6),
+            mins                = setting_hex_to_rgba('#ff7fff', 0.8),
+            sec                 = setting_hex_to_rgba('#ff7fff', 0.6),
         },
 
-        bar_load_rate = {
-            normal              = setting_hex_to_rgba('#7f7fff', 0.6),
-            high                = setting_hex_to_rgba('#ff7fff', 0.6),
-            caption             = setting_hex_to_rgba('#ff7fff', 1.0),
+        text_detail = {
+            days_normal         = setting_hex_to_rgba('#ff7fff', 0.8),
+            days_strike         = setting_hex_to_rgba('#7f7fff', 1.0),
+            body_normal         = setting_hex_to_rgba('#7f7fff', 1.0),
+            body_strike         = setting_hex_to_rgba('#ff7fff', 0.8),
         },
 
         text_top = {
-            fg1                 = setting_hex_to_rgba('#7f7fff', 1.00),
-            fg2                 = setting_hex_to_rgba('#7f7fff', 0.85),
-            fg3                 = setting_hex_to_rgba('#7f7fff', 0.70),
-            fg4                 = setting_hex_to_rgba('#7f7fff', 0.55),
-            fg5                 = setting_hex_to_rgba('#7f7fff', 0.40),
-            fg6                 = setting_hex_to_rgba('#7f7fff', 0.25),
+            fg_1                = setting_hex_to_rgba('#7f7fff', 1.00),
+            fg_2                = setting_hex_to_rgba('#7f7fff', 0.85),
+            fg_3                = setting_hex_to_rgba('#7f7fff', 0.70),
+            fg_4                = setting_hex_to_rgba('#7f7fff', 0.55),
+            fg_5                = setting_hex_to_rgba('#7f7fff', 0.40),
+            fg_6                = setting_hex_to_rgba('#7f7fff', 0.25),
         },
 
         debugging = {
