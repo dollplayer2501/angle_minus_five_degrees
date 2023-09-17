@@ -94,20 +94,31 @@ function conky_main()
     -- Wall Clock
     ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
     if true == global_config.display_module.wall_clock then
-        local cfg = get_config_wall_clock(global_const, global_config)
+        local cfg = get_config_wall_clock(global_const, global_config, TODAY_WIDTH)
         drawing_wall_clock(cr_draw,
             -- position
             cfg.center_x, cfg.center_y,
-            -- 12 hour
-            cfg.radius_hour12, cfg.width_hour12,
-            -- 24 hour
-            cfg.radius_hour24, cfg.width_hour24,
-            -- minutes
-            cfg.radius_mins, cfg.width_mins,
-            -- seconds
-            cfg.display_secs, cfg.radius_secs, cfg.width_secs,
+            -- Clock hands - 12 hour
+            cfg.hands_radius_hour12, cfg.hands_width_hour12,
+            -- Clock hands - 24 hour
+            cfg.hands_radius_hour24, cfg.hands_width_hour24,
+            -- Clock hands - minutes
+            cfg.hands_radius_mins, cfg.hands_width_mins,
+            -- Clock hands - seconds
+            cfg.hands_display_secs, cfg.hands_radius_secs, cfg.hands_width_secs,
+            -- Clock marks - 12 hour
+            cfg.marks_radius_from_hour12, cfg.marks_radius_to_hour12, cfg.marks_width_hour12,
+            -- Clock marks - minutes
+            cfg.marks_display_mins,
+            cfg.marks_radius_from_mins, cfg.marks_radius_to_mins, cfg.marks_width_mins,
+            -- Clock marks - 24 hour
+            cfg.marks_radius_from_hour24, cfg.marks_radius_to_hour24, cfg.marks_width_hour24,
+            -- Clock number - 24 hour
+            cfg.number_display_hour24,
+            cfg.number_adjust_x_hour24, cfg.number_adjust_y_hour24,
+            cfg.number_font_align_hour24, cfg.number_font_size_hour24, cfg.number_font_face_hour24, cfg.number_font_weight_hour24,
             -- etc
-            cfg.line_cap,
+            cfg.hands_line_cap, cfg.marks_line_cap,
             -- color
             global_color.wall_clock)
     end

@@ -74,6 +74,14 @@ function get_config()
         },
 
         --
+        -- Wall clock
+        --
+        wall_clock = {
+            display_marks_minutes = true,
+            display_number_hour24 = true,
+        },
+
+        --
         -- Whether or not to display each modules
         --
         display_module = {
