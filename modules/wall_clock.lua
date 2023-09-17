@@ -10,7 +10,7 @@ function drawing_wall_clock(_context,
     -- Clock hands - 24 hour
     _hands_radius_hour24, _hands_width_hour24,
     -- Clock hands - minutes
-    _hands_radius_mins, _hands_width_mins,
+    _hands_update_interval_mins, _hands_radius_mins, _hands_width_mins,
     -- Clock hands - seconds
     _hands_display_secs, _hands_radius_secs, _hands_width_secs,
     -- Clock marks - 12 hour
@@ -130,9 +130,10 @@ function drawing_wall_clock(_context,
     local tmp_hours24_sys =  tonumber(os.date('%H'))
 
     local tmp_secs_arc = (2 * math.pi / 60) * tmp_secs_sys
-    local tmp_mins_arc = (2 * math.pi / 60) * tmp_mins_sys + tmp_secs_arc / 60
-    local tmp_hours12_arc = (2 * math.pi / 12) * tmp_hours12_sys + tmp_mins_arc / 12
-    local tmp_hours24_arc = (2 * math.pi / 24) * tmp_hours24_sys + tmp_mins_arc / 24
+    local tmp_secs_arc_tmp = (2 * math.pi / 60) * math.floor(tmp_secs_sys / _hands_update_interval_mins) * _hands_update_interval_mins
+    local tmp_mins_arc = (2 * math.pi / 60) * tmp_mins_sys + (tmp_secs_arc_tmp / 60)
+    local tmp_hours12_arc = (2 * math.pi / 12) * tmp_hours12_sys + (tmp_mins_arc / 12)
+    local tmp_hours24_arc = (2 * math.pi / 24) * tmp_hours24_sys + (tmp_mins_arc / 24)
 
 
     --
