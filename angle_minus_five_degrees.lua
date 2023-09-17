@@ -195,6 +195,7 @@ function conky_main()
             cfg.ring_position_x, cfg.ring_position_y,
             -- etc
             cfg.display_secs,
+            cfg.display_hour12_japanese_style,
             -- ring
             cfg.ring_angle_start, cfg.ring_angle_end,
             cfg.ring_radius, cfg.ring_width, cfg.ring_gap,
@@ -318,6 +319,10 @@ function conky_main()
             cfg.display_secs,
             cfg.sec_adjust_x, cfg.sec_adjust_y,
             cfg.sec_font_align, cfg.sec_font_size, cfg.sec_font_face,
+            -- etc
+            cfg.display_24_hour,
+            cfg.display_hour12_japanese_style,
+            cfg.suppression_hour_zero,
             -- color
             global_color.text_clock)
     end

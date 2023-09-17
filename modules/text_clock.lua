@@ -21,6 +21,10 @@ function drawing_text_clock(_context, _conky_parse_updates, _config,
     _display_secs,
     _sec_adjust_x, _sec_adjust_y,
     _sec_font_align, _sec_font_size, _sec_font_face,
+    -- etc
+    _display_24_hour,
+    _display_hour12_japanese_style,
+    _suppression_hour_zero,
     -- color
     _color_text_clock)
 
@@ -49,12 +53,15 @@ function drawing_text_clock(_context, _conky_parse_updates, _config,
     --
 
     local tmp_hour = tostring(os.date('%H'))
-    if true ~= _config.text_clock.display_24_hour then
-        tmp_hour = true == _config.text_clock.suppression_hour_zero
-            and tostring(tonumber(os.date('%I')))
-            or tostring(os.date('%I'))
+    if true ~= _display_24_hour then
+        tmp_hour = tostring(os.date('%I'))
+        if true == _display_hour12_japanese_style and '12' == tmp_hour then
+            tmp_hour = '00'
+        end
+        if true == _suppression_hour_zero then
+            tmp_hour = tostring(tonumber(tmp_hour))
+        end
     end
-
     drawing_text(_context, _hour_font_align,
         _position_x + _hour_adjust_x, _position_y + _hour_adjust_y, _hour_font_size,
         tmp_hour,
@@ -65,10 +72,10 @@ function drawing_text_clock(_context, _conky_parse_updates, _config,
     -- AM/PM
     --
 
-    if true ~= _config.text_clock.display_24_hour then
+    if true ~= _display_24_hour then
         drawing_text(_context, _am_pm_font_align,
             _position_x + _am_pm_adjust_x, _position_y + _am_pm_adjust_y, _am_pm_font_size,
-            tostring(os.date('%p')),
+            os.date('%p'),
             _am_pm_font_face, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_text_clock.am_pm)
     end
 

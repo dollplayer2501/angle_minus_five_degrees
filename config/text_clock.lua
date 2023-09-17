@@ -43,5 +43,10 @@ function get_config_text_clock(_const, _config)
         sec_font_align = _const.ALIGN.RIGHT,
         sec_font_size = 250,
         sec_font_face = _const.FONT_FACE_2_1,
+
+        -- etc
+        display_24_hour = _config.text_clock.display_24_hour,
+        display_hour12_japanese_style = _config.display_hour12_japanese_style,
+        suppression_hour_zero = _config.text_clock.suppression_hour_zero,
     }
 end
