@@ -17,7 +17,8 @@ function get_config_wall_clock(_const, _config, _today_width)
         hands_width_hour24 = 4,
 
         -- Clock hands - minutes
-        hands_radius_mins =  _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + 30,
+        hands_update_interval_mins = _config.wall_clock.update_interval_minutes,
+        hands_radius_mins = _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + 30,
         hands_width_mins = 16,
 
         -- Clock hands - seconds

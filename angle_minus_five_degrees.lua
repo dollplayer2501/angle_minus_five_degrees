@@ -103,7 +103,7 @@ function conky_main()
             -- Clock hands - 24 hour
             cfg.hands_radius_hour24, cfg.hands_width_hour24,
             -- Clock hands - minutes
-            cfg.hands_radius_mins, cfg.hands_width_mins,
+            cfg.hands_update_interval_mins, cfg.hands_radius_mins, cfg.hands_width_mins,
             -- Clock hands - seconds
             cfg.hands_display_secs, cfg.hands_radius_secs, cfg.hands_width_secs,
             -- Clock marks - 12 hour

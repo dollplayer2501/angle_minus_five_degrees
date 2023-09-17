@@ -79,6 +79,10 @@ function get_config()
         wall_clock = {
             display_marks_minutes = true,
             display_number_hour24 = true,
+            -- It's especially annoying that the minute hand updates
+            -- at `update_interval`(of conky's config) intervals
+            -- This value must be greater than or equal 1 and less than or equal to 59 (seconds)
+            update_interval_minutes = 15,
         },
 
         --
