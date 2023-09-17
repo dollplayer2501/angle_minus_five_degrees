@@ -39,7 +39,7 @@ function get_config_text_clock(_const, _config)
         -- seconds
         display_secs = _config.display_seconds.text_clock,
         sec_adjust_x = _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 5,
-        sec_adjust_y = -5,
+        sec_adjust_y = - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT + 150 ,
         sec_font_align = _const.ALIGN.RIGHT,
         sec_font_size = 250,
         sec_font_face = _const.FONT_FACE_2_1,
