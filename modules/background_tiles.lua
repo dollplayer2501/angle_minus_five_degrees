@@ -10,7 +10,7 @@ function drawing_background_tiles(_context, _const,
     -- gradient
     _display_gradient, _rect_step,
     -- color
-    _color_background)
+    _color_tiles)
 
 
     --
@@ -21,12 +21,12 @@ function drawing_background_tiles(_context, _const,
             _center_x - _const.CPU_LOAD_AVERAGE.LENGTH, _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
             _const.CPU_LOAD_AVERAGE.LENGTH, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
             _const.DIRECTION.VERTICAL, _rect_step,
-            _color_background.top_left.gradient)
+            _color_tiles.top_left.gradient)
     else
         drawing_square(_context,
             _center_x - _const.CPU_LOAD_AVERAGE.LENGTH, _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
             _const.CPU_LOAD_AVERAGE.LENGTH, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
-            _color_background.top_left.one)
+            _color_tiles.top_left.one)
     end
 
     --
@@ -39,12 +39,12 @@ function drawing_background_tiles(_context, _const,
             _center_x - tmp, _center_y,
             tmp, _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
             _const.DIRECTION.HORIZONTAL, _rect_step,
-            _color_background.bottom_left.gradient)
+            _color_tiles.bottom_left.gradient)
     else
         drawing_square(_context,
             _center_x - tmp, _center_y,
             tmp, _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
-            _color_background.bottom_left.one)
+            _color_tiles.bottom_left.one)
     end
 
     --
@@ -55,12 +55,12 @@ function drawing_background_tiles(_context, _const,
             _center_x, _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
             _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT, _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
             _const.DIRECTION.HORIZONTAL, _rect_step,
-            _color_background.top_right.gradient)
+            _color_tiles.top_right.gradient)
     else
         drawing_square(_context,
             _center_x, _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
             _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT, _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
-            _color_background.top_right.one)
+            _color_tiles.top_right.one)
     end
 
     --
@@ -71,11 +71,11 @@ function drawing_background_tiles(_context, _const,
             _center_x, _center_y,
             _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
             _const.DIRECTION.VERTICAL, _rect_step,
-            _color_background.bottom_right.gradient)
+            _color_tiles.bottom_right.gradient)
     else
         drawing_square(_context,
             _center_x, _center_y,
             _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT, _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
-            _color_background.bottom_right.one)
+            _color_tiles.bottom_right.one)
     end
 end

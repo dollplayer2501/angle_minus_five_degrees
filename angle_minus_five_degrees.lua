@@ -137,7 +137,7 @@ function conky_main()
             -- gradient
             cfg.display_gradient, cfg.rect_step,
             -- color
-            global_color.background)
+            global_color.background_tiles)
     end
 
 
@@ -159,7 +159,7 @@ function conky_main()
             cfg.caption_position_x, cfg.caption_position_y, cfg.caption_gap_y,
             cfg.caption_align, cfg.caption_font_face, cfg.caption_font_size, cfg.caption_font_weight,
             -- color
-            global_color.bar_load_rate)
+            global_color.bar_more)
     end
 
 
@@ -290,7 +290,7 @@ function conky_main()
             -- etc
             cfg.line_cap,
             -- color
-            global_color.line, global_color.debugging)
+            global_color.background_lines, global_color.debugging)
     end
 
 

@@ -12,7 +12,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
     -- etc
     _line_cap,
     -- color
-    _color_line, _color_debug)
+    _color_lines, _color_debug)
 
 
     local today_width = _today_width_body + _today_width_margin
@@ -26,7 +26,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y,
         _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_y,
-        _const.BACKGROUND.LINES.WIDTH.BOLD, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.BOLD, _line_cap, _color_lines.normal)
 
     --
     -- Main - Vertical - Top to bottom
@@ -36,7 +36,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
         _center_x,
         _center_y + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
-        _const.BACKGROUND.LINES.WIDTH.BOLD, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.BOLD, _line_cap, _color_lines.normal)
 
 
     --
@@ -49,7 +49,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.CENTER_TO.TOP,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH,
         _center_y + _const.BACKGROUND.LINES.LENGTH.ADDITION.NORMAL,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Top, Left - Holizontal -- indicator, top
     drawing_line(_context,
@@ -57,7 +57,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Top, Left - Holizontal -- indicator, middle
     drawing_line(_context,
@@ -65,7 +65,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.CPU_LOAD_AVERAGE.HEIGHT,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_y - _const.CPU_LOAD_AVERAGE.HEIGHT,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Top, Left - Holizontal -- indicator, bottom
     drawing_line(_context,
@@ -73,7 +73,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - (_const.CPU_LOAD_AVERAGE.HEIGHT / 2),
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.NORMAL,
         _center_y - (_const.CPU_LOAD_AVERAGE.HEIGHT / 2),
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
 
     --
@@ -86,7 +86,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
         _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Top, Right -- Vertical
     if true == _display_top_right_gimmick then
@@ -101,13 +101,13 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
             _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT,
             _center_y - tmp_value - _highlight_length,
-            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
         -- Top, Right -- Vertical line 2/3 at highlight
         drawing_line(_context,
             _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value - _highlight_length,
             _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT, _center_y - tmp_value + _highlight_length,
-            _const.BACKGROUND.LINES.WIDTH.BOLDER, _line_cap, _color_line.high)
+            _const.BACKGROUND.LINES.WIDTH.BOLDER, _line_cap, _color_lines.high)
 
         -- Top, Right -- Vertical line 2/3 at lower
         drawing_line(_context,
@@ -115,7 +115,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
             _center_y - tmp_value + _highlight_length,
             _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT,
             _center_y + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
-            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
         -- Top, Right -- Vertical -- indicator, right
         drawing_line(_context,
@@ -123,7 +123,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
             _center_x + _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT,
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
-            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
         -- Top, Right -- Vertical -- indicator, middle/left
         drawing_line(_context,
@@ -131,7 +131,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT - _const.BACKGROUND.LINES.LENGTH.ADDITION.SMALL,
             _center_x + (_const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT / 2),
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT + _const.BACKGROUND.LINES.LENGTH.ADDITION.NORMAL,
-            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
     else
 
         -- Top, Right -- Vertical
@@ -140,7 +140,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
             _center_y - _const.BACKGROUND.LINES.LENGTH.HEIGHT.TOP_RIGHT - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
             _center_x + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT,
             _center_y + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
-            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+            _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
     end
 
 
@@ -154,7 +154,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.ADDITION.NORMAL,
         _center_x + _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT,
         _center_y + _const.BACKGROUND.LINES.LENGTH.CENTER_TO.BOTTOM,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Bottom, Right -- Holizontal -- indicator
     drawing_line(_context,
@@ -162,7 +162,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
         _center_x + _const.BACKGROUND.LINES.LENGTH.WIDTH.BOTTOM_RIGHT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
 
     --
@@ -175,7 +175,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
         _center_x + _const.BACKGROUND.LINES.LENGTH.ADDITION.NORMAL,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Bottom, Left -- Vertical
     drawing_line(_context,
@@ -183,7 +183,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_x - today_width,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 
     -- Bottom, Left -- Vertical -- indicator
     drawing_line(_context,
@@ -191,5 +191,5 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
-        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_line.normal)
+        _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
 end
