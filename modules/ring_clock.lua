@@ -7,6 +7,7 @@ function drawing_ring_clock(_context, _config,
     _ring_position_x, _ring_position_y,
     -- etc
     _display_secs,
+    _display_hour12_japanese_style,
     -- ring
     _ring_angle_start, _ring_angle_end,
     _ring_radius, _ring_width, _ring_gap,
@@ -75,10 +76,10 @@ function drawing_ring_clock(_context, _config,
         elseif 1 == ii then
             tmp_fg_end_angle = (true == _display_secs)
                                 and _get_minites(tmp_ring_angle, _ring_angle_start)
-                                or _get_hour12(tmp_ring_angle, _ring_angle_start, _config.display_hour12_japanese_style)
+                                or _get_hour12(tmp_ring_angle, _ring_angle_start, _display_hour12_japanese_style)
         elseif 2 == ii then
             tmp_fg_end_angle = (true == _display_secs)
-                                and _get_hour12(tmp_ring_angle, _ring_angle_start, _config.display_hour12_japanese_style)
+                                and _get_hour12(tmp_ring_angle, _ring_angle_start, _display_hour12_japanese_style)
                                 or _get_hour24(tmp_ring_angle, _ring_angle_start)
         elseif 3 == ii then
             tmp_fg_end_angle = (true == _display_secs)

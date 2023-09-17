@@ -12,6 +12,7 @@ function get_config_ring_clock(_const, _config)
 
         -- etc
         display_secs = _config.display_seconds.ring_clock,
+        display_hour12_japanese_style = _config.display_hour12_japanese_style,
 
         -- ring
         ring_angle_start = 90,
