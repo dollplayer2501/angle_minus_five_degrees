@@ -1,10 +1,19 @@
 # Conky theme, "Angle minus five degrees"
 
 
-<img src="./_screenshots/screenshot__null.png" width="610"><br clear="all" />
-<img src="./_screenshots/screenshot_terminal.png" width="200">
-<img src="./_screenshots/screenshot_editor.png" width="200">
-<img src="./_screenshots/screenshot_filer.png" width="200">
+<table border="0">
+<tr>
+  <td style="vertical-align:top;text-align:right;">
+    <img src="./_screenshots/screenshot__default.png" style="width:500px;"><br clear="all" />
+    <img src="./_screenshots/screenshot__node.png" style="width:400px;">
+  </td>
+  <td style="vertical-align:top;text-align:left;">
+    <img src="./_screenshots/screenshot_terminal.png" style="width:250px;"><br clear="all" />
+    <img src="./_screenshots/screenshot_editor.png" style="width:250px;"><br clear="all" />
+    <img src="./_screenshots/screenshot_filer.png" style="width:250px;">
+  </td>
+</tr>
+</table>
 
 
 I created this unnecessarily large [Conky](https://github.com/brndnmtthws/conky) theme on the premise that "I only need to know current time".  

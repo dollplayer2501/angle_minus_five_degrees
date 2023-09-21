@@ -9,37 +9,35 @@ require 'cairo'
 
 require 'config'
 require 'const'
-require 'color'
 
 require 'includes/functions'
 require 'includes/conky_parse'
 
-require 'config/wall_clock'
-require 'modules/wall_clock'
-require 'config/background_tiles'
-require 'modules/background_tiles'
-require 'config/bar_more'
-require 'modules/bar_more'
-require 'config/ring_cpu'
-require 'modules/ring_cpu'
-require 'config/ring_clock'
-require 'modules/ring_clock'
-require 'config/ring_more'
-require 'modules/ring_more'
-require 'config/graph_cpu'
-require 'modules/graph_cpu'
-require 'config/graph_network'
-require 'modules/graph_network'
-require 'config/background_lines'
-require 'modules/background_lines'
-require 'config/text_clock'
-require 'modules/text_clock'
-require 'config/text_top'
-require 'modules/text_top'
-require 'config/text_detail'
-require 'modules/text_detail'
-require 'config/debbug_lines'
-require 'modules/debbug_lines'
+
+
+function _load_modules(_id)
+    --
+    -- This way of writing is not possible with `require`.
+    --
+    dofile('config/' .. _id .. '.lua')
+    dofile('modules/' .. _id .. '.lua')
+end
+
+
+_load_modules('wall_clock')
+_load_modules('background_tiles')
+_load_modules('bar_more')
+_load_modules('ring_cpu')
+_load_modules('ring_clock')
+_load_modules('ring_more')
+_load_modules('graph_cpu')
+_load_modules('graph_network')
+_load_modules('background_lines')
+_load_modules('text_clock')
+_load_modules('text_top')
+_load_modules('text_detail')
+_load_modules('debbug_lines')
+
 
 
 
@@ -70,8 +68,14 @@ function conky_main()
     local global_config = get_config()
     local global_conky_parse_updates = tonumber(conky_parse('${updates}'))
     local global_conky_parse = get_conky_parse()
-    local global_color = get_color()
     local global_const = get_const()
+
+    -- load and set color scheme
+    dofile(global_config.color_scheme)
+    local global_color = get_color()
+
+
+
 
 
     -- The width of the left bottom panel is linked to width of the string of today's date (full).
