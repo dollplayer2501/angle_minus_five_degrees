@@ -5,7 +5,5 @@ Thumbs.db
 _trash/
 Memo.md
 
-start-quick.sh
+start-*.sh
 config.lua
-color_*.lua
-const_*.lua

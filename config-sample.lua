@@ -15,6 +15,11 @@ function get_config()
 
     return {
 
+        --
+        -- The existance of this file is not checked within the scripts.
+        --
+        color_scheme = 'color_default.lua',  -- or 'color_node.lua'
+
         -- Whether or not to display gradient color of background
         -- Caution!
         -- Adopting this function may case moiré effect.
