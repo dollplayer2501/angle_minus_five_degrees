@@ -7,7 +7,8 @@ function drawing_bar_more(_context, _conky_parse_updates,
     _conky_parse_cpu0,
     _conky_parse_memperc,
     _conky_parse_fs_free_perc,
-    _usage_limit,
+    _usage_limit_cpu,
+    _usage_limit_memory,
     -- bar
     _bar_position_x, _bar_position_y, _bar_gap_y,
     _bar_line_width, _bar_length,
@@ -32,12 +33,12 @@ function drawing_bar_more(_context, _conky_parse_updates,
         if 1 == ii then
             -- CPU load average
             tmp_length = tonumber(_conky_parse_cpu0) / 100 * _bar_length
-            tmp_color = (_usage_limit.CPU < tonumber(_conky_parse_cpu0)) and _color_bar_more.high or _color_bar_more.normal
+            tmp_color = (_usage_limit_cpu < tonumber(_conky_parse_cpu0)) and _color_bar_more.high or _color_bar_more.normal
 
         elseif 2 == ii then
             -- Memory usage
             tmp_length = tonumber(_conky_parse_memperc) / 100 * _bar_length
-            tmp_color = (_usage_limit.MEMORY < tonumber(_conky_parse_memperc)) and _color_bar_more.high or _color_bar_more.normal
+            tmp_color = (_usage_limit_memory < tonumber(_conky_parse_memperc)) and _color_bar_more.high or _color_bar_more.normal
 
         elseif 3 == ii then
             -- Storage usage

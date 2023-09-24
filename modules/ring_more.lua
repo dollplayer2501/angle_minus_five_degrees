@@ -6,6 +6,7 @@ function drawing_ring_more(_context, _conky_parse_updates,
     -- values
     _conky_parse_memperc,
     _conky_parse_temps,
+    _usage_limit_memory,
     -- position
     _ring_center_x, _ring_center_y,
     -- ring
@@ -29,17 +30,21 @@ function drawing_ring_more(_context, _conky_parse_updates,
         local tmp_radius = _ring_radius + (_ring_width * ii) + (_ring_gap * ii)
         local tmp_ring_angle = _ring_angle_end - _ring_angle_start
         local tmp_fg_end_angle = _ring_angle_start
+        local tmp_fg_color = _color_ring.fg_normal
 
         if 0 == ii then
+            -- 0: memperc
             tmp_fg_end_angle = (tonumber(_conky_parse_memperc) / 100 * tmp_ring_angle) + _ring_angle_start
+            tmp_fg_color = _usage_limit_memory < tonumber(_conky_parse_memperc) and _color_ring.fg_high or _color_ring.fg_normal
         elseif 1 == ii then
+            -- 1: temperature
             tmp_fg_end_angle = (tonumber(_conky_parse_temps) / 100 * tmp_ring_angle) + _ring_angle_start
         end
 
         -- ring foreground
         drawing_ring(_context, _ring_center_x, _ring_center_y, tmp_radius,
             changing_angle_to_radian(_ring_angle_start), changing_angle_to_radian(tmp_fg_end_angle),
-            _ring_width, CAIRO_LINE_CAP_BUTT, _color_ring.fg_normal)
+            _ring_width, CAIRO_LINE_CAP_BUTT, tmp_fg_color)
 
         -- ring background
         drawing_ring(_context, _ring_center_x, _ring_center_y, tmp_radius,

@@ -157,7 +157,8 @@ function conky_main()
             global_conky_parse.cpu.cpu0,
             global_conky_parse.memperc,
             global_conky_parse.fs_free_perc,
-            global_const.USAGE_LIMIT,
+            global_const.USAGE_LIMIT.CPU,
+            global_const.USAGE_LIMIT.MEMORY,
             -- bar
             cfg.bar_position_x, cfg.bar_position_y, cfg.bar_gap_y,
             cfg.bar_line_width, cfg.bar_length,
@@ -222,6 +223,7 @@ function conky_main()
             -- values
             global_conky_parse.memperc,
             global_conky_parse.ibm_temps_0,
+            global_const.USAGE_LIMIT.MEMORY,
             -- position
             cfg.ring_center_x, cfg.ring_center_y,
             -- ring
