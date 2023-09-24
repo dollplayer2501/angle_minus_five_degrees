@@ -115,8 +115,10 @@ function conky_main()
             -- Clock marks - minutes
             cfg.marks_display_mins,
             cfg.marks_radius_from_mins, cfg.marks_radius_to_mins, cfg.marks_width_mins,
-            -- Clock marks - 24 hour
-            cfg.marks_radius_from_hour24, cfg.marks_radius_to_hour24, cfg.marks_width_hour24,
+            -- Clock marks - 24 hour - main hand
+            cfg.marks_radius_from_hour24_main, cfg.marks_radius_to_hour24_main, cfg.marks_width_hour24_main,
+            -- Clock marks - 24 hour - sub hand
+            cfg.marks_radius_from_hour24_sub, cfg.marks_radius_to_hour24_sub, cfg.marks_width_hour24_sub,
             -- Clock number - 24 hour
             cfg.number_display_hour24,
             cfg.number_adjust_x_hour24, cfg.number_adjust_y_hour24,
