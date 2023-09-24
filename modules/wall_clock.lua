@@ -17,8 +17,10 @@ function drawing_wall_clock(_context,
     _marks_radius_from_hour12, _marks_radius_to_hour12, _marks_width_hour12,
     -- Clock marks - minutes
     _marks_display_mins, _marks_radius_from_mins, _marks_radius_to_mins, _marks_width_mins,
-    -- Clock marks - 24 hour
-    _marks_radius_from_hour24, _marks_radius_to_hour24, _marks_width_hour24,
+    -- Clock marks - 24 hour - main hand
+    _marks_radius_from_hour24_main, _marks_radius_to_hour24_main, _marks_width_hour24_main,
+    -- Clock marks - 24 hour - sub hand
+    _marks_radius_from_hour24_sub, _marks_radius_to_hour24_sub, _marks_width_hour24_sub,
     -- Clock number - 24 hour
     _number_display_hour24,
     _number_adjust_x_hour24, _number_adjust_y_hour24,
@@ -84,10 +86,10 @@ function drawing_wall_clock(_context,
 
 
     --
-    -- Clock marks and number - 24 hour
+    -- Clock marks and number - 24 hour - main
     --
 
-    cairo_set_line_width(_context, _marks_width_hour24)
+    cairo_set_line_width(_context, _marks_width_hour24_main)
     cairo_set_line_cap(_context, _marks_line_cap)
     local tmp_num = 24
     local tmp_marks_angle = math.rad(360 / tmp_num)
@@ -98,12 +100,12 @@ function drawing_wall_clock(_context,
             _color_wall_clock.marks.hour24.red, _color_wall_clock.marks.hour24.green, _color_wall_clock.marks.hour24.blue,
             _color_wall_clock.marks.hour24.alpha)
         cairo_move_to(_context,
-            _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_from_hour24,
-            _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_from_hour24
+            _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_from_hour24_main,
+            _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_from_hour24_main
         )
         cairo_line_to(_context,
-            _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to_hour24,
-            _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to_hour24
+            _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to_hour24_main,
+            _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to_hour24_main
         )
         cairo_stroke(_context)
 
@@ -111,11 +113,37 @@ function drawing_wall_clock(_context,
         if true == _number_display_hour24 then
             local display_num = 0 == ii and 0 or math.abs(24 - ii)
             drawing_text(_context, _number_font_align_hour24,
-                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to_hour24 + _number_adjust_x_hour24,
-                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to_hour24 + _number_adjust_y_hour24,
+                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to_hour24_main + _number_adjust_x_hour24,
+                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to_hour24_main + _number_adjust_y_hour24,
                 _number_font_size_hour24,
                 display_num,
                 _number_font_face_hour24, CAIRO_FONT_SLANT_NORMAL, _number_font_weight_hour24, _color_wall_clock.number.hour24)
+        end
+    end
+
+
+    --
+    -- Clock marks and number - 24 hour - sub
+    --
+
+    cairo_set_line_width(_context, _marks_width_hour24_sub)
+    cairo_set_line_cap(_context, _marks_line_cap)
+    cairo_set_source_rgba(_context,
+        _color_wall_clock.marks.hour24.red, _color_wall_clock.marks.hour24.green, _color_wall_clock.marks.hour24.blue,
+        _color_wall_clock.marks.hour24.alpha)
+    local tmp_num = 24 * 6
+    local tmp_marks_angle = math.rad(360 / tmp_num)
+    for ii = 0, tmp_num - 1, 1 do
+        if 0 ~= ii % 6 then
+            cairo_move_to(_context,
+                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_from_hour24_sub,
+                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_from_hour24_sub
+            )
+            cairo_line_to(_context,
+                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to_hour24_sub,
+                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to_hour24_sub
+            )
+            cairo_stroke(_context)
         end
     end
 

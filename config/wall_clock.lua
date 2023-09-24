@@ -37,17 +37,22 @@ function get_config_wall_clock(_const, _config, _today_width)
         marks_radius_to_mins = _const.BACKGROUND.LINES.LENGTH.CENTER_TO.RIGHT - 10,
         marks_width_mins = 2,
 
-        -- Clock marks - 24 hour
-        marks_radius_from_hour24 = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 - 60,
-        marks_radius_to_hour24 = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 + 60,
-        marks_width_hour24 = 2,
+        -- Clock marks - 24 hour - main hand
+        marks_radius_from_hour24_main = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 - 60,
+        marks_radius_to_hour24_main = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 + 60,
+        marks_width_hour24_main = 2,
+
+        -- Clock marks - 24 hour - sub hand
+        marks_radius_from_hour24_sub = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 - 60,
+        marks_radius_to_hour24_sub = _today_width.WIDTH + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE + 200 + 60 - 80,
+        marks_width_hour24_sub = 1,
 
         -- Clock number - 24 hour
         number_display_hour24 = _config.wall_clock.display_number_hour24,
         number_adjust_x_hour24 = 0,
         number_adjust_y_hour24 = -10,
         number_font_align_x_hour24 = _const.ALIGN.LEFT,
-        number_font_size_hour24 = 60,
+        number_font_size_hour24 = 84,
         number_font_face_hour24 = _const.FONT_FACE_2_2,
         number_font_weight_hour24 = CAIRO_FONT_WEIGHT_NORMAL,
 
