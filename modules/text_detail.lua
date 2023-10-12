@@ -19,7 +19,7 @@ function drawing_text_detail(_context, _conky_parse_updates,
 
     -- Today
 
-    local tmp_flg = check_prime_number(tonumber(os.date('%Y%m%d')))
+    local tmp_flg = checking_prime_number(tonumber(os.date('%Y%m%d')))
 
     drawing_text(_context, _position_align,
         _position_x + _adjust_x_large, _position_y + _adjust_y_large, _font_size_large,

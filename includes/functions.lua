@@ -5,9 +5,25 @@
 
 
 --
+-- change time to arc
 --
+
+function changing_time_to_arc(_secs, _mins, _hours12, _hours24, _hands_update_interval_mins)
+    local tmp_secs_arc = (2 * math.pi / 60) * _secs
+    local tmp_secs_arc_tmp = (2 * math.pi / 60) * math.floor(_secs / _hands_update_interval_mins) * _hands_update_interval_mins
+    local tmp_mins_arc = (2 * math.pi / 60) * _mins + (tmp_secs_arc_tmp / 60)
+    local tmp_hours12_arc = (2 * math.pi / 12) * _hours12 + (tmp_mins_arc / 12)
+    local tmp_hours24_arc = (2 * math.pi / 24) * _hours24 + (tmp_mins_arc / 24)
+
+    return tmp_secs_arc, tmp_secs_arc_tmp, tmp_mins_arc, tmp_hours12_arc, tmp_hours24_arc
+end
+
+
 --
-function check_prime_number(_date8)
+-- check prime number
+--
+
+function checking_prime_number(_date8)
     for ii = 2, math.sqrt(_date8) do
         if 0 == _date8 % ii then
             return false
@@ -17,10 +33,10 @@ function check_prime_number(_date8)
 end
 
 
+--
+-- set hex to rgba
+--
 
---
---
---
 function setting_hex_to_rgba(_hex, _alpha)
 
     local color_red, color_green, color_blue = _hex:match('#?(..)(..)(..)')
@@ -52,19 +68,19 @@ function setting_hex_to_rgba(_hex, _alpha)
 end
 
 
+--
+-- change angle to radian
+--
 
---
---
---
 function changing_angle_to_radian(_angle)
     return (_angle - 90) * (math.pi / 180)
 end
 
 
+--
+-- draw line
+--
 
---
---
---
 function drawing_line(_context,
     _start_x, _start_y, _end_x, _end_y,
     _width, _line_cap,
@@ -79,10 +95,10 @@ function drawing_line(_context,
 end
 
 
+--
+-- set text extents
+--
 
---
---
---
 function _setting_text_extents(_context, _extents,
         _font_size,
         _text, _font_face, _font_slant, _font_weight)
@@ -95,10 +111,10 @@ function _setting_text_extents(_context, _extents,
 end
 
 
+--
+-- get text width
+--
 
---
---
---
 function getting_text_width(_context,
     _font_size,
     _text, _font_face, _font_slant, _font_weight)
@@ -113,10 +129,10 @@ function getting_text_width(_context,
 end
 
 
+--
+-- draw text
+--
 
---
---
---
 function drawing_text(_context,
     _align,
     _pos_x, _pos_y, _font_size,
@@ -140,10 +156,10 @@ function drawing_text(_context,
 end
 
 
+--
+-- display text and acquisition text width
+--
 
---
---
---
 function display_text_and_acquisition_text_width(_context,
     _align,
     _pos_x, _pos_y, _font_size,
@@ -162,10 +178,10 @@ function display_text_and_acquisition_text_width(_context,
 end
 
 
+--
+-- draw ring
+--
 
---
---
---
 function drawing_ring(_context,
     _center_x, _center_y, _radius, _start_angle, _end_angle,
     _width, _line_cap,
@@ -179,10 +195,10 @@ function drawing_ring(_context,
 end
 
 
+--
+-- draw square
+--
 
---
---
---
 function drawing_square(_context,
     _top_left_x, _top_left_y, _rec_width, _rec_height,
     _fill_color)
@@ -195,10 +211,10 @@ function drawing_square(_context,
 end
 
 
+--
+-- draw gradient square
+--
 
---
---
---
 function drawing_gradient_square(_context,
     _position_x, _position_y, _rect_width, _rect_height,
     _gradient_direction, _rect_step,
@@ -264,4 +280,69 @@ function drawing_gradient_square(_context,
         cairo_fill_preserve(_context)
         cairo_stroke(_context)
     end
+end
+
+
+--
+--  draw wall clock marks
+--
+
+function drawing_wall_clock_marks(_context,
+    _center_x, _center_y, _marks_radius_from, _marks_radius_to,
+    _marks_number, _marks_skip_count,
+    _marks_width, _marks_line_cap,
+    _marks_color)
+
+    cairo_set_line_width(_context, _marks_width)
+    cairo_set_line_cap(_context, _marks_line_cap)
+    cairo_set_source_rgba(_context, _marks_color.red, _marks_color.green, _marks_color.blue, _marks_color.alpha)
+    local tmp_marks_angle = math.rad(360 / _marks_number)
+    for ii = 0, _marks_number - 1, 1 do
+        local tmp_flg
+        if nil == _marks_skip_count then
+            tmp_flg = true
+        else
+            if 0 ~= ii % _marks_skip_count then
+                tmp_flg = true
+            else
+                tmp_flg = false
+            end
+        end
+
+        if true == tmp_flg then
+            cairo_move_to(_context,
+                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_from,
+                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_from
+            )
+            cairo_line_to(_context,
+                _center_x - math.sin(tmp_marks_angle * ii) * _marks_radius_to,
+                _center_y - math.cos(tmp_marks_angle * ii) * _marks_radius_to
+            )
+            cairo_stroke(_context)
+        end
+    end
+end
+
+
+--
+--  draw clock hands
+--
+
+function drawing_wall_clock_hands(_context,
+    _center_x, _center_y,
+    _hands_radius, _hours_arc, _hands_back_length_rate,
+    _hands_width, _hands_line_cap,
+    _hands_color)
+
+    local tmp_length_x = _center_x + _hands_radius * math.sin(_hours_arc)
+    local tmp_length_y = _center_y - _hands_radius * math.cos(_hours_arc)
+    drawing_line(_context,
+        _center_x, _center_y, tmp_length_x, tmp_length_y,
+        _hands_width, _hands_line_cap, _hands_color)
+
+    local tmp_length_x = _center_x - (_hands_radius * _hands_back_length_rate) * math.sin(_hours_arc)
+    local tmp_length_y = _center_y + (_hands_radius * _hands_back_length_rate) * math.cos(_hours_arc)
+    drawing_line(_context,
+        _center_x, _center_y, tmp_length_x, tmp_length_y,
+        _hands_width, _hands_line_cap, _hands_color)
 end

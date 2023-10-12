@@ -18,7 +18,7 @@ function get_config()
         --
         -- The existance of this file is not checked within the scripts.
         --
-        color_scheme = 'color_default.lua',  -- or 'color_node.lua'
+        color_scheme = 'color_default.lua',  -- or 'color_node.lua',
 
         -- Whether or not to display gradient color of background
         -- Caution!
@@ -27,15 +27,9 @@ function get_config()
         -- When the screen is set to 0 degrees, this moire does not occur.
         display_background_gradient = true,
 
-        -- Whether or not to display clock seconds
-        display_seconds = {
-            wall_clock = true,
-            ring_clock = true,
-            text_clock = true,
-        },
-
         -- Whether or not to display meaningless gimmicks
         display_top_right_gimmick = true,
+
 
         -- Update interval time, network upspeed and down
         graph_network_time_interval = 1,
@@ -54,6 +48,40 @@ function get_config()
             dummy_ip_address = '123.456.789.012',
         },
 
+
+        -- Whether or not to display clock seconds
+        display_seconds = {
+            wall_clock = true,
+            ring_clock = true,
+            text_clock = true,
+        },
+
+        --
+        -- Wall clock
+        --
+        wall_clock = {
+            display_marks_minutes00 = false,
+            display_marks_minutes01 = true,
+            display_marks_minutes15 = false,
+            display_number_display = true,
+            display_number_hour24 = true,
+            -- It's especially annoying that the minute hand updates
+            -- at `update_interval`(of conky's config) intervals
+            -- This value must be greater than or equal 1 and less than or equal to 59 (seconds)
+            update_interval_minutes = 15,
+        },
+
+        --
+        -- 12 hour system or 24 hour system
+        --
+        text_clock = {
+            display_24_hour = true,
+            -- This takes effect if display_24_hour is true
+            -- This may be redundant
+            -- ex) 08:01 am => 8:01 am
+            suppression_hour_zero = false,
+        },
+
         -- Whether or not to display 12pm or 0am
         -- This setting only affects the 12 hour circle of the ring clock
         --
@@ -67,34 +95,13 @@ function get_config()
         --
         display_hour12_japanese_style = false,
 
-        --
-        -- 12 hour system or 24 hour system
-        --
-        text_clock = {
-            display_24_hour = true,
-            -- This takes effect if display_24_hour is true
-            -- This may be redundant
-            -- ex) 08:01 am => 8:01 am
-            suppression_hour_zero = false,
-        },
-
-        --
-        -- Wall clock
-        --
-        wall_clock = {
-            display_marks_minutes = true,
-            display_number_hour24 = true,
-            -- It's especially annoying that the minute hand updates
-            -- at `update_interval`(of conky's config) intervals
-            -- This value must be greater than or equal 1 and less than or equal to 59 (seconds)
-            update_interval_minutes = 15,
-        },
 
         --
         -- Whether or not to display each modules
         --
         display_module = {
-            wall_clock = true,
+            wall_clock_hours24 = true,
+            wall_clock_hours12 = true,
             background_tiles = true,
             bar_more = true,
             ring_cpu = true,
@@ -108,6 +115,7 @@ function get_config()
             text_detail = true,
             debug_lines = false,
         },
+
 
         --
         -- Filesystem
