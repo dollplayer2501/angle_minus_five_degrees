@@ -24,7 +24,8 @@ function _load_modules(_id)
 end
 
 
-_load_modules('wall_clock')
+_load_modules('wall_clock_hours24')
+_load_modules('wall_clock_hours12')
 _load_modules('background_tiles')
 _load_modules('bar_more')
 _load_modules('ring_cpu')
@@ -95,35 +96,63 @@ function conky_main()
 
 
     ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-    -- Wall Clock
+    -- Wall Clock - hours 24
     ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-    if true == global_config.display_module.wall_clock then
-        local cfg = get_config_wall_clock(global_const, global_config, TODAY_WIDTH)
-        drawing_wall_clock(cr_draw,
+    if true == global_config.display_module.wall_clock_hours24 then
+        local cfg = get_config_wall_clock_hours24(global_const, global_config, TODAY_WIDTH)
+        drawing_wall_clock_hours24(cr_draw,
             -- position
             cfg.center_x, cfg.center_y,
-            -- Clock hands - 12 hour
-            cfg.hands_radius_hour12, cfg.hands_width_hour12,
             -- Clock hands - 24 hour
-            cfg.hands_radius_hour24, cfg.hands_width_hour24,
-            -- Clock hands - minutes
-            cfg.hands_update_interval_mins, cfg.hands_radius_mins, cfg.hands_width_mins,
-            -- Clock hands - seconds
-            cfg.hands_display_secs, cfg.hands_radius_secs, cfg.hands_width_secs,
-            -- Clock marks - 12 hour
-            cfg.marks_radius_from_hour12, cfg.marks_radius_to_hour12, cfg.marks_width_hour12,
-            -- Clock marks - minutes
-            cfg.marks_display_mins,
-            cfg.marks_radius_from_mins, cfg.marks_radius_to_mins, cfg.marks_width_mins,
+            cfg.hands_radius_hour24, cfg.hands_width_hour24, cfg.hands_back_length_rate_hour24,
             -- Clock marks - 24 hour - main hand
             cfg.marks_radius_from_hour24_main, cfg.marks_radius_to_hour24_main, cfg.marks_width_hour24_main,
-            -- Clock marks - 24 hour - sub hand
-            cfg.marks_radius_from_hour24_sub, cfg.marks_radius_to_hour24_sub, cfg.marks_width_hour24_sub,
+            -- Clock marks - 24 hour - sub hand - short (10 min)
+            cfg.marks_radius_from_hour24_sub_short, cfg.marks_radius_to_hour24_sub_short, cfg.marks_width_hour24_sub_short,
+            -- Clock marks - 24 hour - sub hand - long (30min)
+            cfg.marks_radius_from_hour24_sub_long, cfg.marks_radius_to_hour24_sub_long, cfg.marks_width_hour24_sub_long,
             -- Clock number - 24 hour
             cfg.number_display_hour24,
             cfg.number_adjust_x_hour24, cfg.number_adjust_y_hour24,
             cfg.number_font_align_hour24, cfg.number_font_size_hour24, cfg.number_font_face_hour24, cfg.number_font_weight_hour24,
             -- etc
+            cfg.hands_update_interval_mins,
+            cfg.hands_hour24_fix_degree,
+            cfg.hands_line_cap, cfg.marks_line_cap,
+            -- color
+            global_color.wall_clock)
+    end
+
+
+    ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    -- Wall Clock - hours 12
+    ---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    if true == global_config.display_module.wall_clock_hours12 then
+        local cfg = get_config_wall_clock_hours12(global_const, global_config, TODAY_WIDTH)
+        drawing_wall_clock_hours12(cr_draw,
+            -- position
+            cfg.center_x, cfg.center_y,
+            -- Clock hands - 12 hour
+            cfg.hands_radius_hour12, cfg.hands_width_hour12, cfg.hands_back_length_rate_hour12,
+            -- Clock hands - minutes
+            cfg.hands_radius_mins, cfg.hands_width_mins, cfg.hands_back_length_rate_mins,
+            -- Clock hands - seconds
+            cfg.hands_display_secs, cfg.hands_radius_secs, cfg.hands_width_secs, cfg.hands_back_length_rate_secs,
+            -- Clock marks - 12 o'clock, top
+            cfg.marks_display_mins00, cfg.marks_radius_from_mins00, cfg.marks_radius_to_mins00, cfg.marks_width_mins00,
+            -- Clock marks - 15 minutes without 12 o'clock
+            cfg.marks_display_mins15, cfg.marks_radius_from_mins15, cfg.marks_radius_to_mins15, cfg.marks_width_mins15,
+            -- Clock marks - 10 minutes
+            cfg.marks_radius_from_mins10, cfg.marks_radius_to_mins10, cfg.marks_width_mins10,
+            -- Clock marks - 1 minute
+            cfg.marks_display_mins01,
+            cfg.marks_radius_from_mins, cfg.marks_radius_to_mins, cfg.marks_width_mins,
+            -- Clock number - 24 hour
+            cfg.number_display_mins10,
+            cfg.number_adjust_x_mins10, cfg.number_adjust_y_mins10,
+            cfg.number_font_align_x_mins10, cfg.number_font_size_mins10, cfg.number_font_face_mins10, cfg.number_font_weight_mins10,
+            -- etc
+            cfg.hands_update_interval_mins,
             cfg.hands_line_cap, cfg.marks_line_cap,
             -- color
             global_color.wall_clock)

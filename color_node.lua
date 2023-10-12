@@ -37,15 +37,19 @@ function get_color()
             marks = {
                 hour12          = setting_hex_to_rgba(node.node11, 0.4),
                 hour24          = setting_hex_to_rgba(node.node11, 0.6),
-                mins            = setting_hex_to_rgba(node.node11, 0.4),
+                mins00          = setting_hex_to_rgba(node.node11, 0.8),
+                mins15          = setting_hex_to_rgba(node.node11, 0.8),
+                mins10          = setting_hex_to_rgba(node.node11, 0.8),
+                mins01          = setting_hex_to_rgba(node.node11, 0.8),
             },
             number = {
                 hour24          = setting_hex_to_rgba(node.node10, 0.6),
+                mins10          = setting_hex_to_rgba(node.node10, 0.6),
             },
             hands ={
                 hour12          = setting_hex_to_rgba(node.node11, 0.8),
                 hour24          = setting_hex_to_rgba(node.node07, 0.6),
-                mins            = setting_hex_to_rgba(node.node11, 0.6),
+                mins            = setting_hex_to_rgba(node.node11, 0.8),
                 secs            = setting_hex_to_rgba(node.node07, 0.8),
             },
         },
