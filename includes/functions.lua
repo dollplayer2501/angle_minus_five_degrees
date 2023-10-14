@@ -5,6 +5,16 @@
 
 
 --
+-- trim
+--
+
+function triming(_str)
+    return (string.gsub(_str, "^%s*(.-)%s*$", "%1"))
+end
+
+
+
+--
 -- change time to arc
 --
 
