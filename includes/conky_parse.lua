@@ -13,7 +13,7 @@ function get_conky_parse()
     --     conky_parse('${execi 600 ip r | head -n 1 | cut -f 5 -d " "}'),  # NIC
     --     conky_parse('${execi 600 ip r | head -n 1 | cut -f 3 -d " "}'),  # Gateway
     --     conky_parse('${execi 600 ip r | head -n 1 | cut -f 9 -d " "}')   # IP Address
-    local tmp_conky_parse_iface = conky_parse('${iface}')
+    local tmp_conky_parse_iface = triming(conky_parse('${iface}'))
 
 
     return {
@@ -28,22 +28,22 @@ function get_conky_parse()
             cpu2 = tonumber(conky_parse('${cpu cpu2}')),
             cpu3 = tonumber(conky_parse('${cpu cpu3}')),
             cpu4 = tonumber(conky_parse('${cpu cpu4}')),
-            name = conky_parse('${execi 600 lscpu | grep "Model name:" | cut -c34-}'),
+            name = triming(conky_parse('${execi 600 lscpu | grep "Model name:" | cut -c37-}')),
         },
 
         hostnamectl = {
-            hardware_vendor  = conky_parse('${execi 600 hostnamectl | grep "Hardware Vendor:" | cut -c19-}'),
-            hardware_model   = conky_parse('${execi 600 hostnamectl | grep "Hardware Model:" | cut -c19-}'),
-            operating_system = conky_parse('${execi 600 hostnamectl | grep "Operating System:" | cut -c19-}'),
-            kernel           = conky_parse('${execi 600 hostnamectl | grep "Kernel:" | cut -c19-}'),
-            architecture     = conky_parse('${execi 600 hostnamectl | grep "Architecture:" | cut -c19-}'),
+            hardware_vendor  = triming(conky_parse('${execi 600 hostnamectl | grep "Hardware Vendor:"  | cut -c19-}')),
+            hardware_model   = triming(conky_parse('${execi 600 hostnamectl | grep "Hardware Model:"   | cut -c19-}')),
+            operating_system = triming(conky_parse('${execi 600 hostnamectl | grep "Operating System:" | cut -c19-}')),
+            kernel           = triming(conky_parse('${execi 600 hostnamectl | grep "Kernel:"           | cut -c19-}')),
+            architecture     = triming(conky_parse('${execi 600 hostnamectl | grep "Architecture:"     | cut -c19-}')),
         },
 
-        uptime       = conky_parse('${execi 600 uptime -p | cut -c 4-}'),
+        uptime       = triming(conky_parse('${execi 600 uptime -p | cut -c 4-}')),
         full_date    = conky_parse('${time %A, %B %-d, %Y}'),
 
-        whoami       = conky_parse('${execi 600 whoami}'),
-        hostname     = conky_parse('${execi 600 hostname}'),
+        whoami       = triming(conky_parse('${execi 600 whoami}')),
+        hostname     = triming(conky_parse('${execi 600 hostname}')),
 
         checkupdates = tonumber(conky_parse('${execi 600 checkupdates | wc -l}')),
         packman_Q    = tonumber(conky_parse('${execi 600 pacman -Q | wc -l}')),
@@ -55,7 +55,7 @@ function get_conky_parse()
         downspeedf   = tonumber(conky_parse('${downspeedf ' .. tmp_conky_parse_iface .. '}')),
 
         -- Global IP Address
-        global_ip    = conky_parse('${execi 600 wget -q -O - http://checkip.amazonaws.com/}'),
+        global_ip    = triming(conky_parse('${execi 600 wget -q -O - http://checkip.amazonaws.com/}')),
 
         mem          = conky_parse('${mem}'),
         memmax       = conky_parse('${memmax}'),
