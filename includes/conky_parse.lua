@@ -4,7 +4,6 @@
 
 function get_conky_parse()
 
-    --local const = get_const()
     local config = get_config()
 
 
@@ -86,5 +85,7 @@ function get_conky_parse()
             cpu5     = conky_parse("${top cpu 5}"),
             cpu6     = conky_parse("${top cpu 6}"),
         },
+
+        conky_version = triming(conky_parse('${conky_version}')),
     }
 end

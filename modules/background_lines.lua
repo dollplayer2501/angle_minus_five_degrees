@@ -188,7 +188,7 @@ function drawing_background_lines(_context, _conky_parse_updates, _const,
     -- Bottom, Left -- Vertical -- indicator
     drawing_line(_context,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH,
-        _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT - _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
+        _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT - _const.BACKGROUND.LINES.LENGTH.ADDITION.SMALL,
         _center_x - _const.CPU_LOAD_AVERAGE.LENGTH,
         _center_y + _const.BACKGROUND.LINES.LENGTH.HEIGHT.BOTTOM_LEFT + _const.BACKGROUND.LINES.LENGTH.ADDITION.LARGE,
         _const.BACKGROUND.LINES.WIDTH.NORMAL, _line_cap, _color_lines.normal)
