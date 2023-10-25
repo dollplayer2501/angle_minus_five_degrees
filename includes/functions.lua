@@ -9,9 +9,129 @@
 --
 
 function triming(_str)
-    return (string.gsub(_str, "^%s*(.-)%s*$", "%1"))
+    return (string.gsub(_str, '^%s*(.-)%s*$', '%1'))
 end
 
+
+--
+-- Convert number to three digit commna separated
+--
+
+function converting_number_to_three_digit_commna_separated(_num)
+    --
+    -- 123456789      => 123,456,789
+    -- 123456789.1234 => 123,456,789.1234
+    -- 123,456,789    => nil
+    --
+    -- Values that are too large number are not suported and are display as is.
+    -- It is unclear how far it can be displayed.
+    --
+
+    local tmp_str_1 = tostring(tonumber(_num))
+
+    -- Extract decimal places
+    local tmp_str_2 = ''
+    local tmp_match_s = string.find(tmp_str_1, '.', 1, true)
+    if nil ~= tmp_match_s then
+        tmp_str_2 = string.sub(tmp_str_1, tmp_match_s)
+        tmp_str_1 = string.sub(tmp_str_1, 1, tmp_match_s - 1)
+    end
+
+    local ii = 1
+    tmp_str_1 = string.reverse(tmp_str_1)
+    while (ii <= string.len(tmp_str_1)) do
+        tmp_str_2 = ',' .. string.reverse(string.sub(tmp_str_1, ii, ii + 2)) .. tmp_str_2
+      ii = ii + 3
+    end
+
+    return string.sub(tmp_str_2, 2)
+end
+
+
+--
+-- check prime number
+--
+
+function checking_prime_number(_num)
+    for ii = 2, math.sqrt(_num) do
+        if 0 == _num % ii then
+            return false
+        end
+    end
+    return true
+end
+
+
+--
+-- append array table
+--
+
+function appendding_array_table(_array_from, _array_to)
+    local tmp_array = {}
+
+    for ii = 1, #_array_from, 1 do
+        table.insert(tmp_array, _array_from[ii])
+    end
+
+    for ii = 1, #_array_to, 1 do
+        table.insert(tmp_array, _array_to[ii])
+    end
+
+    return tmp_array
+end
+
+
+--
+-- displaying time ago
+--
+
+function displaying_time_ago(_secs)
+    --
+    -- Maybe it has a bug ?
+    --
+
+    if 1 * 60 > _secs then
+        -- 1 minute or less
+        return string.format('%s %s', _secs, 'seconds')
+    elseif 1 * 60 * 60 > _secs then
+        -- 1 hour or less
+        local tmp_min_number = math.floor(_secs / (1 * 60))
+        local tmp_min_suffix = (1 < tmp_min_number) and 'minutes' or 'min.'
+
+        return string.format('%s %s', tmp_min_number, tmp_min_suffix)
+    elseif 1 * 60 * 60 * 24 > _secs then
+        -- 1 day or less
+        local tmp_hour_number = math.floor(_secs / (1 * 60 * 60))
+        local tmp_hour_suffix = (1 < tmp_hour_number) and 'hours' or 'hour'
+        local tmp_min_number = math.floor((_secs - (tmp_hour_number * 60 * 60)) / (1 * 60))
+        local tmp_min_suffix = (1 < tmp_min_number) and 'minutes' or 'min.'
+
+        if 0 == tmp_min_number then
+            return string.format('%s %s', tmp_hour_number, tmp_hour_suffix)
+        else
+            return string.format('%s %s %s %s',
+                tmp_hour_number, tmp_hour_suffix, tmp_min_number, tmp_min_suffix)
+        end
+    else
+        -- 1 day or more
+--        tmp_day = math.floor(_secs / (1 * 60 * 60 * 24))
+--        tmp_hour = math.floor((_secs - (tmp_day * 60 * 60 * 24)) / (1 * 60 * 60))
+--        return string.format('%s day %s hour', tmp_day, tmp_hour)
+
+        local tmp_day_number = math.floor(_secs / (1 * 60 * 60 * 24))
+        local tmp_day_suffix = (1 < tmp_day_number) and 'days' or 'day'
+
+        local tmp_hour_number = math.floor((_secs - (tmp_day_number * 60 * 60 * 24)) / (1 * 60 * 60))
+        local tmp_hour_suffix = (1 < tmp_hour_number) and 'hours' or 'hour'
+
+        if 0 == tmp_hour_number then
+            return string.format('%s %s', tmp_day_number, tmp_day_suffix)
+        else
+            return string.format('%s %s %s %s',
+            tmp_day_number, tmp_day_suffix, tmp_hour_number, tmp_hour_suffix)
+        end
+    end
+end
 
 
 --
@@ -26,20 +146,6 @@ function changing_time_to_arc(_secs, _mins, _hours12, _hours24, _hands_update_in
     local tmp_hours24_arc = (2 * math.pi / 24) * _hours24 + (tmp_mins_arc / 24)
 
     return tmp_secs_arc, tmp_secs_arc_tmp, tmp_mins_arc, tmp_hours12_arc, tmp_hours24_arc
-end
-
-
---
--- check prime number
---
-
-function checking_prime_number(_date8)
-    for ii = 2, math.sqrt(_date8) do
-        if 0 == _date8 % ii then
-            return false
-        end
-    end
-    return true
 end
 
 

@@ -14,11 +14,11 @@ function get_config_text_detail(_const, _config)
 
         -- large font
         adjust_x_large = -10,
-        adjust_y_large = 70,
+        adjust_y_large = 65,
 
         -- normal font
         adjust_x_normal = -10,
-        adjust_y_normal = 115,
+        adjust_y_normal = 105,
         gap_y_normal = 26,
         font_size_normal = 24,
         font_face_normal = _const.FONT_FACE_1,

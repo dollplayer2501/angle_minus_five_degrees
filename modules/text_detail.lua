@@ -17,18 +17,56 @@ function drawing_text_detail(_context, _conky_parse_updates,
     _color_detail)
 
 
+    --
+    --
+    --
+
+    local _drawing_text_with_properties_align_right = function(__context, __position_align,
+        __position_x, __position_y, __font_size,
+        _properties)
+
+        local tmp_width = display_text_and_acquisition_text_width(__context, __position_align,
+            __position_x, __position_y, __font_size,
+            _properties[#_properties]._text,
+            _properties[#_properties]._font_face, CAIRO_FONT_SLANT_NORMAL, _properties[#_properties]._font_weight,
+            _properties[#_properties]._font_color)
+
+        for ii = #_properties - 1, 1, -1 do
+            if ii == #_properties then
+                drawing_text(_context, __position_align,
+                    __position_x - tmp_width, __position_y, __font_size,
+                    _properties[ii]._text,
+                    _properties[ii]._font_face, CAIRO_FONT_SLANT_NORMAL, _properties[ii]._font_weight,
+                    _properties[ii]._font_color)
+            else
+                tmp_width = tmp_width + display_text_and_acquisition_text_width(_context, __position_align,
+                    __position_x - tmp_width, __position_y, __font_size,
+                    _properties[ii]._text,
+                    _properties[ii]._font_face, CAIRO_FONT_SLANT_NORMAL, _properties[ii]._font_weight,
+                    _properties[ii]._font_color)
+            end
+        end
+    end
+
+
+    --
     -- Today
+    --
 
-    local tmp_flg = checking_prime_number(tonumber(os.date('%Y%m%d')))
-
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_large, _position_y + _adjust_y_large, _font_size_large,
-        -- 'Wednesday, September 29, 2024',
-        string.format('%s',
-            _conky_parse.full_date
-        ),
-        _font_face_large, CAIRO_FONT_SLANT_NORMAL, _font_weight_large,
-        true == tmp_flg and _color_detail.days_strike or _color_detail.days_normal)
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_large,
+        _position_y + _adjust_y_large,
+        _font_size_large, {
+            {
+                _text = string.format('%s',
+                        _conky_parse.full_date
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = _font_weight_large,
+                _font_color = true == checking_prime_number(tonumber(os.date('%Y%m%d')))
+                    and _color_detail.days_strike or _color_detail.days_normal
+            }
+        })
 
 
     -- If you do not interpose delay processing,
@@ -44,81 +82,350 @@ function drawing_text_detail(_context, _conky_parse_updates,
     -- If you insert a decorating word, for each decorating word,
     -- construct from the right.
 
+
+    --
     -- Uptime
+    --
 
     idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s',
+                        'Uptime is'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.uptime
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_BOLD,
+                _font_color = _color_detail.body_normal
+            }
+        })
 
-    local tmp_width = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s',
-            _conky_parse.uptime
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD, _color_detail.body_normal)
 
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format('%s',
-            'Uptime is'
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+    --
+    -- Login user name, Host name, Packages
+    --
 
-    -- Hardware info
-
-    idx = idx + 1
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(
-            '%s %s, %s, %s %s',
-                _conky_parse.hostnamectl.hardware_vendor,
-                _conky_parse.hostnamectl.hardware_model,
-                _conky_parse.hostnamectl.operating_system,
-                _conky_parse.hostnamectl.kernel,
-                _conky_parse.hostnamectl.architecture
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- Packages
-
-    idx = idx + 1
+    local tmp_array = {
+        {
+            _text = string.format('%s@%s',
+                    _conky_parse.whoami,
+                    _conky_parse.hostname
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }
+    }
 
     if 0 < tonumber(_conky_parse.checkupdates) then
+        tmp_array = appendding_array_table(tmp_array, {
+            {
+                _text = string.format(' %s',
+                        'needs to update'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
 
-        local tmp_width_1 = display_text_and_acquisition_text_width(_context, _position_align,
-            _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format('%s',
-                ' packages'
-            ),
-            _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.checkupdates
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_strike
 
-        local tmp_width_2 = display_text_and_acquisition_text_width(_context, _position_align,
-            _position_x + _adjust_x_normal - tmp_width_1, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format(' %s/%s',
-                _conky_parse.checkupdates,
-                _conky_parse.packman_Q
-            ),
-            _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_strike)
+            }, {
+                _text = string.format('%s',
+                        '/'
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
 
-        drawing_text(_context, _position_align,
-            _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format('%s@%s needs to update',
-                _conky_parse.whoami,
-                _conky_parse.hostname
-            ),
-            _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+            }, {
+                _text = string.format('%s',
+                        _conky_parse.packman_Q
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_strike
+            }, {
+                _text = string.format(' %s',
+                        'packages'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
     else
-
-        drawing_text(_context, _position_align,
-            _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-            string.format(
-                '%s@%s do not need %s packages update',
-                    _conky_parse.whoami,
-                    _conky_parse.hostname,
-                    _conky_parse.packman_Q
-            ),
-            _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+        tmp_array = appendding_array_table(tmp_array, {
+            {
+                _text = string.format(' do not need',
+                        _conky_parse.packman_Q
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.packman_Q
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        'packages update'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
     end
 
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, tmp_array)
+
+
+    --
+    -- Hardware info
+    --
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s %s',
+                        _conky_parse.hostnamectl.hardware_vendor,
+                        _conky_parse.hostnamectl.hardware_model
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ','
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.hostnamectl.operating_system
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ','
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s %s',
+                        _conky_parse.hostnamectl.kernel,
+                        _conky_parse.hostnamectl.architecture
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
+
+
+    --
+    -- CPU info
+    --
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s',
+                        _conky_parse.cpu.name
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ','
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s%%',
+                        _conky_parse.cpu.cpu0
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _usage_limit.FAN < tonumber(_conky_parse.ibm_fan)
+                     and _color_detail.body_strike or _color_detail.body_normal -- I dare to use CPU Fan
+            }, {
+                _text = string.format(' %s',
+                        'used,'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s°C %srpm',
+                        _conky_parse.ibm_temps_0,
+                        _conky_parse.ibm_fan
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _usage_limit.FAN < tonumber(_conky_parse.ibm_fan)
+                     and _color_detail.body_strike or _color_detail.body_normal -- I dare to use CPU Fan
+            }
+        })
+
+
+    --
+    -- Memory Usage
+    --
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s',
+                        'Memory is'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.mem
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                    and _color_detail.body_strike or _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        '/'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        _conky_parse.memmax
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                    and _color_detail.body_strike or _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ','
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s%%',
+                        _conky_parse.memperc
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                    and _color_detail.body_strike or _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        'used'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
+
+
+    --
+    -- NIC, Network Up/Down Speed
+    --
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s',
+                        'NIC is'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.iface
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ', UpSpeed'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %sKib',
+                        _conky_parse.upspeedf
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ', DownSpeed'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %sKib',
+                        _conky_parse.downspeedf
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
+
+
+    --
     -- Gate Way Address, IP Address, Global IP Address
+    --
 
     local tmp_global_iP_address = ''
     if true == _display_global_ip_address.display then
@@ -129,147 +436,223 @@ function drawing_text_detail(_context, _conky_parse_updates,
         end
     end
 
-    local tmp_display_string = '' == tmp_global_iP_address
-        and string.format(
-                'GW is %s, Local is %s',
-                    _conky_parse.gw_ip,
+    local tmp_array = {
+        {
+            _text = string.format('%s',
+                    'GW is'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
+                    _conky_parse.gw_ip
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format('%s',
+                    ', Local is'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
                     _conky_parse.addrs
-            )
-        or string.format(
-                'GW is %s, Local is %s, Global is %s',
-                    _conky_parse.gw_ip,
-                    _conky_parse.addrs,
-                    tmp_global_iP_address
-            )
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }
+    }
+
+    if '' ~= tmp_global_iP_address then
+        tmp_array = appendding_array_table(tmp_array, {
+            {
+                _text = string.format('%s',
+                        ', Global is'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        tmp_global_iP_address
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
+    end
 
     idx = idx + 1
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        tmp_display_string,
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- Network Up/Down Speed
-
-    idx = idx + 1
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(
-            'NIC is %s, UpSpeed %sKib, DownSpeed %sKib',
-                _conky_parse.iface,
-                _conky_parse.upspeedf,
-                _conky_parse.downspeedf
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- Disk info, strage
-
-    idx = idx + 1
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(
-            '%s is %s used, %s, %s%% free',
-                _const_disk_device,
-                _conky_parse.fs_used,
-                _conky_parse.fs_free,
-                _conky_parse.fs_free_perc
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- Disk info, disk i/o
-
-    idx = idx + 1
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal, _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(
-            'Disk IO write %s, read %s',
-                _conky_parse.diskio_write,
-                _conky_parse.diskio_read
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- CPU info
-
-    idx = idx + 1
-
-    local tmp_width_1 = display_text_and_acquisition_text_width(_context, _position_align,
+    _drawing_text_with_properties_align_right(_context, _position_align,
         _position_x + _adjust_x_normal,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %sc %srpm',
-            _conky_parse.ibm_temps_0,
-            _conky_parse.ibm_fan
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL,
-        (_usage_limit.FAN < tonumber(_conky_parse.ibm_fan)) and _color_detail.body_strike or _color_detail.body_normal)
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, tmp_array)
 
-    local tmp_width_2 = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s',
-            'used,'
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    local tmp_width_3 = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s%%',
-            _conky_parse.cpu.cpu0
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL,
-        (_usage_limit.FAN < tonumber(_conky_parse.ibm_fan)) and _color_detail.body_strike or _color_detail.body_normal) -- I dare to use CPU Fan
-
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2 - tmp_width_3,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format('CPU is %s,',
-            _conky_parse.cpu.name
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
-
-    -- Memory Usage
+    --
+    -- Disk info, Strage, Disk I/O
+    --
 
     idx = idx + 1
-
-    local tmp_width_1 = display_text_and_acquisition_text_width(_context, _position_align,
+    _drawing_text_with_properties_align_right(_context, _position_align,
         _position_x + _adjust_x_normal,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s',
-            'used'
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, {
+            {
+                _text = string.format('%s',
+                        _const_disk_device
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ' is'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.fs_used
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        'used,'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.fs_free
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ','
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s%%',
+                        _conky_parse.fs_free_perc
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        'free, Write'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.diskio_write
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format('%s',
+                        ', Read'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.diskio_read
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
 
-    local tmp_width_2 = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s%%',
-            _conky_parse.memperc
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL,
-        (_usage_limit.MEMORY < tonumber(_conky_parse.memperc)) and _color_detail.body_strike or _color_detail.body_normal)
 
-    local tmp_width_3 = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format('%s',
-            ','
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+    --
+    -- Conky info
+    --
 
-    local tmp_width_4 = display_text_and_acquisition_text_width(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2 - tmp_width_3,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format(' %s/%s',
-            _conky_parse.mem,
-            _conky_parse.memmax
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL,
-        (_usage_limit.MEMORY < tonumber(_conky_parse.memperc)) and _color_detail.body_strike or _color_detail.body_normal)
+    local tmp_parse_updates = _conky_parse_updates -- + (24 * 60 * 60) + (2 * 60 * 60) - 10
+        -- In order to easily change the variable value during debugging,
+        -- it is replaced with another variable.
 
-    drawing_text(_context, _position_align,
-        _position_x + _adjust_x_normal - tmp_width_1 - tmp_width_2 - tmp_width_3 - tmp_width_4,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx), _font_size_normal,
-        string.format('%s',
-            'Memory is'
-        ),
-        _font_face_normal, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL, _color_detail.body_normal)
+    local tmp_array = {
+        {
+            _text = string.format('%s',
+                    converting_number_to_three_digit_commna_separated(tmp_parse_updates)
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = true == checking_prime_number(tonumber(tmp_parse_updates))
+                and _color_detail.body_strike or _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
+                    'sec.'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }
+    }
+
+    local tmp_time_ago = displaying_time_ago(tmp_parse_updates)
+    if 60 - 1 < tmp_parse_updates then
+        tmp_array = appendding_array_table(tmp_array, {
+            {
+                _text = string.format(' %s',
+                        'about'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        tmp_time_ago
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }
+        })
+    end
+
+    tmp_array = appendding_array_table(tmp_array, {
+        {
+            _text = string.format(' %s',
+                    'elapsed by Conky ver.'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
+                    _conky_parse.conky_version
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }
+    })
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx) + 5,
+        _font_size_normal * 0.8, tmp_array)
 end
