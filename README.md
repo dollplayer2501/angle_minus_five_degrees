@@ -18,7 +18,8 @@
 
 I created this unnecessarily large [Conky](https://github.com/brndnmtthws/conky) theme on the premise that "I only need to know current time".  
 Because I mainly use terminal emulator and text editor with _transparent background_ in Linux desktop environment.  
-So I thought, "I should use this vast space!", and created the theme based on the idea that "Every thing other than the current time display is a decoration" likening Mobile Suit Gundam, "Legs are decorations".
+So I thought, "I should use this vast space!".  
+And I created the theme based on the idea that "Every thing other than the current time display is a decoration" likening Mobile Suit Gundam, "Legs are decorations".
 
 - Linux distribution: [EndeavourOS](https://endeavouros.com/)
 - Window manager: [Qtile](http://www.qtile.org/), [qtile-extras](https://qtile-extras.readthedocs.io/en/stable/#)
