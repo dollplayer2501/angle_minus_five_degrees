@@ -71,19 +71,26 @@ function get_conky_parse()
         diskio_read  = conky_parse('${diskio_read '.. config.filesystem.device .. '}'),
 
         top = {
-            name1    = conky_parse("${top name 1}"),
-            name2    = conky_parse("${top name 2}"),
-            name3    = conky_parse("${top name 3}"),
-            name4    = conky_parse("${top name 4}"),
-            name5    = conky_parse("${top name 5}"),
-            name6    = conky_parse("${top name 6}"),
+            name1    = conky_parse('${top name 1}'),
+            name2    = conky_parse('${top name 2}'),
+            name3    = conky_parse('${top name 3}'),
+            name4    = conky_parse('${top name 4}'),
+            name5    = conky_parse('${top name 5}'),
+            name6    = conky_parse('${top name 6}'),
 
-            cpu1     = conky_parse("${top cpu 1}"),
-            cpu2     = conky_parse("${top cpu 2}"),
-            cpu3     = conky_parse("${top cpu 3}"),
-            cpu4     = conky_parse("${top cpu 4}"),
-            cpu5     = conky_parse("${top cpu 5}"),
-            cpu6     = conky_parse("${top cpu 6}"),
+            cpu1     = conky_parse('${top cpu 1}'),
+            cpu2     = conky_parse('${top cpu 2}'),
+            cpu3     = conky_parse('${top cpu 3}'),
+            cpu4     = conky_parse('${top cpu 4}'),
+            cpu5     = conky_parse('${top cpu 5}'),
+            cpu6     = conky_parse('${top cpu 6}'),
+        },
+
+        swap = {
+            swap     = conky_parse('${swap}'),
+            swapfree = conky_parse('${swapfree}'),
+            swapmax  = conky_parse('${swapmax}'),
+            swapperc = conky_parse('${swapperc}'),
         },
 
         conky_version = triming(conky_parse('${conky_version}')),
