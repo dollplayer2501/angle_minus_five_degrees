@@ -85,7 +85,7 @@ function conky_main()
         FONT_SIZE = 64,
         FONT_FACE = global_const.FONT_FACE_2_1,
         FONT_WEIGHT = CAIRO_FONT_WEIGHT_NORMAL,
-        MARGIN = 40,
+        MARGIN = 60,
     }
 
     TODAY_WIDTH['WIDTH'] = getting_text_width(cr_draw,
@@ -396,6 +396,8 @@ function conky_main()
             global_config.filesystem.device, global_conky_parse, global_const.USAGE_LIMIT,
             -- display global ip address
             cfg.display_global_ip_address,
+            -- display swap
+            cfg.display_swap,
             -- position
             cfg.position_x, cfg.position_y, cfg.position_align,
             -- large font

@@ -126,5 +126,10 @@ function get_config()
             -- Device files subject to file writing/reading speeds
             device = '/dev/sda2',
         },
+
+        --
+        -- Swap
+        --
+        display_swap = true,
     }
 end

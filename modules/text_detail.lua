@@ -7,6 +7,8 @@ function drawing_text_detail(_context, _conky_parse_updates,
     _const_disk_device, _conky_parse, _usage_limit,
     -- display global ip address
     _display_global_ip_address,
+    -- display swap
+    _display_swap,
     -- position
     _position_x, _position_y, _position_align,
     -- large font
@@ -304,44 +306,82 @@ function drawing_text_detail(_context, _conky_parse_updates,
 
 
     --
-    -- Memory Usage
+    -- Memory and Swap Usage
     --
 
-    idx = idx + 1
-    _drawing_text_with_properties_align_right(_context, _position_align,
-        _position_x + _adjust_x_normal,
-        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
-        _font_size_normal, {
+    tmp_array = {
+        {
+            _text = string.format('%s',
+                    'Memory is'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
+                    _conky_parse.mem
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                and _color_detail.body_strike or _color_detail.body_normal
+        }, {
+            _text = string.format('%s',
+                    '/'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format('%s',
+                    _conky_parse.memmax
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                and _color_detail.body_strike or _color_detail.body_normal
+        }, {
+            _text = string.format('%s',
+                    ','
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }, {
+            _text = string.format(' %s%%',
+                    _conky_parse.memperc
+                ),
+            _font_face = _font_face_large,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
+                and _color_detail.body_strike or _color_detail.body_normal
+        }, {
+            _text = string.format(' %s',
+                    'used'
+                ),
+            _font_face = _font_face_normal,
+            _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+            _font_color = _color_detail.body_normal
+        }
+    }
+
+    if true == _display_swap then
+
+        tmp_array = appendding_array_table(tmp_array, {
             {
                 _text = string.format('%s',
-                        'Memory is'
+                        ', Swap is'
                     ),
                 _font_face = _font_face_normal,
                 _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
                 _font_color = _color_detail.body_normal
             }, {
                 _text = string.format(' %s',
-                        _conky_parse.mem
+                        _conky_parse.swap.swap
                     ),
                 _font_face = _font_face_large,
-                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
-                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
-                    and _color_detail.body_strike or _color_detail.body_normal
-            }, {
-                _text = string.format('%s',
-                        '/'
-                    ),
-                _font_face = _font_face_normal,
                 _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
                 _font_color = _color_detail.body_normal
-            }, {
-                _text = string.format('%s',
-                        _conky_parse.memmax
-                    ),
-                _font_face = _font_face_large,
-                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
-                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
-                    and _color_detail.body_strike or _color_detail.body_normal
             }, {
                 _text = string.format('%s',
                         ','
@@ -351,21 +391,41 @@ function drawing_text_detail(_context, _conky_parse_updates,
                 _font_color = _color_detail.body_normal
             }, {
                 _text = string.format(' %s%%',
-                        _conky_parse.memperc
+                        _conky_parse.swap.swapperc
                     ),
                 _font_face = _font_face_large,
                 _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
-                _font_color = _usage_limit.MEMORY < tonumber(_conky_parse.memperc)
-                    and _color_detail.body_strike or _color_detail.body_normal
+                _font_color = _color_detail.body_normal
             }, {
                 _text = string.format(' %s',
-                        'used'
+                        'used,'
+                    ),
+                _font_face = _font_face_normal,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        _conky_parse.swap.swapfree
+                    ),
+                _font_face = _font_face_large,
+                _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
+                _font_color = _color_detail.body_normal
+            }, {
+                _text = string.format(' %s',
+                        'free'
                     ),
                 _font_face = _font_face_normal,
                 _font_weight = CAIRO_FONT_WEIGHT_NORMAL,
                 _font_color = _color_detail.body_normal
             }
         })
+    end
+
+    idx = idx + 1
+    _drawing_text_with_properties_align_right(_context, _position_align,
+        _position_x + _adjust_x_normal,
+        _position_y + _adjust_y_normal + (_gap_y_normal * idx),
+        _font_size_normal, tmp_array)
 
 
     --
@@ -493,6 +553,7 @@ function drawing_text_detail(_context, _conky_parse_updates,
         _position_x + _adjust_x_normal,
         _position_y + _adjust_y_normal + (_gap_y_normal * idx),
         _font_size_normal, tmp_array)
+
 
     --
     -- Disk info, Strage, Disk I/O

@@ -6,6 +6,8 @@ function get_config_text_detail(_const, _config)
     return {
         -- display global ip address
         display_global_ip_address = _config.display_global_ip_address,
+        -- display swap
+        display_swap = _config.display_swap,
 
         -- position
         position_x = _const.CENTER_POSITION.THEME.X,
